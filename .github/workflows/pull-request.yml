@@ -38,7 +38,9 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - run: |-
+
+      - name: Create a Pull Request    
+        run: |-
           cd .github
           pip install requests
           python3 pull-req.py backend
@@ -55,7 +57,9 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - run: |-
+
+      - name: Create a Pull Request    
+        run: |-
           cd .github
           pip install requests
           python3 pull-req.py frontend
