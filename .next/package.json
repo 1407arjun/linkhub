@@ -1,0 +1,27 @@
+{
+  "name": "linkhub-react-frontend",
+  "version": "0.1.0",
+  "description": "The source code based on NodeJS powering the backend of LinkHub.",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linkhub-org/linkhub-react-frontend.git"
+  },
+  "author": "Arjun Sivaraman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/linkhub-org/linkhub-react-frontend/issues"
+  },
+  "homepage": "https://github.com/linkhub-org/linkhub-react-frontend#readme",
+  "dependencies": {
+    "next": "11.1.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "standard": "^16.0.4"
+  }
+}
