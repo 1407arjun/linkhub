@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-    if: ${{ github.event.push.ref == 'refs/heads/backend' }}    
+    if: ${{ github.ref == 'refs/heads/backend' }}    
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -42,7 +42,7 @@ jobs:
   frontend:
     runs-on: ubuntu-latest
     
-    if: ${{ github.event.push.ref == 'refs/heads/frontend' }}    
+    if: ${{ github.ref == 'refs/heads/frontend' }}    
     steps:
       - uses: actions/checkout@v2
      
