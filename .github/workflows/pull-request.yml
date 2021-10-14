@@ -10,7 +10,9 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-    if: ${{ github.ref == 'refs/heads/backend' }}    
+    if: ${{ github.ref == 'refs/heads/backend' }}
+    env:
+      TOKEN: ${{ secrets.TOKEN }}    
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -37,13 +39,15 @@ jobs:
         with:
           python-version: '3.x'
       - run: |-
+          cd .github
           pip install requests
           python3 pull-req.py backend
             
   frontend:
     runs-on: ubuntu-latest
-    
-    if: ${{ github.ref == 'refs/heads/frontend' }}    
+    if: ${{ github.ref == 'refs/heads/frontend' }}
+    env:
+      TOKEN: ${{ secrets.TOKEN }}    
     steps:
       - uses: actions/checkout@v2
      
@@ -52,5 +56,6 @@ jobs:
         with:
           python-version: '3.x'
       - run: |-
+          cd .github
           pip install requests
           python3 pull-req.py frontend
