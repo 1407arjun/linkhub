@@ -1,0 +1,25 @@
+{
+  "name": "linkhub-node-backend",
+  "version": "0.1.0",
+  "description": "The source code based on NodeJS powering the backend of LinkHub.",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "build": "cd .next && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linkhub-org/linkhub-node-backend.git"
+  },
+  "author": "Arjun Sivaraman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/linkhub-org/linkhub-node-backend/issues"
+  },
+  "homepage": "https://github.com/linkhub-org/linkhub-node-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "standard": "^16.0.4"
+  }
+}
