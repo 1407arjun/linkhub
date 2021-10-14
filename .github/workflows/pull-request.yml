@@ -22,7 +22,7 @@ jobs:
       - name: Update package.json
         run: |-
           npm ci
-          npm i json
+          npm i -g json
           json -I -f package.json -e "this.scripts.build=\"cd .next && npm install && npm run build\""
           
           git config --global user.email "arjun140702@gmail.com"
