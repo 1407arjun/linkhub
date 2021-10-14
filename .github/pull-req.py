@@ -8,5 +8,5 @@ header = {'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v
 url = "https://api.github.com/repos/linkhub-org/linkhub-deployment/pulls"
 data = {'title': 'Deployment', 'head': branch, 'base': 'main'}
 
-response = requests.post(url, headers=header, data=data)
+response = requests.post(url, headers=header, json=data)
 print(response.json())
