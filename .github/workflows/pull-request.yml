@@ -21,18 +21,18 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       
-      - name: Update package.json
-        run: |-
-          npm ci
-          npm i -g json
-          json -I -f package.json -e "this.scripts.build=\"cd .next && npm install && npm run build\""
+#       - name: Update package.json
+#         run: |-
+#           npm ci
+#           npm i -g json
+#           json -I -f package.json -e "this.scripts.build=\"cd .next && npm install && npm run build\""
           
-          git config --global user.email "arjun140702@gmail.com"
-          git config --global user.name "Arjun"
-          git diff
-          git add .
-          git commit -m "refactor: Update build command"
-          git push -f origin backend
+#           git config --global user.email "arjun140702@gmail.com"
+#           git config --global user.name "Arjun"
+#           git diff
+#           git add .
+#           git commit -m "refactor: Update build command"
+#           git push -f origin backend
         
       - name: Use Python 3  
         uses: actions/setup-python@v2
