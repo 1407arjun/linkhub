@@ -31,13 +31,14 @@ jobs:
           git add .
           git commit -m "refactor: Update build command"
           git push -f origin backend
-          
-      - name: Make a pull request
-        run: |-
-          uses: peter-evans/create-pull-request@v3
-          with:
-            title: Backend Deployment
-            branch-suffix: backend
+        
+      - name: Use Python 3  
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - run: |-
+          pip install requests
+          python3 pull-req.py backend
             
   frontend:
     runs-on: ubuntu-latest
@@ -46,9 +47,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
      
-      - name: Make a pull request
-        run: |-
-          uses: peter-evans/create-pull-request@v3
-          with:
-            title: Frontend Deployment
-            branch-suffix: frontend
+      - name: Use Python 3  
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - run: |-
+          pip install requests
+          python3 pull-req.py frontend
