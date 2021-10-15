@@ -1,5 +1,7 @@
-# LinkHub Backend - NodeJS
-The source code based on NodeJS powering the backend of LinkHub.
+# LinkHub Deployment - Vercel
+The source code of the deployed LinkHub website.
+
+![Vercel](https://img.shields.io/github/deployments/linkhub-org/linkhub-deployment/production?label=Vercel%20Deploy&logo=vercel&style=for-the-badge)
 
 ## Remember: Semantic Commit Messages
 
