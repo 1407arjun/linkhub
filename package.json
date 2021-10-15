@@ -1,0 +1,28 @@
+{
+  "name": "linkhub-deployment",
+  "version": "0.1.0",
+  "description": "The source code on which LinkHub is deployed.",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=production node src/server.js",
+    "build": "next build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linkhub-org/linkhub-deployment.git"
+  },
+  "author": "Arjun Sivaraman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/linkhub-org/linkhub-deployment/issues"
+  },
+  "homepage": "https://github.com/linkhub-org/linkhub-deployment#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "next": "^11.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "standard": "^16.0.4"
+  }
+}
