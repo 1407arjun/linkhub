@@ -2,25 +2,9 @@ name: Create a Pull Request
 
 on:
   push:
-    branches: [ backend, frontend ]
+    branches: [ dev ]
     
 jobs:
-  backend:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
-    if: ${{ github.ref == 'refs/heads/backend' }}
-    env:
-      TOKEN: ${{ secrets.TOKEN }}    
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      
 #       - name: Update package.json
 #         run: |-
 #           npm ci
@@ -32,22 +16,9 @@ jobs:
 #           git diff
 #           git add .
 #           git commit -m "refactor: Update build command"
-#           git push -f origin backend
-        
-      - name: Use Python 3  
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-      - name: Create a Pull Request    
-        run: |-
-          cd .github
-          pip install requests
-          python3 pull-req.py backend
-            
-  frontend:
+#           git push -f origin backend 
+  pull-request:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/frontend' }}
     env:
       TOKEN: ${{ secrets.TOKEN }}    
     steps:
@@ -62,4 +33,5 @@ jobs:
         run: |-
           cd .github
           pip install requests
-          python3 pull-req.py frontend
+          python3 pull-req.py
+        continue-on-error: true
