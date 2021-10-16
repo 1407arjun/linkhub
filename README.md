@@ -1,7 +1,7 @@
 # LinkHub Deployment - Vercel
 The source code of the deployed LinkHub website.
 
-![Vercel](https://img.shields.io/github/deployments/linkhub-org/linkhub-deployment/production?label=Vercel%20Deploy&logo=vercel&style=for-the-badge)
+![Vercel](https://img.shields.io/github/deployments/linkhub-org/linkhub-deployment/production?label=Vercel%20Deploy&logo=vercel)
 
 ## Remember: Semantic Commit Messages
 
