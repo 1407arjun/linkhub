@@ -1,26 +1,26 @@
-import express from 'express';
-import next from 'next';
+import express from 'express'
+import next from 'next'
 
-const server = express();
-const PORT = process.env.PORT || 3000;
+const server = express()
+const PORT = process.env.PORT || 3000
 
 if (process.env.NODE_ENV !== 'production') {
-    server.listen(PORT, (err) => {
-        if (err) throw err;
-        console.log(`Server started at port ${PORT}`);
-    });
+  server.listen(PORT, (err) => {
+    if (err) throw err
+    console.log(`Server started at port ${PORT}`)
+  })
 } else {
-    const app = next({ dev:false });
-    const handle = app.getRequestHandler();
+  const app = next({ dev: false })
+  const handle = app.getRequestHandler()
 
-    app.prepare().then(() => {
-        server.get('*', (req, res) => {
-          return handle(req, res)
-        });
-      
-        server.listen(PORT, (err) => {
-          if (err) throw err;
-          console.log(`Server started at port ${PORT}`);
-        });
-      });
+  app.prepare().then(() => {
+    server.get('*', (req, res) => {
+      return res.render(req, res, '/misc/landing')
+    })
+
+    server.listen(PORT, (err) => {
+      if (err) throw err
+      console.log(`Server started at port ${PORT}`)
+    })
+  })
 }
