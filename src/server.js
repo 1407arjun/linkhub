@@ -14,13 +14,13 @@ if (process.env.NODE_ENV !== 'production') {
   const handle = app.getRequestHandler()
 
   app.prepare().then(() => {
-    server.get('*', (req, res) => {
-      return res.render(req, res, '/misc/landing')
-    })
-
-    server.listen(PORT, (err) => {
-      if (err) throw err
-      console.log(`Server started at port ${PORT}`)
-    })
-  })
+     createServer((req, res) => {
+       const parsedUrl = parse(req.url, true)
+       const { pathname, query } = parsedUrl
+       app.render(req, res, '/misc/landing', query)
+     }).listen(PORT, (err) => {
+        if (err) throw err
+        console.log(`Server started at port ${PORT}`)
+     })
+  })  
 }
