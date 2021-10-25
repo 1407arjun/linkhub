@@ -1,0 +1,32 @@
+.container {
+  color: #fff;
+  background: url("../public/assets/landing_bg.jpg") top center no-repeat;
+  background-size: cover;
+  position: relative;
+  text-align: center;
+}
+.container::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(49, 71, 89, 0.6);
+}
+
+@media (min-width: 1024px) {
+  .container {
+    background-attachment: fixed;
+  }
+}
+
+.link {
+  color: #24b7a4;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #36d8c3;
+  text-decoration: none;
+}
