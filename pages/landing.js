@@ -14,6 +14,10 @@ function loadSuccess () {
   Router.push("/landing")
 }
 
+function loadNull () {
+  Router.push("/landing")
+}
+
 export default function Landing () {
   const router = useRouter();
   
@@ -26,7 +30,7 @@ export default function Landing () {
         <link rel='icon' href='/assets/favicon.ico' />
       </Head>
 
-      <header id="header" className="d-flex align-items-center" onLoad={ router.query.id !== undefined ? (router.query.id == "error" ? loadError : loadSuccess) : null }>
+      <header id="header" className="d-flex align-items-center" onLoad={ router.query.id !== undefined ? (router.query.id == "error" ? loadError : ((router.query.id == "success") ? loadSuccess : loadNull)) : null }>
           <div className="container d-flex flex-column align-items-center">
 
             <img src="/assets/logo.svg" alt="LinkHub" className="img-fluid" width="40%"/>
