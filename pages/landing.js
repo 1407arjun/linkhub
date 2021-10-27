@@ -57,7 +57,7 @@ export default function Landing () {
 
             <div className="subscribe">
               <h4>Subscribe now to get the latest updates!</h4>
-              <form action="/api/subscribe/" method="post">
+              <form action="/api/subscribe/" method="post" onSubmit={ (ev) => { ev.preventDefault(); } }>
                 <div className="subscribe-form">
                   <input type="email" name="email" required></input>
                   <input type="submit" value="Notify Me"></input>
