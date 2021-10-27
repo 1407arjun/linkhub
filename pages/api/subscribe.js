@@ -1,5 +1,4 @@
 const { MongoClient } = require('mongodb');
-const router = require('next/router');
 
 module.exports = function addToMailList (req, res) {
 	if (req.method === "POST") {
@@ -13,9 +12,9 @@ module.exports = function addToMailList (req, res) {
 					collection = await client.db("MailList").collection("Subscribe");
 					var response = await collection.insertOne({email: req.body.email});
 					if (response.acknowledged)
-						router.replace("/landing?id=success");
+						res.status(200).json(response);
 					else
-						res.status(500).redirect("/landing?id=error");
+						res.status(500).json(response)
 				}				
 			});
 		} catch (e) {
