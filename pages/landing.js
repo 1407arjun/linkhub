@@ -21,22 +21,13 @@ const registerUser = async event => {
     )
 
     const result = await res.json()
-    console.log(result)
+    if (result.status === 200)
+        alert("You have successfully subscribed to updates. Stay tuned.")
+    else
+        alert("Internal server error. Please try again.")
+    
+    Router.replace("/landing")
   }
-
-function loadError () {
-  alert("Internal server error. Please try again.")
-  Router.push("/landing")
-}
-
-function loadSuccess () {
-  alert("You have successfully subscribed to updates. Stay tuned.")
-  Router.push("/landing")
-}
-
-function loadNull () {
-  Router.push("/landing")
-}
 
 export default function Landing () {
   const router = useRouter();
@@ -50,7 +41,7 @@ export default function Landing () {
         <link rel='icon' href='/assets/favicon.ico' />
       </Head>
 
-      <header id="header" className="d-flex align-items-center" onLoad={ router.query.id !== undefined ? (router.query.id == "error" ? loadError : ((router.query.id == "success") ? loadSuccess : loadNull)) : null }>
+      <header id="header" className="d-flex align-items-center">
           <div className="container d-flex flex-column align-items-center">
 
             <img src="/assets/logo.svg" alt="LinkHub" className="img-fluid" width="40%"/>
