@@ -19,7 +19,7 @@ const addSubscriber = async event => {
     )
 
     const result = await res.json()
-    if (result.acknowledged)
+    if (result.acknowledged !== undefined && result.acknowledged)
         alert("You have successfully subscribed to updates. Stay tuned.")
     else
         alert("Internal server error. Please try again.")
