@@ -12,7 +12,7 @@ module.exports = function addToMailList (req, res) {
 					collection = await client.db("MailList").collection("Subscribe");
 					var response = await collection.insertOne({email: req.body.email});
 					if (response.acknowledged)
-						res.status(200).redirect("/landing?id=success");
+						res.status(200).json(response);
 					else
 						res.status(500).redirect("/landing?id=error");
 				}				
