@@ -23,7 +23,6 @@ const registerUser = async event => {
     const result = await res.json()
     console.log(result)
   }
-}
 
 function loadError () {
   alert("Internal server error. Please try again.")
@@ -78,7 +77,7 @@ export default function Landing () {
 
             <div className="subscribe">
               <h4>Subscribe now to get the latest updates!</h4>
-              <form action="/api/subscribe/" method="post">
+              <form onSubmit={ registerUser }>
                 <div className="subscribe-form">
                   <input type="email" name="email" required></input>
                   <input type="submit" value="Notify Me"></input>
