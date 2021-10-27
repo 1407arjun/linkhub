@@ -21,7 +21,7 @@ const registerUser = async event => {
     )
 
     const result = await res.json()
-    if (result.status === 200)
+    if (result.acknowledged)
         alert("You have successfully subscribed to updates. Stay tuned.")
     else
         alert("Internal server error. Please try again.")
