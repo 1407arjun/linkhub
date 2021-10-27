@@ -4,6 +4,27 @@ import Router from 'next/router'
 import { useRouter } from 'next/router'
 import styles from '../styles/Landing.module.css'
 
+const registerUser = async event => {
+    event.preventDefault()
+
+    const res = await fetch(
+      '/api/subscribe',
+      {
+        body: JSON.stringify({
+          email: event.target.email.value
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST'
+      }
+    )
+
+    const result = await res.json()
+    console.log(result)
+  }
+}
+
 function loadError () {
   alert("Internal server error. Please try again.")
   Router.push("/landing")
