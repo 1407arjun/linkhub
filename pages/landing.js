@@ -1,25 +1,31 @@
 import Head from 'next/head'
 import Script from 'next/script'
-import Router from 'next/router'
-import { useRouter } from 'next/router'
 import styles from '../styles/Landing.module.css'
 
-function loadError () {
-  alert("Internal server error. Please try again.")
-  Router.push("/landing")
-}
+const addSubscriber = async event => {
+    event.preventDefault()
 
-function loadSuccess () {
-  alert("You have successfully subscribed to updates. Stay tuned.")
-  Router.push("/landing")
-}
+    const res = await fetch(
+      '/api/subscribe',
+      {
+        body: JSON.stringify({
+          email: event.target.email.value
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST'
+      }
+    )
 
-function loadNull () {
-  Router.push("/landing")
-}
+    const result = await res.json()
+    if (result.acknowledged)
+        alert("You have successfully subscribed to updates. Stay tuned.")
+    else
+        alert("Internal server error. Please try again.")
+  }
 
 export default function Landing () {
-  const router = useRouter();
   
   return (
     <div className={styles.container}>
@@ -30,7 +36,7 @@ export default function Landing () {
         <link rel='icon' href='/assets/favicon.ico' />
       </Head>
 
-      <header id="header" className="d-flex align-items-center" onLoad={ router.query.id !== undefined ? (router.query.id == "error" ? loadError : ((router.query.id == "success") ? loadSuccess : loadNull)) : null }>
+      <header id="header" className="d-flex align-items-center">
           <div className="container d-flex flex-column align-items-center">
 
             <img src="/assets/logo.svg" alt="LinkHub" className="img-fluid" width="40%"/>
@@ -57,7 +63,7 @@ export default function Landing () {
 
             <div className="subscribe">
               <h4>Subscribe now to get the latest updates!</h4>
-              <form action="/api/subscribe/" method="post">
+              <form onSubmit={ addSubscriber }>
                 <div className="subscribe-form">
                   <input type="email" name="email" required></input>
                   <input type="submit" value="Notify Me"></input>
