@@ -2,8 +2,8 @@
   "name": "linkhub-deployment",
   "version": "0.1.0",
   "description": "The source code on which LinkHub is deployed.",
-  "main": "src/server.js",
   "scripts": {
+    "dev": "next dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "next start",
     "build": "next build",
@@ -27,12 +27,12 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "autoprefixer": "^10.2.6",
+    "bootstrap": "^5.0.0-beta3",
+    "bootstrap-icons": "^1.6.1",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
-    "autoprefixer": "^10.2.6",
     "postcss": "^8.3.5",
-    "tailwindcss": "^2.2.4",
-    "bootstrap": "^5.0.0-beta3",
-    "bootstrap-icons": "^1.6.1"
+    "tailwindcss": "^2.2.19"
   }
 }
