@@ -1,3 +1,0 @@
-## Models
-
-Database models.
