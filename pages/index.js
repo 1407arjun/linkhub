@@ -7,14 +7,13 @@ const tagline = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin 
 
 export default function Index() {
   return (
-    <div className="flex flex-col place-content-start h-full">
+    <div className="flex flex-col place-content-center">
       <Head title="LinkHub &middot; An open source resources network"/>
-      <div className="flex flex-col place-content-center w-full bg-cover bg-home-1 h-full p-4">
+      <div className="wrapper bg-cover bg-home-1 p-4">
         <HomeBar />
-
-        <div className="flex flex-col-reverse md:flex-row place-content-center w-full text-center md:text-left">
-          <div className="flex flex-col place-content-center p-6 md:p-8 w-full gap-y-2 md:justify-center md:content-start w-full md:w-2/3 lg:w-1/2">
-            <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl font-bold">An open source resources network</h1>
+        <div className="mx-auto my-4 md:my-8 flex flex-col-reverse md:flex-row place-content-center w-full text-center md:text-left">
+          <div className="flex flex-col flex-grow-1 place-content-center p-6 md:p-8 w-full gap-y-2 md:justify-center md:content-start w-full md:w-2/3 lg:w-1/2">
+            <h1 className="md:mt-8 text-white text-4xl sm:text-5xl lg:text-6xl font-bold">An open source resources network</h1>
             <h2 className="text-white text-m sm:text-l lg:text-2xl text-opacity-60">{ tagline }</h2>
             <SignUpBar />
           </div>

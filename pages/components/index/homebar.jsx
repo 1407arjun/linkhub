@@ -2,17 +2,19 @@ import SearchBar from '../uni/searchbar'
 
 export default function HomeBar() {
     return (
-        <div className="flex flex-row p-4">
-            <img src="/assets/logo.svg" className="w-1/3 md:w-1/4 xl:w-1/6 mr-2" alt="LinkHub"/>
-            <div className="hidden md:inline-flex flex-row flex-auto justify-start content-center mx-2">
-                <button className="text-l text-white border-transparent hover:border-b-white border-4 p-2 hover:">About</button>
+        <header>
+            <div className="flex flex-row px-4 py-1 justify-around">
+                <img src="/assets/logo.svg" className="w-1/4 md:w-1/6 lg:w-1/8 xl:w-1/10 mr-2" alt="LinkHub"/>
+                <div className="hidden md:inline-flex flex-row flex-auto justify-start content-center mx-2">
+                    <button className="text-l text-white border-transparent hover:border-b-white border-4 p-2 hover:">About</button>
+                </div>
+                <div className="inline-flex flex-row-reverse flex-auto justify-start content-center ml-2">
+                    <button className="inline md:hidden ml-1 text-l text-white p-1">Nav</button>
+                    <button className="mx-1 md:ml-2 text-l text-white rounded-md border-2 border-white p-1">Sign Up</button>
+                    <button className="mx-1 md:mx-2 text-l text-white rounded-md border-2 border-transparent p-1">Sign In</button>
+                    <SearchBar />
+                </div>
             </div>
-            <div className="inline-flex flex-row-reverse flex-auto justify-start content-center ml-2">
-                <button className="inline md:hidden ml-1 text-l text-white p-1">Nav</button>
-                <button className="mx-1 md:ml-2 text-l text-white rounded-md border-2 border-white p-1">Sign Up</button>
-                <button className="mx-1 md:mx-2 text-l text-white rounded-md border-2 border-transparent p-1">Sign In</button>
-                <SearchBar />
-            </div>
-        </div>  
+        </header> 
     )
 }
