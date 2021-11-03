@@ -3,7 +3,7 @@ import SearchBar from '../uni/searchbar'
 export default function HomeBar() {
     return (
         <header>
-            <div className="flex flex-row px-4 py-1 justify-around">
+            <div className="flex flex-row px-4 pt-5 pb-1 mx-4 justify-around">
                 <img src="/assets/logo.svg" className="w-1/4 md:w-1/6 lg:w-1/8 xl:w-1/10 mr-2" alt="LinkHub"/>
                 <div className="hidden md:inline-flex flex-row flex-auto justify-start content-center mx-2">
                     <button className="text-l text-white border-transparent hover:border-b-white border-4 px-2 py-1.5">About</button>
