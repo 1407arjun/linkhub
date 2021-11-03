@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Head from './uni/head'
 import Footer from './uni/footer'
 import SignOpts from './uni/signopts'
@@ -15,7 +16,7 @@ export default function SignUp(props) {
                     <h1 className="text-black text-5xl font-bold mb-6">{ props.line1 }</h1>
                     <h2 className="text-black text-4xl font-bold mb-4">{ props.line2 }</h2>
                     <SignOpts type={ props.type }/>
-                    <p>{ props.rdesc }<span><a href={ props.rloc } className="text-blue-500 hover:underline">{ props.rtype }</a></span></p>
+                    <p>{ props.rdesc }<span><Link href={ props.rloc } replace={ true }><a className="text-blue-500 hover:underline">{ props.rtype }</a></Link></span></p>
                 </div>
             </div>
             <Footer/>

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import SearchBar from '../uni/searchbar'
 
 export default function HomeBar() {
@@ -10,8 +11,8 @@ export default function HomeBar() {
                 </div>
                 <div className="inline-flex flex-row-reverse flex-auto justify-start content-center ml-2">
                     <button className="inline md:hidden ml-1 text-l text-white p-1">Nav</button>
-                    <button className="self-center mx-1 md:ml-2 text-l text-white rounded-md border border-white px-2 py-1.5">Sign Up</button>
-                    <button className="self-center mx-1 md:mx-2 text-l text-white rounded-md border border-transparent px-2 py-1.5">Sign In</button>
+                    <button className="self-center mx-1 md:ml-2 text-l text-white rounded-md border border-white px-2 py-1.5"><Link href="/signup">Sign Up</Link></button>
+                    <button className="self-center mx-1 md:mx-2 text-l text-white rounded-md border border-transparent px-2 py-1.5"><Link href="/login">Sign In</Link></button>
                     <SearchBar/>
                 </div>
             </div>
