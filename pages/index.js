@@ -11,7 +11,7 @@ export default function Index() {
       <div className="wrapper grad-home p-4"> {/* bg-cover bg-home-1*/}
         <HomeBar />
         <div className="mx-auto my-4 lg:my-8 flex flex-col-reverse lg:flex-row place-content-center w-full text-center lg:text-left">
-          <div className="flex flex-col flex-grow-1 place-content-center p-6 lg:p-8 w-full gap-y-2 lg:justify-center lg:content-start w-full lg:w-1/2">
+          <div className="flex flex-col flex-grow-1 place-content-center p-6 lg:p-8 w-full gap-y-2 lg:justify-center lg:content-start w-full lg:w-2/3 xl:w-1/2">
             <h1 className="lg:mt-8 text-white text-4xl sm:text-5xl lg:text-6xl font-bold">An open source resources network</h1>
             <h2 className="text-white text-m sm:text-l lg:text-2xl text-opacity-60">{ tagline }</h2>
             <SignUpBar />
