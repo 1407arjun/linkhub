@@ -3,7 +3,9 @@
 }
 
 .grad-home {
-    background: linear-gradient(-45deg, #240b36, #c31432);
+	background: #000428;
+	background: -webkit-linear-gradient(to right, #004e92, #000428);
+	background: linear-gradient(-45deg, #004e92, #000428);
 	background-size: 400% 400%;
     animation: gradient 8s ease infinite;
 }
