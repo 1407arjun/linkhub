@@ -12,7 +12,7 @@ export default function HomeBar() {
                     <button className="inline md:hidden ml-1 text-l text-white p-1">Nav</button>
                     <button className="self-center mx-1 md:ml-2 text-l text-white rounded-md border border-white px-2 py-1.5">Sign Up</button>
                     <button className="self-center mx-1 md:mx-2 text-l text-white rounded-md border border-transparent px-2 py-1.5">Sign In</button>
-                    <SearchBar />
+                    <SearchBar/>
                 </div>
             </div>
         </header> 

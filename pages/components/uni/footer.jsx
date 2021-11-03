@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
-        <footer className="w-full text-center px-8">
-            <div className="flex flex-row flex-wrap gap-2 justify-evenly items-center border-t border-black pt-4 pb-1">
+        <footer className="w-full text-center bg-gray-200">
+            <div className="flex flex-row flex-wrap gap-2 justify-evenly items-center px-8 py-4">
                 <p className="text-black font-semibold">&copy; 2021 LinkHub</p>
                 <a href="/docs/api" className="text-blue-700 hover:underline focus:underline">API</a>
                 <a href="https://github.com/linkhub-org" className="text-blue-700 hover:underline focus:underline">Developers</a>
