@@ -1,18 +1,18 @@
 import Link from 'next/link'
-import SearchBar from '../uni/searchbar'
+import SearchBar from '../index/searchbar'
 
 export default function HomeBar() {
     return (
         <header>
-            <div className="flex flex-row px-4 pt-5 pb-1 mx-4 justify-around">
+            <div className="flex flex-row px-2 sm:px-4 pt-5 pb-1 mx-4 justify-around">
                 <img src="/assets/logo.svg" className="w-1/4 md:w-1/6 lg:w-1/8 xl:w-1/10 mr-2" alt="LinkHub"/>
                 <div className="hidden md:inline-flex flex-row flex-auto justify-start content-center mx-2">
-                    <button className="text-l text-white border-transparent hover:border-b-white border-4 px-2 py-1.5">About</button>
+                    <button className="text-lg text-white border-transparent hover:border-b-white border-4 px-2 py-1.5">About</button>
                 </div>
                 <div className="inline-flex flex-row-reverse flex-auto justify-start content-center ml-2">
-                    <button className="inline md:hidden ml-1 text-l text-white p-1">Nav</button>
-                    <button className="self-center mx-1 md:ml-2 text-l text-white rounded-md border border-white px-2 py-1.5"><Link href="/signup">Sign Up</Link></button>
-                    <button className="self-center mx-1 md:mx-2 text-l text-white rounded-md border border-transparent px-2 py-1.5"><Link href="/login">Sign In</Link></button>
+                    <button className="inline md:hidden ml-1 w-10"><img src="/assets/index/menu.svg" className="w-full" alt="Nav"/></button>
+                    <button className="self-center mx-1 md:ml-2 text-lg text-white rounded-md border border-white px-2 py-1.5"><Link href="/signup">Sign Up</Link></button>
+                    <button className="self-center mx-1 md:mx-2 text-lg text-white rounded-md border border-transparent px-2 py-1.5"><Link href="/login">Sign In</Link></button>
                     <SearchBar/>
                 </div>
             </div>
