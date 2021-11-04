@@ -1,6 +1,6 @@
-import Google from '../../../public/assets/login/google.svg'
-import GitHub from '../../../public/assets/login/github.svg'
-import Email from '../../../public/assets/login/email.svg'
+import Google from '../../public/assets/login/google.svg'
+import GitHub from '../../public/assets/login/github.svg'
+import Email from '../../public/assets/login/email.svg'
 import Image from 'next/image'
 
 export default function SignBtn(props) {

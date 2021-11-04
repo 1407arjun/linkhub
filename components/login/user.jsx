@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import Head from './uni/head'
-import Footer from './uni/footer'
-import SignOpts from './uni/signopts'
+import Head from '../uni/head'
+import Footer from '../uni/footer'
+import SignOpts from './signopts'
 
-export default function SignUp(props) {
+export default function User(props) {
     return (
         <div>
             <Head title={props.type + " \u00b7 LinkHub"}/>

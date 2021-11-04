@@ -1,4 +1,4 @@
-import User from './components/user'
+import User from '../components/user'
 
 const line1 = "Resources made open source"
 const line2 = "Join LinkHub today."

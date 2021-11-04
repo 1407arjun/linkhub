@@ -1,4 +1,4 @@
-import SignBtn from "../utils/signbtn"
+import SignBtn from "./signbtn"
 
 export default function SignOpts(props) {
     return (

@@ -1,7 +1,7 @@
-import Head from './components/uni/head'
-import Footer from './components/index/footer'
-import HomeBar from './components/index/homebar'
-import SignUpBar from './components/index/signupbar'
+import Head from '../components/uni/head'
+import Footer from '../components/index/footer'
+import HomeBar from '../components/index/homebar'
+import SignUpBar from '../components/index/signupbar'
 
 const tagline = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mattis magna vel viverra faucibus. Curabitur mi ante, eleifend at dui non, feugiat congue lectus."
 
