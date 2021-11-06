@@ -13,6 +13,14 @@ export default function NavBar(props) {
             <NavBtn src="/assets/home/bookmark.svg" href="/saved" alt="Saved" current={ props.current === "Saved"}/>
             <NavBtn src="/assets/home/person.svg" href="/profile" alt="Profile" current={ props.current === "Profile"}/>
             <NavBtn src="/assets/home/settings.svg" href="/settings" alt="Settings" current={ props.current === "Settings"}/>
+            <br/>
+
+            <a href="/create" className="px-2 lg:px-4 xl:px-8 w-full">
+                <div className="block xl:flex xl:flex-row justify-start items-center gap-2 p-4 xl:py-4 xl:pl-4 xl:pr-8 rounded-full bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-300 focus:ring-opacity-60">
+                    <img src="/assets/posts/link-45.svg" className="w-8 mx-auto xl:mx-0" alt="Create"/>
+                    <span className="hidden xl:inline text-xl font-semibold text-white">Create</span>
+                </div>
+            </a>
         </div>
     )
 }
