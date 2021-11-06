@@ -8,7 +8,7 @@ import PostMini from '../components/posts/post-mini'
 export default function Home() {
     return (
         <div>
-            <Head title="LinkHub &middot; Home"/>
+            <Head title="Home &middot; LinkHub"/>
             <div className="flex flex-row place-content-start">
                 <NavBar current="Home"/>
                 <div className="flex flex-col gap-4 justify-start items-center w-full md:w-5/6 lg:w-7/12 xl:w-3/6 p-4">
@@ -29,6 +29,7 @@ export default function Home() {
                             downvotes="0"
                             flags="50"/>
                     </div>
+                    <p className="text-sm md:text-base italic">-- You have reached the end --</p>
                 </div>
                 <SideBar/>
             </div>

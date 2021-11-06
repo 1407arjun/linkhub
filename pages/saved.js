@@ -29,6 +29,7 @@ export default function Saved() {
                             downvotes="0"
                             flags="50"/>
                     </div>
+                    <p className="text-sm md:text-base italic">-- You have reached the end --</p>
                 </div>
                 <SideBar/>
             </div>
