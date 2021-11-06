@@ -34,7 +34,7 @@ export default function PostMini(props) {
                     <p>{ props.body }</p>
                 </div>
             </div>
-            <HBar/>
+            <HBar upvotes={ props.upvotes } downvotes={ props.downvotes } flags={ props.flags }/>
         </div>
     )
 }
