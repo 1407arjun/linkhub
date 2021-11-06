@@ -1,6 +1,6 @@
 import Bar from './bar'
 import HBar from './hbar'
-
+import TagBar from './tagbar'
 
 function getInitials(name) {
     let array = name.split(" ")
@@ -32,6 +32,11 @@ export default function PostMini(props) {
                 <div className="flex flex-col gap-1 place-content-start w-full sm:w-5/6 py-2">
                     <h2 className="font-bold text-lg xl:text-xl">{ props.title }</h2>
                     <p>{ props.body }</p>
+                    <div className="flex flex-row flex-wrap gap-2 justify-start items-center mt-2">
+                        <TagBar name="app-development"/>
+                        <TagBar name="app-development"/>
+                        <TagBar name="app-development"/>
+                    </div>
                 </div>
             </div>
             <HBar upvotes={ props.upvotes } downvotes={ props.downvotes } flags={ props.flags }/>
