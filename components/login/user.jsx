@@ -19,7 +19,7 @@ export default function User(props) {
                     <p>{ props.rdesc }<span><a href={ props.rloc } className="text-blue-500 hover:underline">{ props.rtype }</a></span></p>
                 </div>
             </div>
-            <Footer/>
+            <Footer signedin={ false }/>
         </div>
     )
 }

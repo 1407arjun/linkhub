@@ -1,18 +1,18 @@
 import Head from '../components/uni/head'
 import Footer from '../components/uni/footer'
 import NavBar from '../components/uni/navbar'
-import SideBar from '../components/home/sidebar'
+import SideBar from '../components/posts/sidebar'
 import SearchBar from '../components/uni/searchbar'
 import PostMini from '../components/posts/post-mini'
 
-export default function Home() {
+export default function Saved() {
     return (
         <div>
-            <Head title="LinkHub &middot; Home"/>
+            <Head title="Saved Posts &middot; LinkHub"/>
             <div className="flex flex-row place-content-start">
-                <NavBar current="Home"/>
+                <NavBar current="Saved"/>
                 <div className="flex flex-col gap-4 justify-start items-center w-full md:w-5/6 lg:w-7/12 xl:w-3/6 p-4">
-                    <SearchBar placeholder="What would you like to learn today?"/>
+                    <SearchBar placeholder="Search saved posts"/>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         <PostMini name="Arjun Sivaraman"
                             username="1407arjun"
