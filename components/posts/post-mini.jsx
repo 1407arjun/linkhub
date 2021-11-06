@@ -1,6 +1,7 @@
 import Bar from './bar'
 import HBar from './hbar'
 import TagBar from './tagbar'
+import Dropdown from './dropdown'
 
 function getInitials(name) {
     let array = name.split(" ")
@@ -25,6 +26,7 @@ export default function PostMini(props) {
                             <p className="text-gray-500 text-xs xl:text-sm">{ "@" + props.username }</p>
                         </div>
                     </div>
+                    <Dropdown/>
                 </div>
             </a>
             <div className="flex flex-row gap-2 place-content-start w-full px-2 sm:px-0">
