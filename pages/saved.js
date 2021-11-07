@@ -13,6 +13,7 @@ export default function Saved() {
                 <NavBar current="Saved"/>
                 <div className="flex flex-col gap-4 justify-start items-center w-full md:w-5/6 lg:w-7/12 xl:w-3/6 p-4">
                     <SearchBar placeholder="Search saved posts"/>
+                    <h2 className="w-full font-bold text-2xl md:text-3xl text-left">Saved Posts</h2>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         <PostMini name="Arjun Sivaraman"
                             username="1407arjun"

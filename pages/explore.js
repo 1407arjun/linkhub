@@ -15,6 +15,7 @@ export default function Explore() {
                 <NavBar current="Explore"/>
                 <div className="flex flex-col gap-4 justify-start items-center w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4">
                     <SearchBar placeholder="What would you like to learn today?"/>
+                    <h2 className="w-full font-bold text-2xl md:text-3xl text-left">Explore</h2>
                     <p className="w-full text-left px-2 sm:px-4 text-xs sm:text-sm md:text-base xl:text-lg font-bold">Trending</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         <Tag name="app-development" follow="8.2K"/>
