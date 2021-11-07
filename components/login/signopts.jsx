@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import SignBtn from "./signbtn"
 
 export default function SignOpts(props) {
@@ -5,7 +6,7 @@ export default function SignOpts(props) {
         <div className="flex flex-col gap-2 mb-6">
             <SignBtn name="Google" type={ props.type }/>
             <SignBtn name="GitHub" type={ props.type }/>
-            <SignBtn name="Email" type={ props.type }/>
+            <Link href={ "/auth" + props.href }><a><SignBtn name="Email" type={ props.type }/></a></Link>
         </div>
     )
 }

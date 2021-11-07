@@ -38,7 +38,7 @@ export default function SignUp() {
                         <button type="submit" className="w-full md:w-1/2 bg-blue-500 py-2 rounded-md font-bold text-white hover:bg-blue-600 focus:bg-blue-600">Sign up</button>
                     </div>
                     <div className="w-full md:col-span-2">
-                        <Link href="/login"><a className="block text-center text-blue-500 hover:underline focus:underline">Sign in</a></Link>
+                        <Link href="/login"><a className="text-center text-blue-500 hover:underline focus:underline">Sign in</a></Link>
                     </div>
                 </form>
             </div>

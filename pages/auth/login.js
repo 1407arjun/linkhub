@@ -19,9 +19,9 @@ export default function Login() {
                         <input name="password" type="password" placeholder="Password" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 ring-gray-300 focus:ring-gray-500"/>
                     </div>    
                     <button type="submit" className="w-full bg-blue-500 py-2 rounded-md font-bold text-white hover:bg-blue-600 focus:bg-blue-600">Login</button>
-                    <div>
-                        <a className="block text-left text-blue-500 hover:underline focus:underline">Forgot Password</a>
-                        <Link href="/signup"><a className="block text-left text-blue-500 hover:underline focus:underline">Sign up</a></Link>
+                    <div className="w-full flex flex-col justify-start items-start text-left">
+                        <a className="text-left text-blue-500 hover:underline focus:underline">Forgot Password</a>
+                        <Link href="/signup"><a className="text-left text-blue-500 hover:underline focus:underline">Sign up</a></Link>
                     </div>
                 </form>
             </div>

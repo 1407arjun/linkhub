@@ -15,7 +15,7 @@ export default function User(props) {
                     <img src="/assets/icon-black.svg" className="object-contain w-16 mb-8" alt="LinkHub Icon"/>
                     <h1 className="text-black text-5xl font-bold mb-6">{ props.line1 }</h1>
                     <h2 className="text-black text-4xl font-bold mb-4">{ props.line2 }</h2>
-                    <SignOpts type={ props.type }/>
+                    <SignOpts type={ props.type } href={ props.loc }/>
                     <p>{ props.rdesc }<span><a href={ props.rloc } className="text-blue-500 hover:underline">{ props.rtype }</a></span></p>
                 </div>
             </div>
