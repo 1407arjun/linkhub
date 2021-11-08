@@ -8,18 +8,18 @@ import { useState } from 'react'
 
 export default function Home() {
 
-    const [open, setOpen] = useState(false)
-    function getNavBarStatus(status) {
-        setOpen(status)
+    const [navStatus, setNavStatus] = useState(false)
+    function getNavStatus(status) {
+        setNavStatus(status)
     }
 
     return (
         <div>
             <Head title="Home &middot; LinkHub"/>
             <div className="flex flex-row place-content-start">
-                <NavBar status={ open } current="Home"/>
-                <div className={ "flex flex-col gap-4 justify-start items-center" + ( status ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
-                    <SearchBar update={ getNavBarStatus } placeholder="What would you like to learn today?"/>
+                <NavBar navStatus={ navStatus } current="Home"/>
+                <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
+                    <SearchBar update={ getNavStatus } placeholder="What would you like to learn today?"/>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         <PostMini name="Arjun Sivaraman"
                             username="1407arjun"
