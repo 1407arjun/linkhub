@@ -8,7 +8,10 @@ function getInitials(name) {
     if (array.length > 1) {
         return array[0].slice(0, 1).toUpperCase() + array[1].slice(0, 1).toUpperCase()
     } else {
-        return array[0].slice(0, 2).toUpperCase()
+        if (array[0].length > 1)
+            return array[0].slice(0, 2).toUpperCase()
+        else
+        return (array[0].slice(0, 1).toUpperCase() + "0")
     }
 }
 
