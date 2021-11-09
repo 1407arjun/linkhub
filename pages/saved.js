@@ -4,15 +4,21 @@ import NavBar from '../components/uni/navbar'
 import SideBar from '../components/posts/sidebar'
 import SearchBar from '../components/uni/searchbar'
 import PostMini from '../components/posts/post-mini'
+import { useState } from 'react'
 
 export default function Saved() {
+    const [navStatus, setNavStatus] = useState(false)
+
     return (
         <div>
             <Head title="Saved Posts &middot; LinkHub"/>
             <div className="flex flex-row place-content-start">
-                <NavBar current="Saved"/>
-                <div className="flex flex-col gap-4 justify-start items-center w-full md:w-5/6 lg:w-7/12 xl:w-3/6 p-4">
-                    <SearchBar placeholder="Search saved posts"/>
+                { navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Saved"/> }
+                <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
+                    <div className="w-full flex flex-row justify-start items-center gap-4">
+                        { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full" alt="Nav"/></button> }
+                        <SearchBar placeholder="Search saved posts"/>
+                    </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left">Saved Posts</h2>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         <PostMini name="Arjun Sivaraman"

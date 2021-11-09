@@ -32,7 +32,7 @@ export default function PostMini(props) {
                 <div className="flex flex-col gap-1 place-content-start w-full sm:w-5/6 py-2">
                     <h2 className="font-bold text-lg xl:text-xl">{ props.title }</h2>
                     <p>{ props.body }</p>
-                    <div className="flex flex-row flex-wrap gap-2 justify-start items-center mt-2">
+                    <div className="flex flex-row flex-nowrap overflow-x-auto md:flex-wrap md:overflow-visible gap-2 justify-start items-center pt-2 pb-3">
                         <TagBar name="app-development"/>
                         <TagBar name="app-development"/>
                         <TagBar name="app-development"/>

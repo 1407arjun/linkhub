@@ -1,6 +1,6 @@
 export default function Bar(props) {
     return (
-        <div className="flex flex-row sm:hidden justify-evenly items-center p-2 w-full gap-4">
+        <div className="flex flex-row sm:hidden justify-evenly items-center px-2 pb-2 pt-1 md:py-2 w-full gap-4">
             <button className="flex flex-row justify-start items-center gap-2">
                 <img src="/assets/posts/arrow-up.svg" alt="Upvotes"/>
                 <span className="font-semibold font-sm lg:font-base">{ props.upvotes }</span>

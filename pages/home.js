@@ -7,19 +7,18 @@ import PostMini from '../components/posts/post-mini'
 import { useState } from 'react'
 
 export default function Home() {
-
     const [navStatus, setNavStatus] = useState(false)
-    function getNavStatus(status) {
-        setNavStatus(status)
-    }
 
     return (
         <div>
             <Head title="Home &middot; LinkHub"/>
             <div className="flex flex-row place-content-start">
-                <NavBar navStatus={ navStatus } current="Home"/>
+                { navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Home"/> }
                 <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
-                    <SearchBar update={ getNavStatus } placeholder="What would you like to learn today?"/>
+                    <div className="w-full flex flex-row justify-start items-center gap-4">
+                        { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full" alt="Nav"/></button> }
+                        <SearchBar placeholder="What would you like to learn today?"/>
+                    </div>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         <PostMini name="Arjun Sivaraman"
                             username="1407arjun"
