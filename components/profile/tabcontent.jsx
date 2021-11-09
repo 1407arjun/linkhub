@@ -19,7 +19,7 @@ export default function TabContent() {
                     downvotes="0"
                     flags="50"/>
             </div>
-            <p className="text-sm md:text-base italic">-- You have reached the end --</p>
+            <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
         </div>
     )
 }

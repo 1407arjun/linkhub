@@ -23,7 +23,7 @@ export default function Home() {
     }, [windowSize])
 
     return (
-        <div>
+        <div className="dark:bg-black">
             <Head title="Home &middot; LinkHub"/>
             <div className="flex flex-row place-content-start">
                 { navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Home"/> }
@@ -48,7 +48,7 @@ export default function Home() {
                             downvotes="0"
                             flags="50"/>
                     </div>
-                    <p className="text-sm md:text-base italic">-- You have reached the end --</p>
+                    <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                 </div>
                 <SideBar/>
             </div>

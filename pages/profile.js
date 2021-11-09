@@ -24,7 +24,7 @@ export default function Profile() {
     }, [windowSize])
 
     return (
-        <div>
+        <div className="dark:bg-black">
             <Head title="Profile &middot; LinkHub"/>
             <div className="flex flex-row place-content-start">
                 { navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Profile"/> }
@@ -33,7 +33,7 @@ export default function Profile() {
                         { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full" alt="Nav"/></button> }
                         <SearchBar placeholder="What would you like to learn today?"/>
                     </div>
-                    <h2 className="w-full font-bold text-2xl md:text-3xl text-left">Profile</h2>
+                    <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Profile</h2>
                     <TabLayout/>
                     <TabContent/>
                 </div>
