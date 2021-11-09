@@ -9,7 +9,7 @@ export default function Index() {
   return (
     <div> {/* className="flex flex-col place-content-center" */}
       <Head title="LinkHub &middot; An open source resources network"/>
-      <div className="grad-home">
+      <div className="grad-home min-h-screen">
         <HomeBar/>
         <div className="mx-auto my-4 flex flex-col-reverse lg:flex-row place-content-center w-full text-center lg:text-left px-4">
           <div className="flex flex-col flex-grow-1 place-content-center p-6 lg:p-8 gap-y-2 lg:justify-center lg:content-start w-full lg:w-2/3 xl:w-1/2">

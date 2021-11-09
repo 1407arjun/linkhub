@@ -18,21 +18,19 @@ export default function Saved() {
             setNavStatus(true)
         else
             setNavStatus(false)
-
-        return () => { window.removeEventListener('resize', (ev) => { setWindowSize(ev.path[0].innerWidth) }) }    
     }, [windowSize])
 
     return (
-        <div>
+        <div className="dark:bg-black">
             <Head title="Saved Posts &middot; LinkHub"/>
-            <div className="flex flex-row place-content-start">
+            <div className="flex flex-row place-content-start min-h-screen">
                 { navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Saved"/> }
                 <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
                     <div className="w-full flex flex-row justify-start items-center gap-4">
-                        { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full" alt="Nav"/></button> }
-                        <SearchBar placeholder="Search saved posts"/>
+                        { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:filter dark:invert" alt="Nav"/></button> }
+                        <SearchBar user="Arjun Sivaraman" placeholder="Search saved posts"/>
                     </div>
-                    <h2 className="w-full font-bold text-2xl md:text-3xl text-left">Saved Posts</h2>
+                    <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Saved Posts</h2>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         <PostMini name="Arjun Sivaraman"
                             username="1407arjun"
@@ -49,7 +47,7 @@ export default function Saved() {
                             downvotes="0"
                             flags="50"/>
                     </div>
-                    <p className="text-sm md:text-base italic">-- You have reached the end --</p>
+                    <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                 </div>
                 <SideBar/>
             </div>
