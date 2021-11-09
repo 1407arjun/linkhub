@@ -6,12 +6,24 @@ import SearchBar from '../components/uni/searchbar'
 import Tag from '../components/home/tag'
 import Recent from '../components/posts/recent'
 import Profile from '../components/profile/profile'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Explore() {
     const [navStatus, setNavStatus] = useState(false)
+    const [windowSize, setWindowSize] = useState()
+    
+    useEffect(() => {
+        setWindowSize(window.innerWidth)
+        window.addEventListener('resize', (ev) => { setWindowSize(ev.path[0].innerWidth) })
 
-    console.log(document)
+        if (windowSize >= 768)
+            setNavStatus(true)
+        else
+            setNavStatus(false)
+
+        return () => { window.removeEventListener('resize', (ev) => { setWindowSize(ev.path[0].innerWidth) }) }    
+    }, [windowSize])
+
     return (
         <div>
             <Head title="Explore &middot; LinkHub"/>

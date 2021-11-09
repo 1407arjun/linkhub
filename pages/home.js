@@ -4,10 +4,23 @@ import NavBar from '../components/uni/navbar'
 import SideBar from '../components/home/sidebar'
 import SearchBar from '../components/uni/searchbar'
 import PostMini from '../components/posts/post-mini'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Home() {
     const [navStatus, setNavStatus] = useState(false)
+    const [windowSize, setWindowSize] = useState()
+    
+    useEffect(() => {
+        setWindowSize(window.innerWidth)
+        window.addEventListener('resize', (ev) => { setWindowSize(ev.path[0].innerWidth) })
+
+        if (windowSize >= 768)
+            setNavStatus(true)
+        else
+            setNavStatus(false)
+
+        return () => { window.removeEventListener('resize', (ev) => { setWindowSize(ev.path[0].innerWidth) }) }    
+    }, [windowSize])
 
     return (
         <div>

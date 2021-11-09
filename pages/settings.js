@@ -3,10 +3,23 @@ import Footer from '../components/uni/footer'
 import NavBar from '../components/uni/navbar'
 import SideBar from '../components/profile/sidebar'
 import SearchBar from '../components/uni/searchbar'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Settings() {
     const [navStatus, setNavStatus] = useState(false)
+    const [windowSize, setWindowSize] = useState()
+    
+    useEffect(() => {
+        setWindowSize(window.innerWidth)
+        window.addEventListener('resize', (ev) => { setWindowSize(ev.path[0].innerWidth) })
+
+        if (windowSize >= 768)
+            setNavStatus(true)
+        else
+            setNavStatus(false)
+
+        return () => { window.removeEventListener('resize', (ev) => { setWindowSize(ev.path[0].innerWidth) }) }    
+    }, [windowSize])
 
     return (
         <div>
