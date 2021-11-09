@@ -8,7 +8,7 @@ function getInitials(name) {
     if (array.length > 1) {
         return array[0].slice(0, 1).toUpperCase() + array[1].slice(0, 1).toUpperCase()
     } else {
-        return array[0].slice(0, 1).toUpperCase()
+        return array[0].slice(0, 2).toUpperCase()
     }
 }
 
@@ -17,9 +17,7 @@ export default function PostMini(props) {
         <div className="flex flex-col gap-1 place-content-start rounded-xl border border-gray-300 dark:border-gray-600 w-full p-2">
             <div className="flex flex-row flex-nowrap justify-between items-center gap-2 xl:gap-3 px-2 w-full">
                 <div className="flex-none flex flex-row justify-start items-center gap-2 xl:gap-3">
-                    <div className="cursor-default self-center w-9 h-9 sm:w-10 sm:h-10 xl:w-11 xl:h-11 rounded-full bg-black dark:bg-white text-center py-1">
-                        <h3 className="inline-block font-bold text-lg sm:text-xl xl:text-2xl text-white dark:text-black">{ getInitials(props.name) }</h3>
-                    </div>
+                    <h3 className="p-2 cursor-default self-center inline-block font-bold text-lg sm:text-xl xl:text-2xl text-white dark:text-black rounded-full bg-black dark:bg-white text-center">{ getInitials(props.name) }</h3>
                     <div className="self-center flex flex-col justify-center items-start">
                     <a><h4 className="text-sm xl:text-base font-semibold hover:underline focus:underline dark:text-white">{ props.name }</h4></a>
                         <p className="text-gray-500 dark:text-gray-300 text-xs xl:text-sm">{ "@" + props.username }</p>

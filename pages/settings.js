@@ -17,19 +17,17 @@ export default function Settings() {
             setNavStatus(true)
         else
             setNavStatus(false)
-
-        return () => { window.removeEventListener('resize', (ev) => { setWindowSize(ev.path[0].innerWidth) }) }    
     }, [windowSize])
 
     return (
         <div className="dark:bg-black">
             <Head title="Settings &middot; LinkHub"/>
-            <div className="flex flex-row place-content-start">
+            <div className="flex flex-row place-content-start min-h-screen">
                 { navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Settings"/> }
                 <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
                     <div className="w-full flex flex-row justify-start items-center gap-4">
-                        { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full" alt="Nav"/></button> }
-                        <SearchBar placeholder="What would you like to learn today?"/>
+                        { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:filter dark:invert" alt="Nav"/></button> }
+                        <SearchBar user="Arjun Sivaraman" placeholder="What would you like to learn today?"/>
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Profile Data</h2>
                     <form action="/settings" method="POST" className="flex flex-col gap-4 justify-start items-center w-full p-1">
