@@ -25,7 +25,7 @@ export default function PostMini(props) {
                         <p className="text-gray-500 text-xs xl:text-sm">{ "@" + props.username }</p>
                     </div>
                 </div>
-                <Dropdown delete={ false } saved={ true }/>
+                <Dropdown delete={ true } saved={ true }/>
             </div>
             <div className="flex flex-row gap-2 place-content-start w-full px-2 sm:px-0">
                 <Bar upvotes={ props.upvotes } downvotes={ props.downvotes } flags={ props.flags }/>

@@ -30,8 +30,8 @@ export default function NavBar(props) {
             <br/>
 
             <div className="px-1 md:px-2 lg:px-4 xl:px-8 text-center w-full">
-                <Link href="/create"><a className="inline-block xl:flex xl:flex-row justify-start items-center gap-2 p-4 xl:py-4 xl:pl-4 xl:pr-8 rounded-full bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:ring-opacity-60">
-                    <img src="/assets/posts/link-45.svg" className="w-6 md:w-8 mx-auto xl:mx-0" alt="Create"/>
+                <Link href="/create"><a className="inline-block xl:flex xl:flex-row justify-start items-center gap-2 p-4 xl:py-4 xl:pl-5 xl:pr-8 rounded-full bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:ring-opacity-60">
+                    <img src="/assets/posts/magic.svg" className="w-6 md:w-8 mx-auto xl:mx-0" alt="Create"/>
                     <span className="hidden xl:inline text-xl font-semibold text-white">Create</span>
                 </a></Link>
             </div>
