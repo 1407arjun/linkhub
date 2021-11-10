@@ -12,7 +12,7 @@ export default function Login() {
                 <form action="/auth/login" method="POST" className="inline-flex flex-col mx-auto gap-4 justify-start items-center w-full md:w-2/3 lg:w-1/2 p-1">
                     <div className="w-full">
                         <label htmlFor="username" className="block text-left font-semibold mb-1 dark:text-white">Username or Email</label>
-                        <input name="username" type="text" placeholder="Username or Email" className="dark:bg-black mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:text-white dark:focus:ring-gray-100"/>
+                        <input name="username" type="text" placeholder="Username or Email" className="dark:bg-black mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:text-white dark:focus:ring-gray-100" pattern="[a-z0-9_\-@.]+"/>
                     </div>
                     <div className="w-full">
                         <label htmlFor="password" className="block text-left font-semibold mb-1 dark:text-white">Password</label>

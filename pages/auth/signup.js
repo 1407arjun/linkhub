@@ -12,11 +12,13 @@ export default function SignUp() {
                 <form action="/auth/signup" method="POST" className="inline-flex flex-col md:grid md:grid-cols-2 mx-auto gap-4 justify-start items-center w-full p-1">
                     <div className="w-full">
                         <label htmlFor="name" className="block text-left font-semibold mb-1 dark:text-white">Name</label>
-                        <input name="name" type="text" placeholder="Name" className="dark:bg-black mt-1 w-full p-2 focus:outline-none rounded-md ring-1 ring-gray-300 focus:ring-gray-500 dark:text-white dark:focus:ring-gray-100"/>
+                        <input name="name" type="text" placeholder="Name" className="dark:bg-black mt-1 w-full p-2 focus:outline-none rounded-md ring-1 ring-gray-300 focus:ring-gray-500 dark:text-white dark:focus:ring-gray-100" pattern="[a-zA-Z0-9_\-]+"/>
+                        <p className="px-1 py-0.5 text-left text-gray-500 dark:text-gray-300 text-xs md:text-sm">Special characters except hyphens ( - ) and underscores ( _ ) are not allowed</p>
                     </div>
                     <div className="w-full">
                         <label htmlFor="username" className="block text-left font-semibold mb-1 dark:text-white">Username</label>
-                        <input name="username" type="text" placeholder="Username" className="dark:bg-black mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:text-white dark:focus:ring-gray-100"/>
+                        <input name="username" type="text" placeholder="Username" className="dark:bg-black mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:text-white dark:focus:ring-gray-100" pattern="[a-z0-9_]+" autoComplete="off"/>
+                        <p className="px-1 py-0.5 text-left text-gray-500 dark:text-gray-300 text-xs md:text-sm">Only lowercase alphabets ( a-z ), numbers ( 0-9 ) and underscores ( _ ) are allowed</p>
                     </div>
                     <div className="w-full">
                         <label htmlFor="email" className="block text-left font-semibold mb-1 dark:text-white">Email</label>
@@ -29,8 +31,9 @@ export default function SignUp() {
                     <div className="w-full">
                         <label htmlFor="password" className="block text-left font-semibold mb-1 dark:text-white">Password</label>
                         <input name="password" type="password" placeholder="Password" className="dark:bg-black mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:text-white dark:focus:ring-gray-100"/>
+                        <p className="px-1 py-0.5 text-left text-gray-500 dark:text-gray-300 text-xs md:text-sm">Should contain at least one uppercase letter ( A-Z ), numbers ( 0-9 ) and a special character</p>
                     </div> 
-                    <div className="w-full">
+                    <div className="w-full self-start">
                         <label htmlFor="cpassword" className="block text-left font-semibold mb-1 dark:text-white">Confirm password</label>
                         <input name="cpassword" type="password" placeholder="Confirm password" className="dark:bg-black mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:text-white dark:focus:ring-gray-100"/>
                     </div>

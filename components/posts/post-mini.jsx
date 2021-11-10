@@ -20,7 +20,7 @@ export default function PostMini(props) {
         <div className="flex flex-col gap-1 place-content-start rounded-xl border border-gray-300 dark:border-gray-600 w-full p-2">
             <div className="flex flex-row flex-nowrap justify-between items-center gap-2 xl:gap-3 px-2 w-full">
                 <div className="flex-none flex flex-row justify-start items-center gap-2 xl:gap-3">
-                    <h3 className="p-2 cursor-default self-center inline-block font-bold text-lg sm:text-xl xl:text-2xl text-white dark:text-black rounded-full bg-black dark:bg-white text-center">{ getInitials(props.name) }</h3>
+                    <h3 className="p-2 select-none self-center inline-block font-bold text-lg sm:text-xl xl:text-2xl text-white dark:text-black rounded-full bg-black dark:bg-white text-center">{ getInitials(props.name) }</h3>
                     <div className="self-center flex flex-col justify-center items-start">
                     <a><h4 className="text-sm xl:text-base font-semibold hover:underline focus:underline dark:text-white">{ props.name }</h4></a>
                         <p className="text-gray-500 dark:text-gray-300 text-xs xl:text-sm">{ "@" + props.username }</p>
@@ -33,7 +33,8 @@ export default function PostMini(props) {
                 <div className="flex flex-col gap-1 place-content-start w-full sm:w-5/6 py-2">
                     <h2 className="font-bold text-lg xl:text-xl dark:text-white">{ props.title }</h2>
                     <p className="dark:text-white">{ props.body }</p>
-                    <div className="flex flex-row flex-nowrap overflow-x-auto md:flex-wrap md:overflow-visible gap-2 justify-start items-center pt-2 pb-3">
+                    <div className="flex flex-row flex-wrap gap-2 justify-start items-center pt-2 pb-3">
+                        {/* flex-nowrap overflow-x-auto md:flex-wrap md:overflow-visible */}
                         <TagBar name="app-development"/>
                         <TagBar name="app-development"/>
                         <TagBar name="app-development"/>

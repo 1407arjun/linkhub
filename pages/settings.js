@@ -33,19 +33,21 @@ export default function Settings() {
                     <form action="/settings" method="POST" className="flex flex-col gap-4 justify-start items-center w-full p-1">
                         <div className="w-full">
                             <label htmlFor="username" className="w-full font-semibold mb-1 dark:text-white">Username</label>
-                            <input name="username" type="text" placeholder="Username" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100"/>
+                            <input name="username" type="text" placeholder="Username" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100" pattern="[a-z0-9_]+" autoComplete="off" disabled/>
+                            <p className="px-1 py-0.5 text-left text-gray-500 dark:text-gray-300 text-xs md:text-sm">Only lowercase alphabets ( a-z ), numbers ( 0-9 ) and underscores ( _ ) are allowed</p>
                         </div>
                         <div className="w-full">
                             <label htmlFor="name" className="w-full font-semibold mb-1 dark:text-white">Name</label>
-                            <input name="name" type="text" placeholder="Name" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100"/>
+                            <input name="name" type="text" placeholder="Name" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100" pattern="[a-zA-Z0-9_\- ]+" disabled/>
+                            <p className="px-1 py-0.5 text-left text-gray-500 dark:text-gray-300 text-xs md:text-sm">Special characters except hyphens ( - ) and underscores ( _ ) are not allowed</p>
                         </div>
                         <div className="w-full">
                             <label htmlFor="email" className="w-full font-semibold mb-1 dark:text-white">Email</label>
-                            <input name="email" type="text" placeholder="Email" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100"/>
+                            <input name="email" type="text" placeholder="Email" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100" disabled/>
                         </div>
                         <div className="w-full">
                             <label htmlFor="dob" className="w-full font-semibold mb-1 dark:text-white">Date of Birth</label>
-                            <input name="dob" type="date" placeholder="Date of Birth" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100"/>
+                            <input name="dob" type="date" placeholder="Date of Birth" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100" disabled/>
                         </div>
                         <div className="w-full flex flex-col sm:flex-row gap-4">
                             <button type="submit" className="w-full sm:w-1/3 bg-blue-500 py-2 rounded-md font-bold text-white hover:bg-blue-600 focus:bg-blue-600">Save</button>
@@ -62,6 +64,7 @@ export default function Settings() {
                         <div className="w-full">
                             <label htmlFor="npassword" className="w-full font-semibold mb-1 dark:text-white">New password</label>
                             <input name="npassword" type="password" placeholder="New password" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100"/>
+                            <p className="px-1 py-0.5 text-left text-gray-500 dark:text-gray-300 text-xs md:text-sm">Should contain at least one uppercase letter ( A-Z ), numbers ( 0-9 ) and a special character</p>
                         </div>
                         <div className="w-full">
                             <label htmlFor="cpassword" className="w-full font-semibold mb-1 dark:text-white">Confirm password</label>
