@@ -28,7 +28,7 @@ export default function Home() {
                 <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
                     <div className="w-full flex flex-row justify-start items-center gap-4">
                         { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:filter dark:invert" alt="Nav"/></button> }
-                        <SearchBar user="Arjun Sivaraman" placeholder="What would you like to learn today?"/>
+                        <SearchBar user="Arjun Sivaraman" placeholder="What would you like to learn today?" smhidesearch={ false } hideopts={ false }/>
                     </div>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         <PostMini name="Arjun Sivaraman"

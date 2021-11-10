@@ -26,9 +26,9 @@ export default function Explore() {
                 <div className="flex flex-row justify-start items-center gap-2 w-full">
                     <Link href="/home"><a className="p-2 md:p-4 rounded-full hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-800 dark:focus:bg-gray-800"><img src="/assets/editor/arrow-left.svg" className="w-8 sm:w-10 md:w-12 mx-auto dark:filter dark:invert" alt="Back"/></a></Link>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">New post</h2>
-                    <div className="justify-self-end self-center hidden sm:block w-2/3">
-                        <SearchBar user="Arjun Sivaraman" placeholder="Search LinkHub"/>
-                    </div>    
+                    <div className="justify-self-end self-center w-2/3">
+                        <SearchBar user="Arjun Sivaraman" placeholder="Search LinkHub" smhidesearch={ true } hideopts={ false }/>
+                    </div>
                 </div>
                 <form action="/create" method="POST" className="flex flex-col gap-3 justify-center items-start w-full px-0 md:px-2 h-screen">
                     <div className="w-full md:w-4/5 lg:w-2/3 xl:w-1/2">
