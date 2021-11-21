@@ -42,7 +42,7 @@ export default function Explore() {
                         </div>
                     </div>
                     <div className="w-full"> 
-                        <h4 className="w-full text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Found <Link href="/explore"><a><span className="font-semibold underline">10 posts</span></a></Link>, <Link href="/explore"><a><span className="font-semibold underline">5 tags</span></a></Link> and <Link href="/explore"><a><span className="font-semibold underline">2 users</span></a></Link>.</h4>
+                        <h4 className="w-full font-normal text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Found <Link href="/explore"><a><span className="font-semibold underline">10 posts</span></a></Link>, <Link href="/explore"><a><span className="font-semibold underline">5 tags</span></a></Link> and <Link href="/explore"><a><span className="font-semibold underline">2 users</span></a></Link>.</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
                             <Tag name="app-development" follow="8.2K"/>
                             <Tag name="web-development" follow="15K"/>
