@@ -4,9 +4,9 @@ import { Response } from '../../server/config/response'
 
 export default async function Profile(req: NextApiRequest, res: NextApiResponse<Response>): Promise<void> {
     if (req.method === 'GET') {
-        const username = req.query.username
-        if (typeof username === "string") {
-            let response: Response = await getProfile(username)
+        const userId = req.query.id
+        if (typeof userId === "string") {
+            let response: Response = await getProfile(userId)
             if (response.error)
                 res.status(500).json(response)
             else
