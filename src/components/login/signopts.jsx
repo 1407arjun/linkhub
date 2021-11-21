@@ -6,7 +6,7 @@ export default function SignOpts(props) {
         <div className="flex flex-col gap-2 mb-6">
             <SignBtn name="Google" type={ props.type }/>
             <SignBtn name="GitHub" type={ props.type }/>
-            <Link href={ "/auth" + props.href }><a><SignBtn name="Email" type={ props.type }/></a></Link>
+            <Link href={ "/auth" + props.href }><a className="hover:no-underline focus:no-underline"><SignBtn name="Email" type={ props.type }/></a></Link>
         </div>
     )
 }

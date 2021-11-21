@@ -25,7 +25,7 @@ export default function Explore() {
             <Head title="New post &middot; LinkHub"/>
             <div className="flex flex-col justify-start items-start py-4 px-4 md:px-8 gap-6 min-h-screen">
                 <div className="flex flex-row justify-start items-center gap-2 w-full">
-                    <Link href="/home"><a className="p-2 md:p-4 rounded-full hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-800 dark:focus:bg-gray-800"><img src="/assets/editor/arrow-left.svg" className="w-8 sm:w-10 md:w-12 mx-auto dark:filter dark:invert" alt="Back"/></a></Link>
+                    <Link href="/home"><a className="p-2 md:p-4 rounded-full hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-800 dark:focus:bg-gray-800 hover:no-underline focus:no-underline"><img src="/assets/editor/arrow-left.svg" className="w-8 sm:w-10 md:w-12 mx-auto dark:filter dark:invert" alt="Back"/></a></Link>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">New post</h2>
                     <div className="justify-self-end self-center w-2/3">
                         <SearchBar user="Arjun Sivaraman" placeholder="Search LinkHub" smhidesearch={ true } hideopts={ false }/>
@@ -45,7 +45,7 @@ export default function Explore() {
                         </EditorContext.Provider>
                         <div className="flex flex-row justify-start items-center gap-2 px-1 py-0.5 text-left">
                             <img src="/assets/editor/markdown.svg" className="dark:filter dark:invert" alt="md"/>
-                            <p className="text-gray-500 dark:text-gray-300 text-sm md:text-base">Markdown supported</p>
+                            <a href="https://www.markdownguide.org/cheat-sheet/" target="_blank" rel="noreferrer" className="text-gray-500 dark:text-gray-300 hover:underline focus:underline"><p className="text-sm md:text-base">Markdown supported</p></a>
                         </div>
                     </div>
                     <TagBar/>

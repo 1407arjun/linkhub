@@ -3,7 +3,7 @@ import Tag from "./tag"
 export default function ExploreMini() {
     return (
         <div className="flex flex-col place-content-start gap-3 bg-gray-100 dark:bg-gray-900 rounded-3xl px-2 xl:px-4 py-4">
-            <h2 className="text-base xl:text-lg font-bold text-gray-700 dark:text-gray-300 px-2">Tags to follow</h2>
+            <h3 className="text-base xl:text-lg font-bold text-gray-700 dark:text-gray-300 px-2">Tags to follow</h3>
             <div className="flex flex-col place-content-start"> {/* Max 5 Strip before entering*/}
                 <Tag name="app-development" follow="8.2K"/>
                 <Tag name="web-development" follow="15K"/>

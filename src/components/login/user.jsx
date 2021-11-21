@@ -16,7 +16,7 @@ export default function User(props) {
                     <h1 className="text-black dark:text-white text-5xl font-bold mb-6">{ props.line1 }</h1>
                     <h2 className="text-black dark:text-white text-4xl font-bold mb-4">{ props.line2 }</h2>
                     <SignOpts type={ props.type } href={ props.loc }/>
-                    <p className="dark:text-white">{ props.rdesc }<span><a href={ props.rloc } className="text-blue-500 hover:underline">{ props.rtype }</a></span></p>
+                    <p className="dark:text-white">{ props.rdesc }<span><a href={ props.rloc } className="text-blue-500 hover:underline focus:underline">{ props.rtype }</a></span></p>
                 </div>
             </div>
             <Footer signedin={ false }/>

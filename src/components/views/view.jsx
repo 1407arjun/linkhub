@@ -16,7 +16,7 @@ export default function View(props) {
                         <img src={ props.img } className="w-8 md:w-12 filter invert dark:invert-0" alt=""/>
                         <div className="flex flex-col justify-start items-center gap-1 w-full">
                             <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ props.name }</h2>
-                            <h4 className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ props.desc }</h4>
+                            <h3 className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ props.desc }</h3>
                         </div>
                         { props.add && <button className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
                             <img src="/assets/home/plus-sq.svg" className="w-6 md:w-10" alt="Add"/>
