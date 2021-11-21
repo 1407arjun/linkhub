@@ -39,6 +39,7 @@ const profileSchema = new mongoose.Schema<Profile>({
     }
 })
 
-const profileModel = mongoose.model<Profile>("Post", profileSchema)
+const profileModel = mongoose.models.Profile || mongoose.model<Profile>("Profile", profileSchema)
+
 export default profileModel
 export { profileSchema }

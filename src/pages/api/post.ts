@@ -1,12 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import getPost from './services/post'
+import getPost from '../../server/services/post'
+import { Response } from '../../server/config/response'
 
-export type Response = {
-    error: boolean
-    data: object
-}
-
-export default async (req: NextApiRequest, res: NextApiResponse<Response>) => {
+export default async function Post(req: NextApiRequest, res: NextApiResponse<Response>): Promise<void> {
     if (req.method === 'GET') {
         const postId = req.query.id
         if (typeof postId === "string") {

@@ -22,6 +22,7 @@ const tagSchema = new mongoose.Schema<Tag>({
     }
 })
 
-const tagModel = mongoose.model<Tag>("Tag", tagSchema)
+const tagModel = mongoose.models.Tag || mongoose.model<Tag>("Tag", tagSchema)
+
 export default tagModel
 export { tagSchema }

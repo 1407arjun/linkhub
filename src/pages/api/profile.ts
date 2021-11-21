@@ -1,12 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import getProfile from './services/tag'
+import getProfile from '../../server/services/tag'
+import { Response } from '../../server/config/response'
 
-export type Response = {
-    error: boolean
-    data: object
-}
-
-export default async (req: NextApiRequest, res: NextApiResponse<Response>) => {
+export default async function Profile(req: NextApiRequest, res: NextApiResponse<Response>): Promise<void> {
     if (req.method === 'GET') {
         const username = req.query.username
         if (typeof username === "string") {

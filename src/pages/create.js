@@ -36,12 +36,18 @@ export default function Explore() {
                         <input onChange={ handleTitleChange } name="title" type="text" placeholder="Title" className="w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100 text-lg md:text-xl font-semibold" value={ titleText } autoComplete="off"/>
                         <p className="px-1 py-0.5 text-right text-gray-500 dark:text-gray-300 text-sm md:text-base">{ titleText.length + " of 32 characters" }</p>
                     </div>
-                    <EditorContext.Provider value={ contextValue }>
-                        <div className="grid grid-rows-2 grid-cols-1 lg:grid-rows-1 lg:grid-cols-2 justify-center items-start gap-4 w-full h-full rounded-md border border-gray-300 p-3 lg:p-4">
-                            <Markdown/>
-                            <Preview/>
+                    <div className="w-full h-full">
+                        <EditorContext.Provider value={ contextValue }>
+                            <div className="grid grid-rows-2 grid-cols-1 lg:grid-rows-1 lg:grid-cols-2 justify-center items-start gap-4 rounded-md border border-gray-300 p-3 lg:p-4">
+                                <Markdown/>
+                                <Preview/>
+                            </div>
+                        </EditorContext.Provider>
+                        <div className="flex flex-row justify-start items-center gap-2 px-1 py-0.5 text-left">
+                            <img src="/assets/editor/markdown.svg" className="dark:filter dark:invert" alt="md"/>
+                            <p className="text-gray-500 dark:text-gray-300 text-sm md:text-base">Markdown supported</p>
                         </div>
-                    </EditorContext.Provider>
+                    </div>
                     <TagBar/>
                     <button className="w-full md:w-auto flex flex-row justify-center items-center gap-3 px-6 py-3 rounded-md bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:ring-opacity-60">
                         <img src="/assets/editor/send.svg" className="w-5 md:w-6" alt="Post"/>
