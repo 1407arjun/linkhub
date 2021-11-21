@@ -6,7 +6,6 @@ export default function NavBar(props) {
     const [navStatus, setNavStatus] = useState(props.navstatus)
 
     useEffect(() => {
-        console.log("Navbar " + navStatus)
         props.update(navStatus)
     }, [navStatus])
 

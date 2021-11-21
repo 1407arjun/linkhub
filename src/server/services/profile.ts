@@ -5,7 +5,7 @@ import { Response } from '../config/response'
 export default async function getProfile(userId: string): Promise<Response> {
     await mongoose
     try {
-        const data = await Profile.find({ _id: userId })
+        const data = await Profile.findById(userId)
         return {error: false, data: data}
     } catch (err: object|unknown) {
         if (err && typeof err === "object")

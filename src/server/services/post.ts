@@ -5,7 +5,7 @@ import { Response } from '../config/response'
 export default async function getPost(postId: string): Promise<Response> {
     await mongoose
     try {
-        const data = await Post.find({ _id: postId })
+        const data = await Post.findById(postId)
         return {error: false, data: data}
     } catch (err: object|unknown) {
         if (err && typeof err === "object")
