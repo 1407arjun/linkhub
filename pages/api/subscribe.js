@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 
 module.exports = function addToMailList (req, res) {
 	if (req.method === "POST") {
-		const uri = process.env.MONGODB_STRING
+		const uri = process.env.MONGODB_STRING_2
 		const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 		try {
 			client.connect(async err => {
