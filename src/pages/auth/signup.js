@@ -9,7 +9,7 @@ export default function SignUp() {
             <div className="inline-flex flex-col place-content-center gap-4 w-full md:w-4/5 xl:w-1/2 p-6 min-h-screen">
                 <img src="/assets/logo-black.svg" alt="LinkHub" className="w-1/2 mx-auto dark:filter dark:invert"/>
                 <h2 className="w-full font-bold text-2xl md:text-3xl text-center dark:text-white">Sign up</h2>
-                <form action="/auth/signup" method="POST" className="inline-flex flex-col md:grid md:grid-cols-2 mx-auto gap-4 justify-start items-center w-full p-1">
+                <form action="/api/auth?action=signup&amp;strategy=local" method="POST" className="inline-flex flex-col md:grid md:grid-cols-2 mx-auto gap-4 justify-start items-center w-full p-1">
                     <div className="w-full">
                         <label htmlFor="name" className="block text-left font-semibold mb-1 dark:text-white">Name</label>
                         <input name="name" type="text" placeholder="Name" className="dark:bg-black mt-1 w-full p-2 focus:outline-none rounded-md ring-1 ring-gray-300 focus:ring-gray-500 dark:text-white dark:focus:ring-gray-100" pattern="[a-zA-Z0-9_\-]+"/>

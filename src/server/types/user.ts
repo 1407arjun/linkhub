@@ -4,6 +4,5 @@ export default interface TypeUser {
     dob: string;
     email: string;
     provider: string;
-    hash?: string;
-    salt?: string;
+    password?: string;
 }

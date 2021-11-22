@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import passportLocalMongoose from 'passport-local-mongoose'
 import TypeUser from '../types/user'
 
 const userSchema = new mongoose.Schema<TypeUser>({
@@ -22,9 +23,10 @@ const userSchema = new mongoose.Schema<TypeUser>({
         type: String,
         required: true
     },
-    hash: String,
-    salt: String
+    password: String
 })
+
+userSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.models.User || mongoose.model<TypeUser>("User", userSchema)
 
