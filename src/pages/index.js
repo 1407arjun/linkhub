@@ -3,7 +3,7 @@ import Footer from '../components/index/footer'
 import HomeBar from '../components/index/homebar'
 import SignUpBar from '../components/index/signupbar'
 
-const tagline = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mattis magna vel viverra faucibus. Curabitur mi ante, eleifend at dui non, feugiat congue lectus."
+const tagline = "A portal to help you find the right resources to boost your learning from all those available on the World Wide Web. Links are ranked based on the feedback by others who have tried it out, so as to provide you only the best of the best."
 
 export default function Index() {
   return (

@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import getPost from '../../server/services/post'
-import { Response } from '../../server/config/response'
+import getPost from '../../server/services/data/post'
+import { Response } from '../../server/types/response'
 
 export default async function Post(req: NextApiRequest, res: NextApiResponse<Response>): Promise<void> {
     if (req.method === 'GET') {

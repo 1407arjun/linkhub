@@ -1,6 +1,6 @@
-import mongoose from '../loaders/database'
-import Post from '../models/post'
-import { Response } from '../config/response'
+import mongoose from '../../loaders/database'
+import Post from '../../models/post'
+import { Response } from '../../types/response'
 
 export default async function getPost(postId: string): Promise<Response> {
     await mongoose

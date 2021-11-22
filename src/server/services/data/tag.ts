@@ -1,11 +1,11 @@
-import mongoose from '../loaders/database'
-import Profile from '../models/profile'
-import { Response } from '../config/response'
+import mongoose from '../../loaders/database'
+import Tag from '../../models/tag'
+import { Response } from '../../types/response'
 
-export default async function getProfile(userId: string): Promise<Response> {
+export default async function getTag(tagId: string): Promise<Response> {
     await mongoose
     try {
-        const data = await Profile.findById(userId)
+        const data = await Tag.findById(tagId)
         return {error: false, data: data}
     } catch (err: object|unknown) {
         if (err && typeof err === "object")

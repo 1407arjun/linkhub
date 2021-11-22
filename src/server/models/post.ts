@@ -1,19 +1,9 @@
-import mongoose from 'mongoose'
-import { Tag, tagSchema } from './tag'
-import { User, userSchema } from './user'
+import mongoose from '../loaders/database'
+import { tagSchema } from './tag'
+import { userSchema } from './user'
+import TypePost from '../types/post'
 
-export interface Post {
-    title: string;
-    body: string;
-    date: string;
-    upvotes: number;
-    downvotes: number;
-    flags: number;
-    author: User
-    tags: [ Tag ]
-}
-
-const postSchema = new mongoose.Schema<Post>({
+const postSchema = new mongoose.Schema<TypePost>({
     title: {
         type: String,
         required: true
@@ -48,7 +38,7 @@ const postSchema = new mongoose.Schema<Post>({
     }
 })
 
-const postModel = mongoose.models.Post || mongoose.model<Post>("Post", postSchema)
+const Post = mongoose.models.Post || mongoose.model<TypePost>("Post", postSchema)
 
-export default postModel
+export default Post
 export { postSchema }

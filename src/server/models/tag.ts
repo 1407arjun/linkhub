@@ -1,13 +1,8 @@
-import mongoose from 'mongoose'
-import { User, userSchema } from './user'
+import mongoose from '../loaders/database'
+import { userSchema } from './user'
+import TypeTag from '../types/tag'
 
-export interface Tag {
-    name: string;
-    followers: [ User ];
-    related: [ string ];
-}
-
-const tagSchema = new mongoose.Schema<Tag>({
+const tagSchema = new mongoose.Schema<TypeTag>({
     name: {
         type: String,
         required: true
@@ -22,7 +17,7 @@ const tagSchema = new mongoose.Schema<Tag>({
     }
 })
 
-const tagModel = mongoose.models.Tag || mongoose.model<Tag>("Tag", tagSchema)
+const Tag = mongoose.models.Tag || mongoose.model<TypeTag>("Tag", tagSchema)
 
-export default tagModel
+export default Tag
 export { tagSchema }

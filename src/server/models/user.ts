@@ -1,14 +1,7 @@
 import mongoose from 'mongoose'
+import TypeUser from '../types/user'
 
-export interface User {
-    username: string;
-    name: string;
-    dob: string;
-    email: string;
-    auth: string;
-}
-
-const userSchema = new mongoose.Schema<User>({
+const userSchema = new mongoose.Schema<TypeUser>({
     username: {
         type: String,
         required: true
@@ -25,13 +18,15 @@ const userSchema = new mongoose.Schema<User>({
         type: String,
         required: true
     },
-    auth: {
+    provider: {
         type: String,
         required: true
-    }
+    },
+    hash: String,
+    salt: String
 })
 
-const userModel = mongoose.models.User || mongoose.model<User>("User", userSchema)
+const User = mongoose.models.User || mongoose.model<TypeUser>("User", userSchema)
 
-export default userModel
+export default User
 export { userSchema }

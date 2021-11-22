@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import getTag from '../../server/services/tag'
-import { Response } from '../../server/config/response'
+import getTag from '../../server/services/data/tag'
+import { Response } from '../../server/types/response'
 
 export default async function Tag(req: NextApiRequest, res: NextApiResponse<Response>): Promise<void> {
     if (req.method === 'GET') {

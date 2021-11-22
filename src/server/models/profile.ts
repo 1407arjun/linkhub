@@ -1,18 +1,10 @@
-import mongoose from 'mongoose'
-import { User, userSchema } from './user'
-import { Post, postSchema } from './post'
-import { Tag, tagSchema } from './tag'
+import mongoose from '../loaders/database'
+import { userSchema } from './user'
+import { postSchema } from './post'
+import { tagSchema } from './tag'
+import TypeProfile from '../types/profile'
 
-export interface Profile {
-    user: User;
-    tags: [ Tag ];
-    posts: [ Post ];
-    saved: [ Post ];
-    upvoted: [ Post ];
-    downvoted: [ Post ];
-}
-
-const profileSchema = new mongoose.Schema<Profile>({
+const profileSchema = new mongoose.Schema<TypeProfile>({
     user: {
         type: userSchema,
         required: true
@@ -39,7 +31,7 @@ const profileSchema = new mongoose.Schema<Profile>({
     }
 })
 
-const profileModel = mongoose.models.Profile || mongoose.model<Profile>("Profile", profileSchema)
+const Profile = mongoose.models.Profile || mongoose.model<TypeProfile>("Profile", profileSchema)
 
-export default profileModel
+export default Profile
 export { profileSchema }
