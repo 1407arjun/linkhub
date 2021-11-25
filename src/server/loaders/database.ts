@@ -1,11 +1,9 @@
 import mongoose from 'mongoose'
 
-if (mongoose.connection.readyState === 0) {
-    //@ts-ignore
-    mongoose.connect(process.env.MONGODB_STRING! + "Client?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err: object): void => {
-        if (err)
-            console.log(err)
-    })
-}
-
-export default mongoose
+export default async function Connect() {
+    try {
+        const db = await mongoose.connect(process.env.MONGO_CLIENT_URI!, {useNewUrlParser: true, useUnifiedTopology: true})
+    } catch (err) {
+        console.log(err)
+    }
+}    
