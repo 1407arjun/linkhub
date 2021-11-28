@@ -34,7 +34,7 @@ export default function Username() {
                     <button type="submit" className="w-full bg-blue-500 py-2 rounded-md font-bold text-white hover:bg-blue-600 focus:bg-blue-600">Let&#39;s Go!</button>
                 </form>
             </div>
-            <Footer signedin={ true }/>
+            <Footer signedin={ false }/>
         </div>
     )  
 }
