@@ -49,7 +49,9 @@ export async function getServerSideProps(context) {
             props: {}
         }
     } else {
-        const profile = await (await client).db("Client").collection("profiles").findOne({"user.email": session.user.email})
+        const mClient = await client
+        const profile = await mClient.db("Client").collection("profiles").findOne({"user.email": session.user.email})
+        await mClient.close()
         if (profile)
             return {
                 redirect: {

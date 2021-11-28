@@ -64,7 +64,9 @@ export default function Explore(props) {
 export async function getServerSideProps(context) {
     const session = await getSession(context)
     if (session) {
-        const profile = JSON.parse(JSON.stringify(await (await client).db("Client").collection("profiles").findOne({"user.email": session.user.email})))
+        const mClient = await client
+        const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({"user.email": session.user.email})))
+        await mClient.close()
         if (!profile)
             return {
                 redirect: {
