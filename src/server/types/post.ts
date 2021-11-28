@@ -1,5 +1,4 @@
-import User from './user'
-import Tag from './tag'
+import Profile from './profile'
 
 export default interface Post {
     title: string;
@@ -8,6 +7,6 @@ export default interface Post {
     upvotes: number;
     downvotes: number;
     flags: number;
-    author: User
-    tags: [ Tag ]
+    author: Profile
+    tags: [ string ]
 }

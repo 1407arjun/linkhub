@@ -2,6 +2,7 @@ import Bar from './bar'
 import HBar from './hbar'
 import TagBar from './tagbar'
 import Dropdown from './dropdown'
+import ReactMarkdown from 'react-markdown'
 
 function getInitials(name) {
     let array = name.split(" ")
@@ -26,18 +27,15 @@ export default function PostMini(props) {
                         <p className="text-gray-500 dark:text-gray-300 text-xs xl:text-sm">{ "@" + props.username }</p>
                     </div>
                 </div>
-                <Dropdown delete={ true } saved={ true }/>
+                <Dropdown delete={ props.delete } saved={ props.saved }/>
             </div>
             <div className="flex flex-row gap-2 place-content-start w-full px-2 sm:px-0">
                 <Bar upvotes={ props.upvotes } downvotes={ props.downvotes } flags={ props.flags }/>
                 <div className="flex flex-col gap-1 place-content-start w-full sm:w-5/6 py-2">
                     <h2 className="font-bold text-lg xl:text-xl dark:text-white">{ props.title }</h2>
-                    <div className="dark:text-white">{ props.body }</div>
+                    <ReactMarkdown className="dark:text-white">{ props.body }</ReactMarkdown>
                     <div className="flex flex-row flex-wrap gap-2 justify-start items-center pt-2 pb-3">
-                        {/* flex-nowrap overflow-x-auto md:flex-wrap md:overflow-visible */}
-                        <TagBar name="app-development"/>
-                        <TagBar name="app-development"/>
-                        <TagBar name="app-development"/>
+                        { tags.map((tag, index) => { return <TagBar key={ index } name={ tag }/> }) }
                     </div>
                 </div>
             </div>

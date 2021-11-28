@@ -1,6 +1,5 @@
 import 'tailwindcss/tailwind.css'
 import '../../public/styles/globals.css'
-import Connect from '../server/loaders/database'
 import { SessionProvider } from 'next-auth/react'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
@@ -9,10 +8,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       <Component {...pageProps} />
     </SessionProvider>  
   )
-}
-
-export async function getStaticProps() {
-  await Connect()
 }
 
 export default MyApp

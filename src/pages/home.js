@@ -30,7 +30,7 @@ export default function Home(props) {
                 <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
                     <div className="w-full flex flex-row justify-start items-center gap-4">
                         { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:filter dark:invert" alt="Nav"/></button> }
-                        <SearchBar user="Arjun Sivaraman" placeholder="What would you like to learn today?" smhidesearch={ false } hideopts={ false }/>
+                        <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         <PostMini name="Arjun Sivaraman"
@@ -60,7 +60,7 @@ export default function Home(props) {
 export async function getServerSideProps(context) {
     const session = await getSession(context)
     if (session) {
-        const profile = await (await client).db("Client").collection("profiles").findOne({"user.email": session.user.email})
+        const profile = JSON.parse(JSON.stringify(await (await client).db("Client").collection("profiles").findOne({"user.email": session.user.email})))
         if (!profile)
             return {
                 redirect: {

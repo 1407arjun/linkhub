@@ -4,6 +4,8 @@ import NavBar from '../components/uni/navbar'
 import SideBar from '../components/profile/sidebar'
 import SearchBar from '../components/uni/searchbar'
 import { useState, useEffect } from 'react'
+import { getSession } from 'next-auth/react'
+import client from '../server/loaders/database'
 
 export default function Settings() {
     const [navStatus, setNavStatus] = useState(false)
@@ -28,7 +30,7 @@ export default function Settings() {
                 <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
                     <div className="w-full flex flex-row justify-start items-center gap-4">
                         { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:filter dark:invert" alt="Nav"/></button> }
-                        <SearchBar user="Arjun Sivaraman" placeholder="What would you like to learn today?" smhidesearch={ false } hideopts={ false }/>
+                        <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Profile Data</h2>
                     <form action="/settings" method="POST" className="flex flex-col gap-4 justify-start items-center w-full p-1">
@@ -74,7 +76,32 @@ export default function Settings() {
                 </div>
                 <SideBar/>
             </div>
-            <Footer signedin={ true }/>
+            <Footer username={ props.user.username } signedin={ true }/>
         </div>
     )
+}
+
+export async function getServerSideProps(context) {
+    const session = await getSession(context)
+    if (session) {
+        const profile = JSON.parse(JSON.stringify(await (await client).db("Client").collection("profiles").findOne({"user.email": session.user.email})))
+        if (!profile)
+            return {
+                redirect: {
+                destination: "/complete/username"
+                },
+                props: {}
+            }
+        else
+            return {
+                props: { user: profile }
+            }
+    } else {
+        return {
+            redirect: {
+            destination: "/login"
+            },
+            props: {}
+        }
+    }
 }

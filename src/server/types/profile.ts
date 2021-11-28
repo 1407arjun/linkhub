@@ -6,7 +6,6 @@ export default interface Profile {
     user: User;
     username: string | undefined;
     tags: [ Tag ];
-    posts: [ Post ];
     saved: [ Post ];
     upvoted: [ Post ];
     downvoted: [ Post ];

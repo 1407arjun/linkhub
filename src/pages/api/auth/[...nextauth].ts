@@ -16,10 +16,7 @@ export default async function Auth(req: NextApiRequest, res: NextApiResponse) {
                 profileUrl: "https://www.googleapis.com/oauth2/v3/userinfo"
             })
         ],
-        adapter: MongoDBAdapter({
-            //@ts-ignore
-            db: (await client).db("Client")
-        }),
+        adapter: MongoDBAdapter(client),
         secret: process.env.AUTH_SECRET!,
         pages: {
             signIn: '/login',

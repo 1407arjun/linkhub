@@ -8,11 +8,14 @@ export default function Username() {
     async function check(ev) {
         ev.preventDefault()
         console.log(ev)
-        const profile = await (await client).db("Client").collection("profiles").findOne({username: ev.target[0].value})
-        if (profile)
+        const res = await fetch("/api/new?reqname=" + ev.target[0].value)
+        if (res.exists)
             alert("Username already exists.")
         else {
-            
+            await fetch("/api/new", {
+                method: "POST",
+                body: JSON.stringify({ username: ev.target[0].value })
+            }) 
         }
     }
 
@@ -22,7 +25,7 @@ export default function Username() {
             <div className="inline-flex flex-col place-content-center gap-4 w-full md:w-2/3 lg:w-1/2 p-6 min-h-screen">
                 <img src="/assets/logo-black.svg" alt="LinkHub" className="w-1/2 mx-auto dark:filter dark:invert"/>
                 <h2 className="w-full font-bold text-2xl md:text-3xl text-center dark:text-white">Complete your profile</h2>
-                <form onSubmit={ check } action="/api/new" method="POST" className="inline-flex flex-col mx-auto gap-4 justify-start items-center w-full md:w-2/3 p-1">
+                <form className="inline-flex flex-col mx-auto gap-4 justify-start items-center w-full md:w-2/3 p-1">
                     <div className="w-full self-start">
                         <label htmlFor="username" className="block text-left font-semibold mb-1 dark:text-white">Enter a username for your account (You can always change it later)</label>
                         <input name="username" type="text" placeholder="Username" className="dark:bg-black mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:text-white dark:focus:ring-gray-100" pattern="[a-z0-9_]+" autoComplete="off" required minLength="4" maxLength="20"/>

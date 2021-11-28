@@ -1,11 +1,12 @@
 import Link from 'next/link'
+import { signOut } from 'next-auth/react'
 
 export default function Footer(props) {
     return (
         <footer className="w-full text-center bg-gray-200 dark:bg-gray-800 py-2">
-             <p className={ (props.signedin ? "block " : "hidden ") + "text-gray-600 dark:text-gray-200 mb-2 text-sm"}><span className="font-semibold">{ "Signed in as" + props.username + "." }</span> Not you? <span>
-                <Link href="/api/auth/signout"><a className="hover:underline focus:underline">Sign out</a></Link></span>
-            </p>
+            { props.signedin && <p className="block text-gray-600 dark:text-gray-200 mb-2 text-sm"><span className="font-semibold">{ "Signed in as " + props.username + "." }</span> Not you? <span>
+                <button className="hover:underline focus:underline" onClick={ () => signOut() }>Sign out</button></span>
+            </p> }
             <div className="flex flex-row flex-wrap gap-2 justify-evenly items-center mt-1 px-8">
                 <p className="text-black dark:text-white font-semibold">&copy; 2021 LinkHub</p>
                 <a className="text-gray-600 dark:text-gray-200 hover:underline focus:underline">API</a>

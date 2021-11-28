@@ -1,9 +1,13 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Tag from "./tag"
 
-export default function TagBar() {
+export default function TagBar(props) {
     const [tags, setTags] = useState([])
     const [tagInput, setTagInput] = useState("")
+
+    useEffect(() => {
+        props.update(tags)
+    }, [tags])
 
     function handleTagsChange(ev) {
         /*let re = new RegExp("^[a-z\-]+$")

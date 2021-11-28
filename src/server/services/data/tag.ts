@@ -1,10 +1,10 @@
 import client from '../../loaders/database'
 import { Response } from '../../types/response'
 
-export default async function getTag(tagId: string): Promise<Response> {
+export default async function getTag(tagName: string): Promise<Response> {
     const collection = (await client).db("Client").collection("tags")
     try {
-        const data = await collection.findOne({ _id: tagId})
+        const data = await collection.findOne({ name: tagName})
         return {error: false, data: data!}
     } catch (err: object|unknown) {
         if (err && typeof err === "object")

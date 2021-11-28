@@ -2,14 +2,17 @@ import Link from 'next/link'
 import Head from '../components/uni/head'
 import Footer from '../components/uni/footer'
 import { useState } from 'react'
+import { getSession } from 'next-auth/react'
 import Markdown from '../components/editor/markdown'
 import Preview from '../components/editor/preview'
 import EditorContext from '../components/editor/context'
 import SearchBar from '../components/uni/searchbar'
 import TagBar from '../components/editor/tagbar'
+import client from '../server/loaders/database'
 
-export default function Explore() {
+export default function Create(props) {
     const [titleText, setTitleText] = useState("")
+    const [tags, setTags] = useState([])
     const [markdownText, setMarkdownText] = useState("")
     const contextValue = { markdownText, setMarkdownText }
 
@@ -18,6 +21,24 @@ export default function Explore() {
             setTitleText(ev.target.value.slice(0, 32))
         else
             setTitleText(ev.target.value)    
+    }
+
+    function handleTagsChange(tagsArray) {
+        setTags(tagsArray)
+    }
+
+    async function newPost(ev) {
+        ev.preventDefault()
+        console.log(ev)
+        await fetch("/api/new-post", {
+            method: "POST",
+            body: JSON.stringify({
+                title: ev.target[0].value,
+                body: ev.target[1].value,
+                tags: tags,
+                date: new Date()
+            })
+        })
     } 
 
     return (
@@ -28,12 +49,12 @@ export default function Explore() {
                     <Link href="/home"><a className="p-2 md:p-4 rounded-full hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-800 dark:focus:bg-gray-800 hover:no-underline focus:no-underline"><img src="/assets/editor/arrow-left.svg" className="w-8 sm:w-10 md:w-12 mx-auto dark:filter dark:invert" alt="Back"/></a></Link>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">New post</h2>
                     <div className="justify-self-end self-center w-2/3">
-                        <SearchBar user="Arjun Sivaraman" placeholder="Search LinkHub" smhidesearch={ true } hideopts={ false }/>
+                        <SearchBar placeholder="Search LinkHub" smhidesearch={ true } />
                     </div>
                 </div>
-                <form action="/create" method="POST" className="flex flex-col gap-3 justify-center items-start w-full px-0 md:px-2 h-full">
+                <form onSubmit={ newPost } className="flex flex-col gap-3 justify-center items-start w-full px-0 md:px-2 h-full">
                     <div className="w-full md:w-4/5 lg:w-2/3 xl:w-1/2">
-                        <input onChange={ handleTitleChange } name="title" type="text" placeholder="Title" className="w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100 text-lg md:text-xl font-semibold" value={ titleText } autoComplete="off"/>
+                        <input onChange={ handleTitleChange } name="title" type="text" placeholder="Title" className="w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100 text-lg md:text-xl font-semibold" value={ titleText } autoComplete="off" required/>
                         <p className="px-1 py-0.5 text-right text-gray-500 dark:text-gray-300 text-sm md:text-base">{ titleText.length + " of 32 characters" }</p>
                     </div>
                     <div className="w-full h-full">
@@ -48,14 +69,39 @@ export default function Explore() {
                             <a href="https://www.markdownguide.org/cheat-sheet/" target="_blank" rel="noreferrer" className="text-gray-500 dark:text-gray-300 hover:underline focus:underline"><p className="text-sm md:text-base">Markdown supported</p></a>
                         </div>
                     </div>
-                    <TagBar/>
+                    <TagBar update={ handleTagsChange }/>
                     <button className="w-full md:w-auto flex flex-row justify-center items-center gap-3 px-6 py-3 rounded-md bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:ring-opacity-60">
                         <img src="/assets/editor/send.svg" className="w-5 md:w-6" alt="Post"/>
                         <span className="text-lg md:text-xl font-semibold text-white">Post</span>
                     </button>
                 </form>
             </div>
-            <Footer signedin={ true }/>
+            <Footer username={ props.user.username } signedin={ true }/>
         </div>
     )
+}
+
+export async function getServerSideProps(context) {
+    const session = await getSession(context)
+    if (session) {
+        const profile = JSON.parse(JSON.stringify(await (await client).db("Client").collection("profiles").findOne({"user.email": session.user.email})))
+        if (!profile)
+            return {
+                redirect: {
+                destination: "/complete/username"
+                },
+                props: {}
+            }
+        else
+            return {
+                props: { user: profile }
+            }
+    } else {
+        return {
+            redirect: {
+            destination: "/login"
+            },
+            props: {}
+        }
+    }
 }

@@ -1,10 +1,11 @@
+import { ObjectId } from 'bson'
 import client from '../../loaders/database'
 import { Response } from '../../types/response'
 
 export default async function getPost(postId: string): Promise<Response> {
     const collection = (await client).db("Client").collection("posts")
     try {
-        const data = await collection.findOne({ _id: postId})
+        const data = await collection.findOne({ _id: new ObjectId(postId)})
         return {error: false, data: data!}
     } catch (err: object|unknown) {
         if (err && typeof err === "object")
