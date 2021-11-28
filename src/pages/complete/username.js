@@ -34,7 +34,7 @@ export default function Username() {
                     <button type="submit" className="w-full bg-blue-500 py-2 rounded-md font-bold text-white hover:bg-blue-600 focus:bg-blue-600">Let&#39;s Go!</button>
                 </form>
             </div>
-            <Footer signedin={ false }/>
+            <Footer username={ props.email } signedin={ true }/>
         </div>
     )  
 }
@@ -60,6 +60,6 @@ export async function getServerSideProps(context) {
                 props: {}
             }
         else
-            return { props: {} }       
+            return { props: { email: session.user.email } }       
     }
 }
