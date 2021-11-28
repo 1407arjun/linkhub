@@ -8,14 +8,14 @@ export default async function deletePost(postId: string): Promise<Response> {
     try {
         console.log(postId)
         const response = await collection.deleteOne({ _id: new ObjectId(postId)})
-        await mClient.close()
+        //await mClient.close()
         return {error: !response.acknowledged}
     } catch (err: object|unknown) {
         if (err && typeof err === "object") {
-            await mClient.close()
+            //await mClient.close()
             return {error: true, data: err}
         } else {
-            await mClient.close()
+            //await mClient.close()
             return {error: true, data: {name: "Unknown error", message:"Unknown error occurred. Please try again."}}
         }      
     }

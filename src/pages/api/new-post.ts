@@ -20,7 +20,7 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
                 author: profile
             }
             const response = await mClient.db("Client").collection("posts").insertOne(newPost)
-            await mClient.close()
+            //await mClient.close()
             if (response.acknowledged) {
                 res.status(200).redirect("/post/" + response.insertedId.toString())
             } else

@@ -1,7 +1,7 @@
 async function deletePost(id, email) {
     const submit = confirm("Are you sure you want to delete this post?")
     if (submit)
-        await fetch("/api/post/delete", {
+        fetch("/api/post/delete", {
             method: "POST",
             body: JSON.stringify({ _id: id, email: email })
         })

@@ -21,7 +21,7 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
                 downvoted: []
             }
             const response = await mClient.db("Client").collection("profiles").insertOne(newProfile)
-            await mClient.close()
+            //await mClient.close()
             if (response.acknowledged)
                 res.status(200).redirect("/home")
             else
@@ -31,7 +31,7 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
             const mClient = await client
             const username = req.query.reqname
             const profile = await mClient.db("Client").collection("profiles").findOne({username: username})
-            await mClient.close()
+            //await mClient.close()
             if (profile)
                 res.json({ exists: true })
             else

@@ -12,7 +12,7 @@ export default function Username() {
         if (res.exists)
             alert("Username already exists.")
         else {
-            await fetch("/api/new", {
+            fetch("/api/new", {
                 method: "POST",
                 body: JSON.stringify({ username: ev.target[0].value })
             }) 
@@ -51,7 +51,7 @@ export async function getServerSideProps(context) {
     } else {
         const mClient = await client
         const profile = await mClient.db("Client").collection("profiles").findOne({"user.email": session.user.email})
-        await mClient.close()
+        //await mClient.close()
         if (profile)
             return {
                 redirect: {
