@@ -3,6 +3,7 @@ import HBar from './hbar'
 import TagBar from './tagbar'
 import Dropdown from './dropdown'
 import ReactMarkdown from 'react-markdown'
+import Link from 'next/link'
  
 function getInitials(name) {
     let array = name.split(" ")
@@ -24,8 +25,10 @@ export default function PostMini(props) {
                 <div className="flex-none flex flex-row justify-start items-center gap-2 xl:gap-3">
                     <h3 className="p-2 select-none self-center inline-block font-bold text-lg sm:text-xl xl:text-2xl text-white dark:text-black rounded-full bg-black dark:bg-white text-center">{ getInitials(props.name) }</h3>
                     <div className="self-center flex flex-col justify-center items-start">
-                    <a className="hover:no-underline focus:no-underline"><h4 className="text-sm xl:text-base font-semibold hover:underline focus:underline dark:text-white">{ props.name }</h4></a>
-                        <p className="text-gray-500 dark:text-gray-300 text-xs xl:text-sm">{ "@" + props.username }</p>
+                        <Link href={ "/profile/" + props.username }><a className="hover:no-underline focus:no-underline">
+                            <h4 className="text-sm xl:text-base font-semibold hover:underline focus:underline dark:text-white">{ props.name }</h4>
+                            <p className="text-gray-500 dark:text-gray-300 text-xs xl:text-sm">{ "@" + props.username }</p>
+                        </a></Link>
                     </div>
                 </div>
                 <Dropdown id={ props.id } email={ props.email } delete={ props.delete } saved={ props.saved } date={ props.date }/>
