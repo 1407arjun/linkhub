@@ -1,5 +1,5 @@
-import TypeUser from './user'
-import TypeTag from './tag'
+import User from './user'
+import Tag from './tag'
 
 export default interface Post {
     title: string;
@@ -8,6 +8,6 @@ export default interface Post {
     upvotes: number;
     downvotes: number;
     flags: number;
-    author: TypeUser
-    tags: [ TypeTag ]
+    author: User
+    tags: [ Tag ]
 }

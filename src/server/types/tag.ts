@@ -1,7 +1,7 @@
-import TypeUser from './user'
+import User from './user'
 
 export default interface Tag {
     name: string;
-    followers: [ TypeUser ];
+    followers: [ User ];
     related: [ string ];
 }

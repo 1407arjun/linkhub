@@ -5,8 +5,10 @@ import SideBar from '../components/home/sidebar'
 import SearchBar from '../components/uni/searchbar'
 import PostMini from '../components/posts/post-mini'
 import { useState, useEffect } from 'react'
+import { getSession } from 'next-auth/react'
+import client from '../server/loaders/database'
 
-export default function Home() {
+export default function Home(props) {
     const [navStatus, setNavStatus] = useState(false)
     const [windowSize, setWindowSize] = useState()
     
@@ -50,7 +52,32 @@ export default function Home() {
                 </div>
                 <SideBar/>
             </div>
-            <Footer signedin={ true }/>
+            <Footer username={ props.user.username } signedin={ true }/>
         </div>
     )
+}
+
+export async function getServerSideProps(context) {
+    const session = await getSession(context)
+    if (session) {
+        const profile = await (await client).db("Client").collection("profiles").findOne({"user.email": session.user.email})
+        if (!profile)
+            return {
+                redirect: {
+                destination: "/complete/username"
+                },
+                props: {}
+            }
+        else
+            return {
+                props: { user: profile }
+            }
+    } else {
+        return {
+            redirect: {
+            destination: "/login"
+            },
+            props: {}
+        }
+    }
 }

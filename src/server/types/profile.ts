@@ -1,12 +1,13 @@
-import TypeUser from './user'
-import TypeTag from './tag'
-import TypePost from './post'
+import User from './user'
+import Tag from './tag'
+import Post from './post'
 
 export default interface Profile {
-    user: TypeUser;
-    tags: [ TypeTag ];
-    posts: [ TypePost ];
-    saved: [ TypePost ];
-    upvoted: [ TypePost ];
-    downvoted: [ TypePost ];
+    user: User;
+    username: string | undefined;
+    tags: [ Tag ];
+    posts: [ Post ];
+    saved: [ Post ];
+    upvoted: [ Post ];
+    downvoted: [ Post ];
 }

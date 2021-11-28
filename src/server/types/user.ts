@@ -1,8 +1,6 @@
-export default interface TypeUser {
-    username: string;
+export default interface User {
     name: string;
-    dob: string;
     email: string;
-    provider: string;
-    password?: string;
+    image?: string;
+    emailVerified?: string | null;
 }

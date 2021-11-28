@@ -1,12 +1,11 @@
-import mongoose from '../../loaders/database'
-import Post from '../../models/post'
+import client from '../../loaders/database'
 import { Response } from '../../types/response'
 
 export default async function getPost(postId: string): Promise<Response> {
-    await mongoose
+    const collection = (await client).db("Client").collection("posts")
     try {
-        const data = await Post.findById(postId)
-        return {error: false, data: data}
+        const data = await collection.findOne({ _id: postId})
+        return {error: false, data: data!}
     } catch (err: object|unknown) {
         if (err && typeof err === "object")
             return {error: true, data: err}

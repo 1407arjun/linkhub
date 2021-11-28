@@ -1,9 +1,16 @@
-import mongoose from 'mongoose'
+import { MongoClient } from 'mongodb'
+import dotenv from 'dotenv'
 
-export default async function Connect() {
-    try {
-        const db = await mongoose.connect(process.env.MONGO_CLIENT_URI!, {useNewUrlParser: true, useUnifiedTopology: true})
-    } catch (err) {
-        console.log(err)
-    }
-}    
+dotenv.config()
+
+const uri = process.env.MONGODB_CLIENT_URI!
+const options = {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+}
+
+//@ts-ignore
+let client = new MongoClient(uri, options)
+let clientPromise: Promise<MongoClient> = client.connect()
+
+export default clientPromise

@@ -46,10 +46,6 @@ export default function Settings() {
                             <label htmlFor="email" className="w-full font-semibold mb-1 dark:text-white">Email</label>
                             <input name="email" type="text" placeholder="Email" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100" disabled={ disableProfile ? "disabled" : ""} required/>
                         </div>
-                        <div className="w-full">
-                            <label htmlFor="dob" className="w-full font-semibold mb-1 dark:text-white">Date of Birth</label>
-                            <input name="dob" type="date" placeholder="Date of Birth" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100" disabled={ disableProfile ? "disabled" : ""} required/>
-                        </div>
                         <div className="w-full flex flex-col sm:flex-row gap-4">
                             <button type="submit" className="w-full sm:w-1/3 bg-blue-500 py-2 rounded-md font-bold text-white hover:bg-blue-600 focus:bg-blue-600">Save</button>
                             <button className="w-full sm:w-1/3 bg-white py-2 rounded-md font-bold dark:bg-black text-black dark:text-white border border-gray-400 dark:border-gray-600 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-900 dark:focus:bg-gray-900" onClick={ (ev) => { ev.preventDefault(); setDisableProfile(false) } }>Edit profile</button>

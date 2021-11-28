@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { signOut } from "next-auth/react"
 
 function getInitials(name) {
     let array = name.split(" ")
@@ -22,7 +23,7 @@ export default function SearchBar(props) {
             <button onClick={ () => { setOptState(!optState) } } className={ (!props.hideopts && optState ? "hidden " : "inline-block ") + "p-2 md:p-3 select-none self-center font-bold text-lg sm:text-xl xl:text-2xl text-white dark:text-black rounded-full bg-black dark:bg-white text-center"}>{ getInitials(props.user) }</button>
             { optState && <div className="flex flex-row gap-2 justify-start items-center">
                 <button onClick={ () => { setOptState(!optState) } } className="self-center rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-1 md:p-3"><img src="/assets/home/cancel.svg" alt="Logout" className="w-6 md:w-12 mx-auto dark:filter dark:invert"/></button>
-                <button className="self-center rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-1 md:p-3"><img src="/assets/home/box-arrow-left.svg" alt="Logout" className="w-6 md:w-12 mx-auto dark:filter dark:invert"/></button>
+                <button onClick={ () => signOut() } className="self-center rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-1 md:p-3"><img src="/assets/home/box-arrow-left.svg" alt="Logout" className="w-6 md:w-12 mx-auto dark:filter dark:invert"/></button>
             </div> }
         </div>    
     )

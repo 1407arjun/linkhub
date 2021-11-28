@@ -1,12 +1,11 @@
-import mongoose from '../../loaders/database'
-import Tag from '../../models/tag'
+import client from '../../loaders/database'
 import { Response } from '../../types/response'
 
 export default async function getTag(tagId: string): Promise<Response> {
-    await mongoose
+    const collection = (await client).db("Client").collection("tags")
     try {
-        const data = await Tag.findById(tagId)
-        return {error: false, data: data}
+        const data = await collection.findOne({ _id: tagId})
+        return {error: false, data: data!}
     } catch (err: object|unknown) {
         if (err && typeof err === "object")
             return {error: true, data: err}

@@ -2,6 +2,7 @@ import Head from '../components/uni/head'
 import Footer from '../components/index/footer'
 import HomeBar from '../components/index/homebar'
 import SignUpBar from '../components/index/signupbar'
+import { getSession } from 'next-auth/react'
 
 const tagline = "A portal to help you find the right resources to boost your learning from all those available on the World Wide Web. Links are ranked based on the feedback by others who have tried it out, so as to provide you only the best of the best."
 
@@ -23,4 +24,17 @@ export default function Index() {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context)
+  if (session) {
+      return {
+        redirect: {
+          destination: "/home"
+        },
+        props: {}
+      }
+  }
+  return {props: {}}
 }
