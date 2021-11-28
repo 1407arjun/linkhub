@@ -1,5 +1,5 @@
 # LinkHub
-The source code of the deployed LinkHub website.
+The source code of the deployed LinkHub website. One commit at a time.
 
 [![Build Project](https://github.com/linkhub-org/linkhub/actions/workflows/build.yml/badge.svg)](https://github.com/linkhub-org/linkhub/actions/workflows/build.yml)
 [![Lint Project](https://github.com/linkhub-org/linkhub/actions/workflows/lint.yml/badge.svg)](https://github.com/linkhub-org/linkhub/actions/workflows/lint.yml)
