@@ -12,7 +12,7 @@ export default function Username() {
         if (res.exists)
             alert("Username already exists.")
         else {
-            fetch("/api/new", {
+            await fetch("/api/new", {
                 method: "POST",
                 body: JSON.stringify({ username: ev.target[0].value })
             }) 

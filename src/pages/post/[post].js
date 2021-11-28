@@ -40,10 +40,10 @@ export default function Post(props) {
 
         return (
             <div className="dark:bg-black">
-                <Head title="Post on LinkHub &middot; An open source resources network"/>
-                <div className="flex flex-row justify-start items-start min-h-screen">
+                <Head title={  data.title + " \u00b7 A post on LinkHub" }/>
+                <div className="flex flex-row justify-center items-start min-h-screen">
                     { status === "authenticated" && navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Explore"/> }
-                    <div className={ "flex flex-col gap-4 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : "w-full md:w-5/6 lg:w-7/12 xl:w-3/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
+                    <div className={ "flex flex-col gap-6 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
                         <div className="w-full flex flex-row justify-start items-center gap-4">
                             { status === "authenticated" && !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:filter dark:invert" alt="Nav"/></button> }
                             <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false }/>
@@ -62,11 +62,12 @@ export default function Post(props) {
                                 title={ data.title }
                                 body={ data.body }
                                 tags={ data.tags }
+                                date={ data.date }
                                 upvotes={ data.upvotes }
                                 downvotes={ data.downvotes }
                                 flags={ data.flags }
                                 saved ={ false }
-                                delete ={ session.user.email === data.author.user.email }/>
+                                delete ={ /*session.user.email === data.author.user.email*/ true }/>
                         </div>
                         <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                     </div>

@@ -3,7 +3,6 @@ import HBar from './hbar'
 import TagBar from './tagbar'
 import Dropdown from './dropdown'
 import ReactMarkdown from 'react-markdown'
-import { useSession } from 'next-auth/react'
  
 function getInitials(name) {
     let array = name.split(" ")
@@ -18,7 +17,6 @@ function getInitials(name) {
 }
 
 export default function PostMini(props) {
-    const { data: session, status } = useSession()
 
     return (
         <div className="flex flex-col gap-1 place-content-start rounded-xl border border-gray-300 dark:border-gray-600 w-full p-2">
@@ -30,12 +28,11 @@ export default function PostMini(props) {
                         <p className="text-gray-500 dark:text-gray-300 text-xs xl:text-sm">{ "@" + props.username }</p>
                     </div>
                 </div>
-                { status === "authenticated" && <Dropdown id={ props.id } email={ props.email } delete={ props.delete } saved={ props.saved }/> }
+                <Dropdown id={ props.id } email={ props.email } delete={ props.delete } saved={ props.saved } date={ props.date }/>
             </div>
             <div className="flex flex-row gap-2 place-content-start w-full px-2 sm:px-0">
                 <Bar upvotes={ props.upvotes } downvotes={ props.downvotes } flags={ props.flags }/>
                 <div className="flex flex-col gap-1 place-content-start w-full sm:w-5/6 py-2">
-                    <h2 className="font-bold text-lg xl:text-xl dark:text-white">{ props.title }</h2>
                     <ReactMarkdown className="dark:text-white">{ props.body }</ReactMarkdown>
                     <div className="flex flex-row flex-wrap gap-2 justify-start items-center pt-2 pb-3">
                         { props.tags.map((tag, index) => { return <TagBar key={ index } name={ tag }/> }) }

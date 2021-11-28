@@ -36,7 +36,7 @@ export default function Create(props) {
                 title: ev.target[0].value,
                 body: ev.target[1].value,
                 tags: tags,
-                date: new Date()
+                date: (new Date()).toLocaleString()
             })
         })
     } 
@@ -54,7 +54,7 @@ export default function Create(props) {
                 </div>
                 <form onSubmit={ newPost } className="flex flex-col gap-3 justify-center items-start w-full px-0 md:px-2 h-full">
                     <div className="w-full md:w-4/5 lg:w-2/3 xl:w-1/2">
-                        <input onChange={ handleTitleChange } name="title" type="text" placeholder="Title" className="w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100 text-lg md:text-xl font-semibold" value={ titleText } autoComplete="off" required/>
+                        <input onChange={ handleTitleChange } name="title" type="text" placeholder="Title (will be displayed on the browser tab)" className="w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100 text-lg md:text-xl font-semibold" value={ titleText } autoComplete="off" required/>
                         <p className="px-1 py-0.5 text-right text-gray-500 dark:text-gray-300 text-sm md:text-base">{ titleText.length + " of 32 characters" }</p>
                     </div>
                     <div className="w-full h-full">
