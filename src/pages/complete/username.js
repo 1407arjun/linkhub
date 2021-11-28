@@ -3,7 +3,7 @@ import Footer from "../../components/uni/footer"
 import { getSession } from "next-auth/react"
 import client from '../../server/loaders/database'
 
-export default function Username() {
+export default function Username(props) {
 
     async function check(ev) {
         ev.preventDefault()
