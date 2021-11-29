@@ -32,17 +32,22 @@ export default function Create(props) {
 
     async function newPost(ev) {
         ev.preventDefault()
-        const res = await axios.post("/api/new-post", {
-            title: ev.target[0].value,
-            body: ev.target[1].value,
-            tags: tags,
-            date: (new Date()).toLocaleString()
-        })
+        try {
+            const res = await axios.post("/api/new-post", {
+                title: ev.target[0].value,
+                body: ev.target[1].value,
+                tags: tags,
+                date: (new Date()).toLocaleString()
+            })
 
-        if (res.status === 200)
-            router.push("/post/" + res.data.id)
-        else
+            if (res.status === 200)
+                router.push("/post/" + res.data.id)
+            else
+                router.push("/home")
+        } catch (e) {
+            console.log(e)
             router.push("/home")
+        }    
     } 
 
     return (
@@ -89,7 +94,7 @@ export async function getServerSideProps(context) {
     const session = await getSession(context)
     if (session) {
         const mClient = await client
-        const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({"user.email": session.user.email})))
+        const profile = await mClient.db("Client").collection("profiles").findOne({email: session.user.email})
         //await mClient.close()
         if (!profile)
             return {

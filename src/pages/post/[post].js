@@ -35,6 +35,7 @@ export default function Post(props) {
     const { error, data } = props.postData
     if (error)
         window.alert(JSON.stringify(data))
+    const author = props.author
 
     return (
         <div className="dark:bg-black">
@@ -54,9 +55,9 @@ export default function Post(props) {
                         </div>
                     </div>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
-                        <PostMini id={ data._id.toString() } name={ data.author.user.name }
-                            username={ data.author.username }
-                            email = { data.author.user.email }
+                        <PostMini id={ data._id.toString() } name={ author.name }
+                            username={ author.username }
+                            email = { author.email }
                             title={ data.title }
                             body={ data.body }
                             tags={ data.tags }
@@ -65,7 +66,7 @@ export default function Post(props) {
                             downvotes={ data.downvotes }
                             flags={ data.flags }
                             saved ={ false }
-                            delete ={ /*session.user.email === data.author.user.email*/ true }/>
+                            delete ={ props.user.email === author.email }/>
                     </div>
                     <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                 </div>
@@ -78,12 +79,13 @@ export default function Post(props) {
 export async function getServerSideProps(context) {
     const session = await getSession(context)
     const { post } = context.query
-    const postData = JSON.parse(JSON.stringify(await getPost(post)))
+    const postData = await getPost(post)
     
     if (postData.data) {
+        const mClient = await client
+        const author = await mClient.db("Client").collection("profiles").findOne({_id: postData.author})
         if (session) {
-            const mClient = await client
-            const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({"user.email": session.user.email})))
+            const profile = await mClient.db("Client").collection("profiles").findOne({email: session.user.email})
             //await mClient.close()
             if (!profile)
                 return {
@@ -94,11 +96,11 @@ export async function getServerSideProps(context) {
                 }
             else
                 return {
-                    props: { user: profile, postData: postData }
+                    props: { user: profile, postData: postData, author: author }
                 }
         } else {
             return {
-                props: { postData: postData }
+                props: { postData: postData, author: author }
             }
         }
     } else

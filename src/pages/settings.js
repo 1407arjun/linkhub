@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 import { getSession } from 'next-auth/react'
 import client from '../server/loaders/database'
 
-export default function Settings() {
+export default function Settings(props) {
     const [navStatus, setNavStatus] = useState(false)
     const [windowSize, setWindowSize] = useState()
     const [disableProfile, setDisableProfile] = useState(true)
@@ -36,7 +36,7 @@ export default function Settings() {
                     <form action="/settings" method="POST" className="flex flex-col gap-4 justify-start items-center w-full p-1">
                         <div className="w-full">
                             <label htmlFor="username" className="w-full font-semibold mb-1 dark:text-white">Username</label>
-                            <input name="username" type="text" placeholder="Username" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100" pattern="[a-z0-9_]+" autoComplete="off" disabled={ disableProfile ? "disabled" : ""} required minLength="4" maxLength="20"/>
+                            <input name="username" type="text" placeholder="Username" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100" pattern="[a-z0-9_]+" autoComplete="off" disabled={ disableProfile ? "disabled" : ""} required minLength="4" maxLength="20" value={ props.user.username }/>
                             <p className="px-1 py-0.5 text-left text-gray-500 dark:text-gray-300 text-xs md:text-sm">Only lowercase alphabets ( a-z ), numbers ( 0-9 ) and underscores ( _ ) are allowed</p>
                         </div>
                         <div className="w-full">
@@ -85,7 +85,7 @@ export async function getServerSideProps(context) {
     const session = await getSession(context)
     if (session) {
         const mClient = await client
-        const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({"user.email": session.user.email})))
+        const profile = await mClient.db("Client").collection("profiles").findOne({email: session.user.email})
         //await mClient.close()
         if (!profile)
             return {

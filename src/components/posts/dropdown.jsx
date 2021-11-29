@@ -19,34 +19,36 @@ export default function Dropdown(props) {
                     router.push("/home")    
             } catch (e) {
                 console.log(e)
+                router.push("/home")
             }
         }     
     }    
 
     useEffect(() => {
-            let newDiff = Math.floor((new Date().getMilliseconds()) - (new Date(props.date).getMilliseconds()))
-            let secs = Math.floor(newDiff/1000)
-            if (secs > 59) {
-                let mins = Math.floor(secs/60)
-                if (mins > 59) {
-                    let hrs = Math.floor(mins/60)
-                    if (hrs > 23) {
-                        let days = Math.floor(hrs/24)
-                        if (days > 29) {
-                            let months = Math.floor(days/30)
-                            if (months > 11) {
-                                let yrs = Math.floor(months/12)
-                                setDiff(yrs.toString() + "y")
-                            } else
-                                setDiff(months.toString() + "mo")
+        console.log(1)
+        let newDiff = Math.floor((new Date()) - (new Date(props.date)))
+        let secs = Math.floor(newDiff/1000)
+        if (secs > 59) {
+            let mins = Math.floor(secs/60)
+            if (mins > 59) {
+                let hrs = Math.floor(mins/60)
+                if (hrs > 23) {
+                    let days = Math.floor(hrs/24)
+                    if (days > 29) {
+                        let months = Math.floor(days/30)
+                        if (months > 11) {
+                            let yrs = Math.floor(months/12)
+                            setDiff(yrs.toString() + "y")
                         } else
-                            setDiff(days.toString() + "d")
+                            setDiff(months.toString() + "mo")
                     } else
-                    setDiff(hrs.toString() + "h")
+                        setDiff(days.toString() + "d")
                 } else
-                    setDiff(mins.toString() + "m")
+                setDiff(hrs.toString() + "h")
             } else
-                setDiff(secs.toString() + "s")
+                setDiff(mins.toString() + "m")
+        } else
+            setDiff(secs.toString() + "s")
     }, [props.date])
 
     return (

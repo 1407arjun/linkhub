@@ -12,8 +12,9 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
             const user = await mClient.db("Client").collection("users").findOne({email: session.user.email})
             const newProfile = {
                 _id: new ObjectId(user!._id),
-                user: user,
                 username: username,
+                name: session.user.name,
+                email: session.user.email,
                 tags: [],
                 posts: [],
                 saved: [],

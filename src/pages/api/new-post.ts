@@ -1,3 +1,4 @@
+import { ObjectId } from 'bson'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from "next-auth/react"
 import client from '../../server/loaders/database'
@@ -8,7 +9,7 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
         if (req.method === 'POST') {
             const mClient = await client
             const data = req.body
-            const profile = await mClient.db("Client").collection("profiles").findOne({"user.email": session.user.email})
+            const profile = await mClient.db("Client").collection("profiles").findOne({email: session.user.email})
             const newPost = {
                 title: data.title,
                 body: data.body,
@@ -17,7 +18,7 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
                 upvotes: 0,
                 downvotes: 0,
                 flags: 0,
-                author: profile
+                author: new ObjectId(profile!._id)
             }
             const response = await mClient.db("Client").collection("posts").insertOne(newPost)
             //await mClient.close()

@@ -1,7 +1,5 @@
-import User from './user'
-
 export default interface Tag {
     name: string;
-    followers: [ User ];
+    followers: [ string ];
     related: [ string ];
 }

@@ -6,7 +6,7 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
     const session = await getSession({ req })
     if (session && session.user) {
         if (req.method === 'POST') {
-            const data = JSON.parse(req.body)
+            const data = req.body
             if (data.email === session.user.email) {
                 const response = await deletePost(data._id)
                 if (!response.error)
@@ -19,4 +19,4 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
     } else {
         res.status(401).statusMessage
     }
-}        
+}

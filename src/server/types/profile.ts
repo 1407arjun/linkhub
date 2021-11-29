@@ -1,12 +1,9 @@
-import User from './user'
-import Tag from './tag'
-import Post from './post'
-
 export default interface Profile {
-    user: User;
+    name: string;
+    email: string
     username: string | undefined;
-    tags: [ Tag ];
-    saved: [ Post ];
-    upvoted: [ Post ];
-    downvoted: [ Post ];
+    tags: [ string ];
+    saved: [ string ];
+    upvoted: [ string ];
+    downvoted: [ string ];
 }

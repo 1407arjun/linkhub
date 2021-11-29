@@ -28,6 +28,7 @@ export default function Username(props) {
             }
         } catch (e) {
             console.log(e)
+            router.push("/complete/username")
         }
     }
 
@@ -62,7 +63,7 @@ export async function getServerSideProps(context) {
         }
     } else {
         const mClient = await client
-        const profile = await mClient.db("Client").collection("profiles").findOne({"user.email": session.user.email})
+        const profile = await mClient.db("Client").collection("profiles").findOne({email: session.user.email})
         //await mClient.close()
         if (profile)
             return {
