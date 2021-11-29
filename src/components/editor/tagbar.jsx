@@ -24,7 +24,7 @@ export default function TagBar(props) {
 
     function onTagChange(ev) {
         let re = new RegExp("^[a-z\-]+$")
-        let val = ev.target.value
+        let val = ev.target.value.toLowerCase()
         if (val.substring(val.length - 1) === " ") {
             let tag = val.trim()
             if (re.test(tag) && !tags.includes(tag)) {
