@@ -7,7 +7,7 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
     if (session && session.user) {
         if (req.method === 'POST') {
             const mClient = await client
-            const data = JSON.parse(req.body)
+            const data = req.body
             const profile = await mClient.db("Client").collection("profiles").findOne({"user.email": session.user.email})
             const newPost = {
                 title: data.title,
@@ -22,9 +22,9 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
             const response = await mClient.db("Client").collection("posts").insertOne(newPost)
             //await mClient.close()
             if (response.acknowledged) {
-                res.status(200).redirect("/post/" + response.insertedId.toString())
+                res.status(200).send({id: response.insertedId.toString()})
             } else
-                res.status(500).redirect("/home")
+                res.status(500).end()
         }
     } else
         res.status(401).statusMessage

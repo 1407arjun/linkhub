@@ -1,9 +1,27 @@
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
+import axios from 'axios'
 
 export default function Dropdown(props) {
     const { data: session, status } = useSession()
     const [diff, setDiff] = useState("0s")
+    const router = useRouter()
+
+    async function deletePost(id, email) {
+        const submit = confirm("Are you sure you want to delete this post?")
+        if (submit) {
+            try {
+                const res = await axios.post("/api/post/delete", { _id: id, email: email })
+                if (res.status === 200)
+                    router.push("/home")
+                else
+                    router.push("/home")    
+            } catch (e) {
+                console.log(e)
+            }
+        }     
+    }    
 
     useEffect(() => {
             let newDiff = Math.floor((new Date().getMilliseconds()) - (new Date(props.date).getMilliseconds()))
@@ -30,15 +48,6 @@ export default function Dropdown(props) {
             } else
                 setDiff(secs.toString() + "s")
     }, [props.date])
-
-    async function deletePost(id, email) {
-        const submit = confirm("Are you sure you want to delete this post?")
-        if (submit)
-            await fetch("/api/post/delete", {
-                method: "POST",
-                body: JSON.stringify({ _id: id, email: email })
-            })
-    }
 
     return (
         <div className="flex flex-row justify-end items-center">

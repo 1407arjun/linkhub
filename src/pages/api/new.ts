@@ -8,7 +8,7 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
     if (session && session.user) {
         if (req.method === 'POST') {
             const mClient = await client
-            const username = JSON.parse(req.body).username
+            const username = req.body.username
             const user = await mClient.db("Client").collection("users").findOne({email: session.user.email})
             const newProfile = {
                 _id: new ObjectId(user!._id),
@@ -23,9 +23,9 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
             const response = await mClient.db("Client").collection("profiles").insertOne(newProfile)
             //await mClient.close()
             if (response.acknowledged)
-                res.status(200).redirect("/home")
+                res.status(200).end()
             else
-                res.redirect("/complete/username")    
+                res.status(500).end()    
         }
         if (req.method === 'GET') {
             const mClient = await client

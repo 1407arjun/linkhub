@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Tag(props) {
     return (
-        <Link href={ props.href }><a className="hover:no-underline focus:no-underline"> {/* Max tag length == 25*/}
+        <Link href={ "/tag/" + props.name }><a className="hover:no-underline focus:no-underline"> {/* Max tag length == 25*/}
             <div className="flex flex-row flex-nowrap justify-between items-center gap-2 xl:gap-3 p-2 rounded-xl hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                 <div className="flex-none flex flex-row justify-start items-center gap-2 xl:gap-3">
                     <div className="self-center p-2 xl:p-3 rounded-full bg-black dark:bg-white">

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Head from '../components/uni/head'
 import Footer from '../components/uni/footer'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { getSession } from 'next-auth/react'
 import Markdown from '../components/editor/markdown'
 import Preview from '../components/editor/preview'
@@ -9,12 +10,14 @@ import EditorContext from '../components/editor/context'
 import SearchBar from '../components/uni/searchbar'
 import TagBar from '../components/editor/tagbar'
 import client from '../server/loaders/database'
+import axios from 'axios'
 
 export default function Create(props) {
     const [titleText, setTitleText] = useState("")
     const [tags, setTags] = useState([])
     const [markdownText, setMarkdownText] = useState("")
     const contextValue = { markdownText, setMarkdownText }
+    const router = useRouter()
 
     function handleTitleChange(ev) {
         if (ev.target.value.length > 32)
@@ -29,16 +32,17 @@ export default function Create(props) {
 
     async function newPost(ev) {
         ev.preventDefault()
-        console.log(ev)
-        await fetch("/api/new-post", {
-            method: "POST",
-            body: JSON.stringify({
-                title: ev.target[0].value,
-                body: ev.target[1].value,
-                tags: tags,
-                date: (new Date()).toLocaleString()
-            })
+        const res = await axios.post("/api/new-post", {
+            title: ev.target[0].value,
+            body: ev.target[1].value,
+            tags: tags,
+            date: (new Date()).toLocaleString()
         })
+
+        if (res.status === 200)
+            router.push("/post/" + res.data.id)
+        else
+            router.push("/home")
     } 
 
     return (

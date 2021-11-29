@@ -10,9 +10,9 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
             if (data.email === session.user.email) {
                 const response = await deletePost(data._id)
                 if (!response.error)
-                    res.status(200).redirect("/home")
+                    res.status(200).end()
                 else
-                    res.status(500).redirect("/home")    
+                    res.status(500).end()    
             } else
                 res.status(401).statusMessage
         }
