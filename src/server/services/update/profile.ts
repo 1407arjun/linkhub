@@ -1,13 +1,13 @@
-import { ObjectId } from 'bson'
 import client from '../../loaders/database'
 import { Response } from '../../types/response'
 
-export default async function deletePost(postId: string): Promise<Response> {
+export default async function updateProfile(username: string, newUsername: string): Promise<Response> {
+    const mClient = await client
     try {
-        const mClient = await client
-        const response = await mClient.db("Client").collection("posts").deleteOne({ _id: new ObjectId(postId)})
+        const res1 = await mClient.db("Client").collection("posts").updateMany({author: username}, { $set: { author: newUsername }})
+        const res2 = await mClient.db("Client").collection("profiles").updateOne({author: username}, { $set: { author: newUsername }})
         //await mClient.close()
-        return {error: !response.acknowledged}
+        return {error: !(res1.acknowledged && res2.acknowledged)}
     } catch (err: object|unknown) {
         if (err && typeof err === "object") {
             //await mClient.close()

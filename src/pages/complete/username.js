@@ -16,11 +16,18 @@ export default function Username(props) {
     async function check(ev) {
         ev.preventDefault()
         try {
-            const res = await axios.get("/api/new?reqname=" + ev.target[0].value)
-            if (res.exists)
+            let flag = 0
+            props.usernames.every(u => {
+                if (u.username === ev.target[0].value) {
+                    flag = 1
+                    return true
+                }
+                return false
+            })
+            if (flag === 1)
                 alert("Username already exists.")
             else {
-                const r = await axios.post("/api/new", { username: ev.target[0].value })
+                const r = await axios.post("/api/profile/create", { username: ev.target[0].value })
                 if (r.status === 200)
                     router.push("/home")
                else
@@ -63,7 +70,7 @@ export async function getServerSideProps(context) {
         }
     } else {
         const mClient = await client
-        const profile = await mClient.db("Client").collection("profiles").findOne({email: session.user.email})
+        const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
         //await mClient.close()
         if (profile)
             return {
@@ -72,7 +79,9 @@ export async function getServerSideProps(context) {
                 },
                 props: {}
             }
-        else
-            return { props: { email: session.user.email } }       
+        else {
+            const usernames = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").find().project({ username: 1 }).toArray()))
+            return { props: { email: session.user.email, usernames: usernames } }
+        }       
     }
 }

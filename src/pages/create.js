@@ -33,7 +33,7 @@ export default function Create(props) {
     async function newPost(ev) {
         ev.preventDefault()
         try {
-            const res = await axios.post("/api/new-post", {
+            const res = await axios.post("/api/post/create", {
                 title: ev.target[0].value,
                 body: ev.target[1].value,
                 tags: tags,
@@ -94,7 +94,7 @@ export async function getServerSideProps(context) {
     const session = await getSession(context)
     if (session) {
         const mClient = await client
-        const profile = await mClient.db("Client").collection("profiles").findOne({email: session.user.email})
+        const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
         //await mClient.close()
         if (!profile)
             return {

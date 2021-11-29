@@ -8,6 +8,7 @@ import { getSession, useSession } from 'next-auth/react'
 import getPost from '../../server/services/read/post'
 import client from '../../server/loaders/database'
 import { useRouter } from 'next/router'
+import { ObjectId } from 'bson'
 
 export default function Post(props) {
     const router = useRouter()
@@ -50,7 +51,7 @@ export default function Post(props) {
                     <div className="flex flex-row flex-nowrap justify-between items-center w-full px-4 gap-4">
                         <img src="/assets/posts/link-45.svg" className="w-8 md:w-12 filter invert dark:invert-0" alt=""/>
                         <div className="flex flex-col justify-start items-center gap-1 w-full">
-                            <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ "Post by " + data.author.user.name.split(" ")[0] }</h2>
+                            <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ "Post by " + author.name.split(" ")[0] }</h2>
                             <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "At " + data.date }</p>
                         </div>
                     </div>
@@ -79,13 +80,13 @@ export default function Post(props) {
 export async function getServerSideProps(context) {
     const session = await getSession(context)
     const { post } = context.query
-    const postData = await getPost(post)
+    const postData = JSON.parse(JSON.stringify(await getPost(post)))
     
     if (postData.data) {
         const mClient = await client
-        const author = await mClient.db("Client").collection("profiles").findOne({_id: postData.author})
+        const author = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({username: postData.data.author})))
         if (session) {
-            const profile = await mClient.db("Client").collection("profiles").findOne({email: session.user.email})
+            const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
             //await mClient.close()
             if (!profile)
                 return {

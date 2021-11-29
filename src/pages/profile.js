@@ -48,7 +48,7 @@ export async function getServerSideProps(context) {
     const session = await getSession(context)
     if (session) {
         const mClient = await client
-        const profile = await mClient.db("Client").collection("profiles").findOne({email: session.user.email})
+        const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
         //await mClient.close()
         if (!profile)
             return {
