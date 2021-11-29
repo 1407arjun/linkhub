@@ -8,7 +8,6 @@ import { getSession, useSession } from 'next-auth/react'
 import getPost from '../../server/services/read/post'
 import client from '../../server/loaders/database'
 import { useRouter } from 'next/router'
-import { ObjectId } from 'bson'
 
 export default function Post(props) {
     const router = useRouter()
@@ -67,7 +66,7 @@ export default function Post(props) {
                             downvotes={ data.downvotes }
                             flags={ data.flags }
                             saved ={ false }
-                            delete ={ props.user.email === author.email }/>
+                            delete ={ true }/>
                     </div>
                     <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                 </div>
@@ -84,7 +83,7 @@ export async function getServerSideProps(context) {
     
     if (postData.data) {
         const mClient = await client
-        const author = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({username: postData.data.author})))
+        const author = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({username: postData.data.author}).project({name: 1, username: 1, email: 1 })))
         if (session) {
             const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
             //await mClient.close()

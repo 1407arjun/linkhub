@@ -31,11 +31,11 @@ export default function Username(props) {
                 if (r.status === 200)
                     router.push("/home")
                else
-                    router.push("/complete/username")     
+                    router.reload()     
             }
         } catch (e) {
             console.log(e)
-            router.push("/complete/username")
+            router.reload()
         }
     }
 

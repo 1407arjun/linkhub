@@ -47,13 +47,13 @@ export default function Settings(props) {
             else {
                 const r = await axios.post("/api/profile/update", { username: props.user.username, newUsername: ev.target[0].value, email: props.user.email })
                 if (r.status === 200)
-                    router.push("/settings")
+                    router.reload()
                else
-                    router.push("/settings")     
+                    router.reload()     
             }
         } catch (e) {
             console.log(e)
-            router.push("/settings")
+            router.reload()
         }
     }
 
@@ -65,10 +65,10 @@ export default function Settings(props) {
                 if (res.status === 200)
                     signOut()
                 else
-                    router.push("/settings")    
+                    router.reload()    
             } catch (e) {
                 console.log(e)
-                router.push("/settings")
+                router.reload()
             }
         }     
     }
@@ -100,7 +100,7 @@ export default function Settings(props) {
                             <input name="email" type="text" placeholder="Email" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100" disabled={ /*disableProfile ? "disabled" : ""*/ "disabled" } required value={ props.user.email }/>
                         </div>
                         <div className="w-full flex flex-col sm:flex-row gap-4">
-                            <button type="submit" className="w-full sm:w-1/3 bg-blue-500 py-2 rounded-md font-bold text-white hover:bg-blue-600 focus:bg-blue-600" disabled={ !disableProfile ? "disabled" : ""}>Save</button>
+                            <button type="submit" className="w-full sm:w-1/3 bg-blue-500 py-2 rounded-md font-bold text-white hover:bg-blue-600 focus:bg-blue-600">Save</button>
                             <button className="w-full sm:w-1/3 bg-white py-2 rounded-md font-bold dark:bg-black text-black dark:text-white border border-gray-400 dark:border-gray-600 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-900 dark:focus:bg-gray-900" onClick={ (ev) => { ev.preventDefault(); setDisableProfile(false) } }>Edit profile</button>
                             <button className="w-full sm:w-1/3 bg-red-500 py-2 rounded-md font-bold text-white hover:bg-red-600 focus:bg-red-600" onClick={ (ev) => { ev.preventDefault(); deleteProfile(props.user._id.toString(), props.user.username, props.user.email) } }>Delete account</button>
                         </div>

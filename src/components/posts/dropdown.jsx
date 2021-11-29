@@ -16,10 +16,10 @@ export default function Dropdown(props) {
                 if (res.status === 200)
                     router.push("/home")
                 else
-                    router.push("/home")    
+                    router.reload()    
             } catch (e) {
                 console.log(e)
-                router.push("/home")
+                router.reload()
             }
         }     
     }    
