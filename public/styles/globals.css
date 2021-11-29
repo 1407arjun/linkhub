@@ -100,6 +100,10 @@ pre > code {
 	width: 100%;
 }
 
+input:disabled {
+	background-color: #F5F5F5;
+}
+
 @media (prefers-color-scheme: dark) {
 	html, body {
 		color: white;
@@ -112,5 +116,9 @@ pre > code {
 
 	code {
 		background-color: #424242;
+	}
+
+	input:disabled {
+		background-color: #212121;
 	}
 }

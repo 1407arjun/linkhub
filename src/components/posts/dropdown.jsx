@@ -57,7 +57,8 @@ export default function Dropdown(props) {
                 <img src="/assets/posts/delete.svg" className="w-4 xl:w-6" alt="Menu"/>
             </button> }
             { status === "authenticated" && <button className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2">
-                <img src={ props.saved ? "/assets/posts/bookmark-done.svg" : "/assets/posts/bookmark.svg" } className="w-4 xl:w-6" alt={ props.saved ? "Saved" : "Save" }/>
+                { props.saved && <img src="/assets/posts/bookmark-done.svg" className="w-4 xl:w-6" alt="Saved"/> }
+                { !props.saved && <img src="/assets/posts/bookmark.svg" className="w-4 xl:w-6 dark:filter dark:invert" alt="Save"/> }
             </button> }
             <p className="inline-block text-gray-500 dark:text-gray-300 text-base xl:text-lg p-2">{ diff }</p>
         </div>
