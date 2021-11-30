@@ -5,6 +5,6 @@ export default interface Post {
     upvotes: number;
     downvotes: number;
     flags: number;
-    author: string
+    author: { name: string, username: string, email: string }
     tags: [ string ]
 }

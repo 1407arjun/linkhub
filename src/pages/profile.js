@@ -35,7 +35,7 @@ export default function Profile(props) {
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Profile</h2>
                     <TabLayout/>
-                    <TabContent yourPosts={ props.yourPosts } author={ props.user }/>
+                    <TabContent yourPosts={ props.yourPosts }/>
                 </div>
                 <SideBar/>
             </div>
@@ -58,7 +58,7 @@ export async function getServerSideProps(context) {
                 props: {}
             }
         else {
-            const yourPosts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({author: profile.username}).sort({date: -1}).toArray()))
+            const yourPosts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({"author.username": profile.username}).sort({date: -1}).toArray()))
             return {
                 props: { user: profile, yourPosts: yourPosts }
             }
