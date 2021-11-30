@@ -27,7 +27,7 @@ export default function TagBar(props) {
         let val = ev.target.value.toLowerCase()
         if (val.substring(val.length - 1) === " ") {
             let tag = val.trim()
-            if (tags.length >= 3 && re.test(tag) && !tags.includes(tag)) {
+            if (tag.length >= 3 && re.test(tag) && !tags.includes(tag)) {
                 setTags((prev) => { return [...prev, tag]})
             }
             setTagInput("")
