@@ -10,7 +10,7 @@ export default function Tag(props) {
                     </div>
                     <div className="self-center flex flex-col justify-center items-start">
                         <h4 className="text-sm xl:text-base font-semibold dark:text-white">{ props.name }</h4>
-                        <p className="text-gray-500 dark:text-gray-300 text-xs xl:text-sm">{ props.follow + " followers"}</p>
+                        <p className="text-gray-500 dark:text-gray-300 text-xs xl:text-sm">{ props.post + " posts, " + props.follow + " followers"}</p>
                     </div>
                 </div>
                 <button className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">

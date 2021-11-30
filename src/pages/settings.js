@@ -35,7 +35,6 @@ export default function Settings(props) {
         ev.preventDefault()
         try {
             const flag = props.usernames.every(u => {
-                console.log(u)
                 if (u.username === ev.target[0].value)
                     return false
                 

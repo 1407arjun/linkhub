@@ -25,7 +25,6 @@ export default function Dropdown(props) {
     }    
 
     useEffect(() => {
-        console.log(1)
         let newDiff = Math.floor((new Date()) - (new Date(props.date)))
         let secs = Math.floor(newDiff/1000)
         if (secs > 59) {

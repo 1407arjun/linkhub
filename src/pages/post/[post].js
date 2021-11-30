@@ -88,7 +88,6 @@ export async function getServerSideProps(context) {
             const mClient = await client
             const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
             //await mClient.close()
-            console.log
             if (!profile)
                 return {
                     redirect: {
