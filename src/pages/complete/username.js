@@ -18,9 +18,9 @@ export default function Username(props) {
         try {
             const flag = props.usernames.every(u => {
                 if (u.username === ev.target[0].value)
-                    return true
+                    return false
                 
-                return false
+                return true
             })
             
             if (!flag)
