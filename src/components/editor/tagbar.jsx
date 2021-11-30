@@ -42,7 +42,7 @@ export default function TagBar(props) {
                 { tags.map((tag, index) => { return <Tag key={ index } name={ tag } update={ setTags }/>}) }
                 <input onChange={ onTagChange } onKeyDown={ handleTagsChange } name="tags" type="text" placeholder="Tags" className="w-full p-1 focus:outline-none dark:text-white dark:focus:ring-gray-100 dark:bg-black text-base md:text-lg font-semibold" value={ tagInput } autoComplete="off"/>
             </div>    
-            <p className="px-1 py-0.5 text-left text-gray-500 dark:text-gray-300 text-sm md:text-base">Enter the tags with a space between them. Backspace to delete</p>
+            <p className="px-1 py-0.5 text-left text-gray-500 dark:text-gray-300 text-sm md:text-base">Only alphabets and hyphens ( - ) are allowed. Enter the tags with a space between them. Backspace to delete</p>
         </div>
     )
 }
