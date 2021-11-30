@@ -34,15 +34,15 @@ export default function Settings(props) {
     async function check(ev) {
         ev.preventDefault()
         try {
-            let flag = 0
-            props.usernames.every(u => {
-                if (u.username === ev.target[0].value) {
-                    flag = 1
-                    return true
-                }
-                return false
+            const flag = props.usernames.every(u => {
+                console.log(u)
+                if (u.username === ev.target[0].value)
+                    return false
+                
+                return true
             })
-            if (flag === 1)
+
+            if (!flag)
                 alert("Username already exists.")
             else {
                 const r = await axios.post("/api/profile/update", { username: props.user.username, newUsername: ev.target[0].value, email: props.user.email })
@@ -100,7 +100,7 @@ export default function Settings(props) {
                             <input name="email" type="text" placeholder="Email" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100" disabled={ /*disableProfile ? "disabled" : ""*/ "disabled" } required value={ props.user.email }/>
                         </div>
                         <div className="w-full flex flex-col sm:flex-row gap-4">
-                            <button type="submit" className="w-full sm:w-1/3 bg-blue-500 py-2 rounded-md font-bold text-white hover:bg-blue-600 focus:bg-blue-600">Save</button>
+                            <button type="submit" className="w-full sm:w-1/3 bg-blue-500 py-2 rounded-md font-bold text-white hover:bg-blue-600 focus:bg-blue-600" disabled={ disableProfile ? true : false}>Save</button>
                             <button className="w-full sm:w-1/3 bg-white py-2 rounded-md font-bold dark:bg-black text-black dark:text-white border border-gray-400 dark:border-gray-600 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-900 dark:focus:bg-gray-900" onClick={ (ev) => { ev.preventDefault(); setDisableProfile(false) } }>Edit profile</button>
                             <button className="w-full sm:w-1/3 bg-red-500 py-2 rounded-md font-bold text-white hover:bg-red-600 focus:bg-red-600" onClick={ (ev) => { ev.preventDefault(); deleteProfile(props.user._id.toString(), props.user.username, props.user.email) } }>Delete account</button>
                         </div>

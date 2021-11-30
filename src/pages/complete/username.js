@@ -16,15 +16,14 @@ export default function Username(props) {
     async function check(ev) {
         ev.preventDefault()
         try {
-            let flag = 0
-            props.usernames.every(u => {
-                if (u.username === ev.target[0].value) {
-                    flag = 1
+            const flag = props.usernames.every(u => {
+                if (u.username === ev.target[0].value)
                     return true
-                }
+                
                 return false
             })
-            if (flag === 1)
+            
+            if (!flag)
                 alert("Username already exists.")
             else {
                 const r = await axios.post("/api/profile/create", { username: ev.target[0].value })

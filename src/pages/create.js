@@ -37,7 +37,7 @@ export default function Create(props) {
                 title: ev.target[0].value,
                 body: ev.target[1].value,
                 tags: tags,
-                date: (new Date()).toLocaleString()
+                date: (new Date()).toUTCString()
             })
 
             if (res.status === 200)

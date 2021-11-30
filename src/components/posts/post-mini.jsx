@@ -36,7 +36,7 @@ export default function PostMini(props) {
             <div className="flex flex-row gap-2 place-content-start w-full px-2 sm:px-0">
                 <Bar upvotes={ props.upvotes } downvotes={ props.downvotes } flags={ props.flags }/>
                 <div className="flex flex-col gap-1 place-content-start w-full sm:w-5/6 py-2">
-                    <ReactMarkdown className="dark:text-white">{ props.body }</ReactMarkdown>
+                    <ReactMarkdown className="dark:text-white break-words whitespace-pre-line">{ props.body }</ReactMarkdown>
                     <div className="flex flex-row flex-wrap gap-2 justify-start items-center pt-2 pb-3">
                         { props.tags.map((tag, index) => { return <TagBar key={ index } name={ tag }/> }) }
                     </div>
