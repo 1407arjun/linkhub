@@ -28,7 +28,7 @@ jobs:
     - name: Build Project 
       run: npm run build --if-present
       env:
-          MONGODB_CLIENT_URI: mongodb
+          MONGODB_CLIENT_URI: ${{ secrets.MONGODB_CLIENT_URI }}
           NEXTAUTH_URI: linkhub
           AUTH_SECRET: secret
           GOOGLE_CLIENT_ID: clientId
