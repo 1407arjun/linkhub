@@ -25,7 +25,7 @@ export default function Username(props) {
                     const r = await axios.post("/api/profile/create", { username: ev.target[0].value })
                     if (r.status === 200)
                         router.push("/home")
-                else
+                    else
                         router.reload()     
                 }
             } else {

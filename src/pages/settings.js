@@ -43,7 +43,7 @@ export default function Settings(props) {
                     const r = await axios.post("/api/profile/update", { username: props.user.username, newUsername: ev.target[0].value, email: props.user.email })
                     if (r.status === 200)
                         router.reload()
-                else
+                    else
                         router.reload()     
                 }
             } else {

@@ -30,12 +30,11 @@ export default function Create(props) {
         setTags(tagsArray)
     }
 
-    async function newPost(ev) {
-        ev.preventDefault()
+    async function post(title, body) {
         try {
             const res = await axios.post("/api/post/create", {
-                title: ev.target[0].value,
-                body: ev.target[1].value,
+                title: title,
+                body: body,
                 tags: tags,
                 date: (new Date()).toUTCString()
             })
@@ -47,8 +46,19 @@ export default function Create(props) {
         } catch (e) {
             console.log(e)
             router.push("/home")
-        }    
-    } 
+        }
+    }
+
+    function newPost(ev) {
+        ev.preventDefault()
+        if (tags.length === 0) {
+            const submit = confirm("Are you want to post with no tags? Adding tags help in making the search easier and expanding the reach of your post.")
+            if (submit)
+                post(ev.target[0].value, ev.target[1].value)
+        } else {
+            post(ev.target[0].value, ev.target[1].value)
+        }       
+    }
 
     return (
         <div className="dark:bg-black">
