@@ -36,7 +36,7 @@ export default function Settings(props) {
         try {
             const res = await axios.get("/api/profile/create?username=" + ev.target[0].value)
             
-            if (!res.error) {
+            if (res.status === 200) {
                 if (res.exists)
                     alert("Username already exists.")
                 else {
@@ -46,9 +46,8 @@ export default function Settings(props) {
                     else
                         router.reload()     
                 }
-            } else {
-                throw(res.data)
-            }  
+            } else
+                router.reload()
         } catch (e) {
             console.log(e)
             router.reload()
