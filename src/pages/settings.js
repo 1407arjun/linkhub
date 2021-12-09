@@ -35,16 +35,16 @@ export default function Settings(props) {
         ev.preventDefault()
         try {
             const res = await axios.get("/api/profile/create?username=" + ev.target[0].value)
-            
+
             if (res.status === 200) {
-                if (res.exists)
+                if (res.data.exists)
                     alert("Username already exists.")
                 else {
                     const r = await axios.post("/api/profile/update", { username: props.user.username, newUsername: ev.target[0].value, email: props.user.email })
                     if (r.status === 200)
                         router.reload()
                     else
-                        router.reload()     
+                        router.reload()
                 }
             } else
                 router.reload()

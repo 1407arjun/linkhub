@@ -19,7 +19,7 @@ export default function Username(props) {
             const res = await axios.get("/api/profile/create?username=" + ev.target[0].value)
             
             if (res.status === 200) {
-                if (res.exists)
+                if (res.data.exists)
                     alert("Username already exists.")
                 else {
                     const r = await axios.post("/api/profile/create", { username: ev.target[0].value })
