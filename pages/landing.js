@@ -44,7 +44,7 @@ export default function Landing () {
             <img src="/assets/logo.svg" alt="LinkHub" className="img-fluid" width="40%"/>
             <br />
             <h2>Stay tuned. Launching in</h2>
-            <div className="countdown d-flex justify-content-center" data-count="2021/12/1">
+            <div className="countdown d-flex justify-content-center" data-count="2022/1/31">
               <div>
                 <h3>%d</h3>
                 <h4>Days</h4>
