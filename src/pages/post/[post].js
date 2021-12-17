@@ -38,7 +38,7 @@ export default function Post(props) {
 
     return (
         <div className="dark:bg-black">
-            <Head title={  data.title + " \u00b7 A post on LinkHub" }/>
+            <Head title={  "Post by " + data.author.name.split(" ")[0] + " \u00b7 LinkHub" }/>
             <div className="flex flex-row justify-center items-start min-h-screen">
                 { status === "authenticated" && navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Explore"/> }
                 <div className={ "flex flex-col gap-6 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
@@ -49,7 +49,7 @@ export default function Post(props) {
                     <div className="flex flex-row flex-nowrap justify-between items-center w-full px-4 gap-4">
                         <img src="/assets/posts/link-45.svg" className="w-8 md:w-12 filter invert dark:invert-0" alt=""/>
                         <div className="flex flex-col justify-start items-center gap-1 w-full">
-                            <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ "Post by " + data.author.name.split(" ")[0] }</h2>
+                            <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.title }</h2>
                             <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "At " + new Date(data.date.toLocaleString()) }</p>
                         </div>
                         { status === "authenticated" && <button className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
