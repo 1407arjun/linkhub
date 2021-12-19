@@ -70,7 +70,7 @@ export default function Post(props) {
                                     downvotes={ post.downvotes }
                                     flags={ post.flags }
                                     saved ={ false }
-                                    delete ={ props.user.email === post.author.email }/>
+                                    delete ={ props.user && props.user.email === post.author.email }/>
                             )
                         }) }
                     </div>
