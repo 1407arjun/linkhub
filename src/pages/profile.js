@@ -34,7 +34,7 @@ export default function Profile(props) {
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Profile</h2>
-                    <TabLayout/>
+                    <TabLayout tab={ props.tab }/>
                     <TabContent yourPosts={ props.yourPosts }/>
                 </div>
                 <SideBar/>
@@ -46,6 +46,7 @@ export default function Profile(props) {
 
 export async function getServerSideProps(context) {
     const session = await getSession(context)
+    const { tab } = context.query
     if (session) {
         const mClient = await client
         const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
@@ -58,9 +59,23 @@ export async function getServerSideProps(context) {
                 props: {}
             }
         else {
-            const yourPosts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({"author.username": profile.username}).sort({date: -1}).toArray()))
-            return {
-                props: { user: profile, yourPosts: yourPosts }
+            if (!tab) {
+                const yourPosts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({"author.username": profile.username}).sort({date: -1}).toArray()))
+                return {
+                    props: { user: profile, yourPosts: yourPosts, tab: null }
+                } 
+            } else {
+                if (tab === "upvoted") {
+                    const yourPosts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": profile.upvoted}}).sort({date: -1}).toArray()))
+                    return {
+                        props: { user: profile, yourPosts: yourPosts, tab: tab }
+                    }
+                } else {
+                    const yourPosts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": profile.downvoted}}).sort({date: -1}).toArray()))
+                    return {
+                        props: { user: profile, yourPosts: yourPosts, tab: tab }
+                    }
+                } 
             }
         }     
     } else {

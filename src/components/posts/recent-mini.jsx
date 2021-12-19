@@ -1,4 +1,5 @@
 import Recent from "./recent"
+import Link from "next/link"
 
 export default function RecentMini() {
     return (
@@ -11,7 +12,7 @@ export default function RecentMini() {
                 <Recent title="web-development" tag="15K" id=""/>
                 <Recent title="machine-learning" tag="5K" id=""/>
             </div>
-            <button className="text-black dark:text-white font-semibold bg-gray-300 dark:bg-gray-500 rounded-full px-4 py-2 w-full focus:bg-gray-400 dark:focus:bg-gray-600">Show more</button>
+            <Link href="/profile?tab=upvoted"><a className="text-center text-black dark:text-white font-semibold bg-gray-300 dark:bg-gray-500 rounded-full px-4 py-2 w-full focus:bg-gray-400 dark:focus:bg-gray-600 hover:no-underline focus:no-underline">Show more</a></Link>
         </div>
     )
 }
