@@ -4,6 +4,8 @@ import TagBar from './tagbar'
 import Dropdown from './dropdown'
 import ReactMarkdown from 'react-markdown'
 import Link from 'next/link'
+import { useState } from 'react'
+import axios from 'axios'
  
 function getInitials(name) {
     let array = name.split(" ")
@@ -18,7 +20,6 @@ function getInitials(name) {
 }
 
 export default function PostMini(props) {
-
     return (
         <div className="flex flex-col gap-1 place-content-start rounded-xl border border-gray-300 dark:border-gray-600 w-full p-2">
             <div className="flex flex-row flex-nowrap justify-between items-center gap-2 xl:gap-3 px-2 w-full">

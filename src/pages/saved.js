@@ -34,7 +34,20 @@ export default function Saved(props) {
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Saved Posts</h2>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
-                        {/* Posts go here*/ }
+                        { props.posts.map((data, index) => { return (
+                            <PostMini key={ index } id={ data._id.toString() } name={ data.author.name }
+                                username={ data.author.username }
+                                email = { data.author.email }
+                                title={ data.title }
+                                body={ data.body }
+                                tags={ data.tags }
+                                date={ data.date }
+                                upvotes={ data.upvotes }
+                                downvotes={ data.downvotes }
+                                flags={ data.flags }
+                                saved ={ true }
+                                delete ={ data.author.email === session.user.email }/>
+                        ) }) }
                     </div>
                     <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                 </div>
@@ -58,10 +71,12 @@ export async function getServerSideProps(context) {
                 },
                 props: {}
             }
-        else
+        else {
+            const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": profile.saved}}).sort({date: -1}).toArray()))
             return {
-                props: { user: profile }
+                props: { user: profile, posts: saved }
             }
+        }     
     } else {
         return {
             redirect: {

@@ -37,7 +37,7 @@ export default function Home(props) {
                     </div>
                     <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                 </div>
-                <SideBar/>
+                <SideBar saved={ props.saved }/>
             </div>
             <Footer username={ props.user.username } signedin={ true }/>
         </div>
@@ -57,10 +57,12 @@ export async function getServerSideProps(context) {
                 },
                 props: {}
             }
-        else
+        else {
+            const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": profile.saved}}).limit(3).toArray()))
             return {
-                props: { user: profile }
+                props: { user: profile, saved: saved }
             }
+        }
     } else {
         return {
             redirect: {
