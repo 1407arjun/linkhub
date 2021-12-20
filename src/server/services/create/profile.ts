@@ -1,6 +1,6 @@
 import client from '../../loaders/database'
 import { Response } from '../../types/response'
-import { ObjectId } from 'bson'
+import { ObjectId } from 'mongodb'
 
 export default async function createPost(username: string, name: string, email: string): Promise<Response> {
     try {

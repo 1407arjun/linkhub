@@ -15,7 +15,7 @@ export default async function updateSaved(email: string, tag: string, remove: bo
                     tags.push(tag) 
             }
 
-            const res = await mClient.db("Client").collection("profiles").updateMany({email: email}, { "$set": { tags: tags }})
+            const res = await mClient.db("Client").collection("profiles").updateOne({email: email}, { "$set": { tags: tags }})
             //await mClient.close()
             return {error: !(res.acknowledged)}
         }

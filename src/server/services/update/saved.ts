@@ -1,4 +1,4 @@
-import { ObjectId } from 'bson'
+import { ObjectId } from 'mongodb'
 import client from '../../loaders/database'
 import { Response } from '../../types/response'
 
@@ -16,7 +16,7 @@ export default async function updateSaved(email: string, postId: string, remove:
                     saved.push(new ObjectId(postId)) 
             }
 
-            const res = await mClient.db("Client").collection("profiles").updateMany({email: email}, { "$set": { saved: saved }})
+            const res = await mClient.db("Client").collection("profiles").updateOne({email: email}, { "$set": { saved: saved }})
             //await mClient.close()
             return {error: !(res.acknowledged)}
         }

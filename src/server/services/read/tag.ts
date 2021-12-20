@@ -5,7 +5,7 @@ export default async function getTag(tagName: string): Promise<Response> {
     const mClient = await client
     const collection = mClient.db("Client").collection("tags")
     try {
-        const data = await collection.findOne({ name: tagName})
+        const data = await collection.findOne({ name: tagName })
         //await mClient.close()
         return {error: false, data: data!}
     } catch (err: object|unknown) {
