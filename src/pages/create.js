@@ -20,8 +20,8 @@ export default function Create(props) {
     const router = useRouter()
 
     function handleTitleChange(ev) {
-        if (ev.target.value.length > 32)
-            setTitleText(ev.target.value.slice(0, 32))
+        if (ev.target.value.length > 50)
+            setTitleText(ev.target.value.slice(0, 50))
         else
             setTitleText(ev.target.value)    
     }
@@ -75,7 +75,7 @@ export default function Create(props) {
                     <div className="w-full md:w-4/5 lg:w-2/3 xl:w-1/2">
                     <p className="px-1 py-0.5 text-left font-semibold text-gray-500 dark:text-gray-300 text-sm md:text-base">Title (enhances search)</p>
                         <input onChange={ handleTitleChange } name="title" type="text" placeholder="Title" className="w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100 text-lg md:text-xl font-semibold" value={ titleText } autoComplete="off" required/>
-                        <p className="px-1 py-0.5 text-right text-gray-500 dark:text-gray-300 text-sm md:text-base">{ titleText.length + " of 32 characters" }</p>
+                        <p className="px-1 py-0.5 text-right text-gray-500 dark:text-gray-300 text-sm md:text-base">{ titleText.length + " of 50 characters" }</p>
                     </div>
                     <div className="w-full h-full">
                         <EditorContext.Provider value={ contextValue }>
