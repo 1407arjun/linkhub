@@ -7,6 +7,7 @@ import PostMini from '../components/posts/post-mini'
 import { useState, useEffect } from 'react'
 import { getSession } from 'next-auth/react'
 import client from '../server/loaders/database'
+import { ObjectId } from 'mongodb'
 
 export default function Home(props) {
     const [navStatus, setNavStatus] = useState(false)
@@ -58,7 +59,8 @@ export async function getServerSideProps(context) {
                 props: {}
             }
         else {
-            const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": profile.saved}}).limit(3).toArray()))
+            const oidArray = profile.saved.map(id => { return new ObjectId(id) })
+            const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).limit(3).toArray()))
             return {
                 props: { user: profile, saved: saved }
             }

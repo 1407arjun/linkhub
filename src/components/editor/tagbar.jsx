@@ -32,7 +32,10 @@ export default function TagBar(props) {
             }
             setTagInput("")
         } else {
-            setTagInput(val)
+            if (val.length > 28)
+                setTagInput(val.slice(0, 28))
+            else
+                setTagInput(val)
         }
     }
 
@@ -41,8 +44,9 @@ export default function TagBar(props) {
             <div className="p-1.5 flex flex-row flex-wrap gap-2 justify-start items-center rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 w-full">
                 { tags.map((tag, index) => { return <Tag key={ index } name={ tag } update={ setTags }/>}) }
                 <input onChange={ onTagChange } onKeyDown={ handleTagsChange } name="tags" type="text" placeholder="Tags" className="w-full p-1 focus:outline-none dark:text-white dark:focus:ring-gray-100 dark:bg-black text-base md:text-lg font-semibold" value={ tagInput } autoComplete="off"/>
+                <p className="px-1 py-0.5 w-full text-right text-gray-500 dark:text-gray-300 text-sm md:text-base">{ tagInput.length + " of 28 characters" }</p>
             </div>    
-            <p className="px-1 py-0.5 text-left text-gray-500 dark:text-gray-300 text-sm md:text-base">Only alphabets and hyphens ( - ) are allowed. Enter the tags with a space between them. Backspace to delete</p>
+            <p className="px-1 py-0.5 text-left text-gray-500 dark:text-gray-300 text-sm md:text-base">Only alphabets and hyphens ( - ) are allowed. Enter the tags with a space between them. Backspace to delete.</p>
         </div>
     )
 }

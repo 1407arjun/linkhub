@@ -5,10 +5,12 @@ import SideBar from '../components/posts/sidebar'
 import SearchBar from '../components/uni/searchbar'
 import PostMini from '../components/posts/post-mini'
 import { useState, useEffect } from 'react'
-import { getSession } from 'next-auth/react'
+import { useSession, getSession } from 'next-auth/react'
 import client from '../server/loaders/database'
+import { ObjectId } from 'mongodb'
 
 export default function Saved(props) {
+    const { data: session, status } = useSession()
     const [navStatus, setNavStatus] = useState(false)
     const [windowSize, setWindowSize] = useState()
     
@@ -46,12 +48,12 @@ export default function Saved(props) {
                                 downvotes={ data.downvotes }
                                 flags={ data.flags }
                                 saved ={ true }
-                                delete ={ data.author.email === session.user.email }/>
+                                delete ={ data.author.email === props.user.email }/>
                         ) }) }
                     </div>
                     <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                 </div>
-                <SideBar/>
+                <SideBar saved={ props.posts } upvoted={ props.upvoted }/>
             </div>
             <Footer username={ props.user.username } signedin={ true }/>
         </div>
@@ -72,9 +74,12 @@ export async function getServerSideProps(context) {
                 props: {}
             }
         else {
-            const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": profile.saved}}).sort({date: -1}).toArray()))
+            const oidArray = profile.saved.map(id => { return new ObjectId(id) })
+            const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).sort({date: -1}).toArray()))
+            const oidUpArray = profile.upvoted.map(id => { return new ObjectId(id) })
+            const upvoted = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidUpArray}}).limit(5).toArray()))
             return {
-                props: { user: profile, posts: saved }
+                props: { user: profile, posts: saved, upvoted: upvoted }
             }
         }     
     } else {

@@ -1,9 +1,11 @@
+import { ObjectId } from "mongodb";
+
 export default interface Profile {
     name: string;
     email: string
     username: string | undefined;
-    tags: [ string ];
-    saved: [ string ];
-    upvoted: [ string ];
-    downvoted: [ string ];
+    tags: string[];
+    saved: ObjectId[];
+    upvoted: ObjectId[];
+    downvoted: ObjectId[];
 }

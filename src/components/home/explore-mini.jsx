@@ -8,7 +8,7 @@ export default function ExploreMini() {
             <div className="flex flex-col place-content-start"> {/* Max 5 Strip before entering*/}
                 <Tag name="app-development" follow="8.2K" post="15K"/>
                 <Tag name="web-development" follow="15K" post="1.2M"/>
-                <Tag name="machine-learning" follow="5K" post="8K"/>
+                <Tag name="natural-langauge-processing" follow="5K" post="8K"/>
             </div>
             <Link href="/explore"><a className="text-center text-black dark:text-white font-semibold bg-gray-300 dark:bg-gray-500 rounded-full px-4 py-2 w-full focus:bg-gray-400 dark:focus:bg-gray-600 hover:no-underline focus:no-underline">Show more</a></Link>
         </div>

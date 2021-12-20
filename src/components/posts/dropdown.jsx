@@ -26,9 +26,10 @@ export default function Dropdown(props) {
     }
 
     async function updateSaved(newSaved) {
+        setSaved(!newSaved)
         try {
-            const r = await axios.post("/api/saved/update", { postId: props.id, remove: !newSaved })
-            if (r.status === 200)
+            const r = await axios.post("/api/saved/update", { postId: props.id, remove: newSaved })
+            if (r.status !== 200)
                 setSaved(newSaved)
         } catch (e) {
             console.log(e)
@@ -66,7 +67,7 @@ export default function Dropdown(props) {
             { status === "authenticated" && <button onClick={ () => deletePost(props.id, props.email) } className={ "flex-none self-center justify-self-end bg-white dark:bg-black rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2" + (props.delete ? "" : " hidden") }>
                 <img src="/assets/posts/delete.svg" className="w-4 xl:w-6" alt="Menu"/>
             </button> }
-            { status === "authenticated" && <button onClick={ () => {setSaved(!saved); updateSaved(saved);} } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2">
+            { status === "authenticated" && <button onClick={ () => {updateSaved(saved)} } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2">
                 { saved && <img src="/assets/posts/bookmark-done.svg" className="w-4 xl:w-6" alt="Saved"/> }
                 { !saved && <img src="/assets/posts/bookmark.svg" className="w-4 xl:w-6 dark:filter dark:invert" alt="Save"/> }
             </button> }

@@ -15,7 +15,7 @@ export default function TabContent(props) {
                         upvotes={ data.upvotes }
                         downvotes={ data.downvotes }
                         flags={ data.flags }
-                        saved ={ false }
+                        saved ={ props.saved.includes(data._id.toString()) }
                         delete ={ true }/>
                 ) }) }
             </div>

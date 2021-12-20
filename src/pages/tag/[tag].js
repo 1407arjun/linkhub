@@ -69,7 +69,7 @@ export default function Post(props) {
                                     upvotes={ post.upvotes }
                                     downvotes={ post.downvotes }
                                     flags={ post.flags }
-                                    saved ={ false }
+                                    saved ={ props.user && props.user.saved.includes(post._id.toString()) }
                                     delete ={ props.user && props.user.email === post.author.email }/>
                             )
                         }) }

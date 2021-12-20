@@ -8,6 +8,7 @@ export default async function updateSaved(req: NextApiRequest, res: NextApiRespo
         if (req.method === 'POST') {
             if (session.user.email) {
                 const response = await updateProfile(session.user.email, req.body.postId, req.body.remove)
+                
                 if (!response.error)
                     res.status(200).end()
                 else

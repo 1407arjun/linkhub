@@ -1,3 +1,4 @@
+import { ObjectId } from 'bson'
 import client from '../../loaders/database'
 import { Response } from '../../types/response'
 
@@ -6,13 +7,15 @@ export default async function updateSaved(email: string, postId: string, remove:
     try {
         const profile = await mClient.db("Client").collection("profiles").findOne({email: email})
         if (profile) {
-            let saved = profile.saved
+            let saved: ObjectId[] = profile.saved
+            
             if (remove) {
-                saved = saved.filter((id: string) => { return id !== postId })
+                saved = saved.filter((id: ObjectId) => { return id.toString() !== postId })
             } else {
-                if (!saved.includes(postId))
-                    saved.push(postId)
+                if (!saved.includes(new ObjectId(postId)))
+                    saved.push(new ObjectId(postId)) 
             }
+
             const res = await mClient.db("Client").collection("profiles").updateMany({email: email}, { "$set": { saved: saved }})
             //await mClient.close()
             return {error: !(res.acknowledged)}

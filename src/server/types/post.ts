@@ -6,5 +6,5 @@ export default interface Post {
     downvotes: number;
     flags: number;
     author: { name: string, username: string, email: string }
-    tags: [ string ]
+    tags: string[]
 }

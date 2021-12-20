@@ -35,7 +35,7 @@ export default function Profile(props) {
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Profile</h2>
                     <TabLayout tab={ props.tab }/>
-                    <TabContent yourPosts={ props.yourPosts }/>
+                    <TabContent yourPosts={ props.yourPosts } saved={ props.user.saved }/>
                 </div>
                 <SideBar/>
             </div>
