@@ -70,7 +70,10 @@ export default function Post(props) {
                                     upvotes={ post.upvotes }
                                     downvotes={ post.downvotes }
                                     flags={ post.flags }
-                                    saved ={ props.user && props.user.saved.includes(post._id.toString()) }
+                                    option={ props.user ? (props.user.upvoted.includes(data._id) ? "upvoted" : 
+                                        (props.user.downvoted.includes(data._id) ? "downvoted" : 
+                                        (props.user.flagged.includes(data._id) ? "flagged" : null))) : null }
+                                    saved ={ props.user && props.user.saved.includes(post._id) }
                                     delete ={ false }/>
                             )
                         }) }

@@ -14,7 +14,8 @@ export default async function createPost(username: string, name: string, email: 
             tags: [],
             saved: [],
             upvoted: [],
-            downvoted: []
+            downvoted: [],
+            flagged: []
         }
         const response = await mClient.db("Client").collection("profiles").insertOne(newProfile)
         //await mClient.close()

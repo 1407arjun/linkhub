@@ -47,6 +47,9 @@ export default function Saved(props) {
                                 upvotes={ data.upvotes }
                                 downvotes={ data.downvotes }
                                 flags={ data.flags }
+                                option={ props.user.upvoted.includes(data._id) ? "upvoted" : 
+                                    (props.user.downvoted.includes(data._id) ? "downvoted" : 
+                                    (props.user.flagged.includes(data._id) ? "flagged" : null)) }
                                 saved ={ true }
                                 delete ={ data.author.email === props.user.email }/>
                         ) }) }

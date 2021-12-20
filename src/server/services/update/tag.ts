@@ -1,7 +1,7 @@
 import client from '../../loaders/database'
 import { Response } from '../../types/response'
 
-export default async function updateSaved(email: string, tag: string, remove: boolean): Promise<Response> {
+export default async function updateTags(email: string, tag: string, remove: boolean): Promise<Response> {
     const mClient = await client
     try {
         const profile = await mClient.db("Client").collection("profiles").findOne({email: email})

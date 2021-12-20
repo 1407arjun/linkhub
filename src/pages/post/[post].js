@@ -64,7 +64,10 @@ export default function Post(props) {
                             upvotes={ data.upvotes }
                             downvotes={ data.downvotes }
                             flags={ data.flags }
-                            saved ={ props.user && props.user.saved.includes(data._id.toString()) }
+                            option={ props.user ? (props.user.upvoted.includes(data._id) ? "upvoted" : 
+                                (props.user.downvoted.includes(data._id) ? "downvoted" : 
+                                (props.user.flagged.includes(data._id) ? "flagged" : null))) : null }
+                            saved ={ props.user && props.user.saved.includes(data._id) }
                             delete ={ props.user && props.user.email === data.author.email }/>
                     </div>
                     <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>

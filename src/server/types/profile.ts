@@ -8,4 +8,5 @@ export default interface Profile {
     saved: ObjectId[];
     upvoted: ObjectId[];
     downvoted: ObjectId[];
+    flagged: ObjectId[];
 }

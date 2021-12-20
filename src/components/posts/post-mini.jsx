@@ -20,6 +20,87 @@ function getInitials(name) {
 }
 
 export default function PostMini(props) {
+    const [option, setOption] = useState(props.option)
+    const [upvotes, setUpvotes] = useState(props.upvotes)
+    const [downvotes, setDownvotes] = useState(props.downvotes)
+    const [flags, setFlags] = useState(props.flags)
+
+    async function updateOption(newOption) {
+        let prevOption = option
+
+        if (prevOption === newOption) {
+            newOption = null
+            setOption(null)
+        } else {    
+            setOption(newOption)
+
+            switch(newOption) {
+                case "upvoted":
+                    setUpvotes((prev) => {return prev + 1})
+                    break
+                case "downvoted":
+                    setDownvotes((prev) => {return prev + 1})
+                    break
+                case "flagged":
+                    setFlags((prev) => {return prev + 1})
+                    break
+                default:
+                    break            
+            }
+
+            switch(prevOption) {
+                case "upvoted":
+                    setUpvotes((prev) => {return prev - 1})
+                    break
+                case "downvoted":
+                    setDownvotes((prev) => {return prev - 1})
+                    break
+                case "flagged":
+                    setFlags((prev) => {return prev - 1})
+                    break
+                default:
+                    break            
+            }
+        }
+
+        try {
+            const r = await axios.post("/api/post/update", { postId: props.id, add: newOption, remove: prevOption })
+            if (r.status !== 200) {
+                setOption(prevOption)
+
+                switch(prevOption) {
+                    case "upvoted":
+                        setUpvotes((prev) => {return prev + 1})
+                        break
+                    case "downvoted":
+                        setDownvotes((prev) => {return prev + 1})
+                        break
+                    case "flagged":
+                        setFlags((prev) => {return prev + 1})
+                        break
+                    default:
+                        break            
+                }
+
+                switch(newOption) {
+                    case "upvoted":
+                        setUpvotes((prev) => {return prev - 1})
+                        break
+                    case "downvoted":
+                        setDownvotes((prev) => {return prev - 1})
+                        break
+                    case "flagged":
+                        setFlags((prev) => {return prev - 1})
+                        break
+                    default:
+                        break            
+                }
+            }     
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     return (
         <div className="flex flex-col gap-1 place-content-start rounded-xl border border-gray-300 dark:border-gray-600 w-full p-2">
             <div className="flex flex-row flex-nowrap justify-between items-center gap-2 xl:gap-3 px-2 w-full">
@@ -35,7 +116,7 @@ export default function PostMini(props) {
                 <Dropdown id={ props.id } email={ props.email } delete={ props.delete } saved={ props.saved } date={ props.date }/>
             </div>
             <div className="flex flex-row gap-2 place-content-start w-full px-2 sm:px-0">
-                <Bar upvotes={ props.upvotes } downvotes={ props.downvotes } flags={ props.flags }/>
+                <Bar upvotes={ upvotes } downvotes={ downvotes } flags={ flags } option={ option } update={ updateOption }/>
                 <div className="flex flex-col gap-1 place-content-start w-full sm:w-5/6 py-2">
                     <ReactMarkdown className="dark:text-white overflow-y-auto break-words">{ props.body }</ReactMarkdown>
                     <div className="flex flex-row flex-wrap gap-2 justify-start items-center pt-2 pb-3">
@@ -43,7 +124,7 @@ export default function PostMini(props) {
                     </div>
                 </div>
             </div>
-            <HBar upvotes={ props.upvotes } downvotes={ props.downvotes } flags={ props.flags }/>
+            <HBar upvotes={ upvotes } downvotes={ downvotes } flags={ flags } option={ option } update={ updateOption }/>
         </div>
     )
 }

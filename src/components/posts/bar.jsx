@@ -1,17 +1,17 @@
 export default function Bar(props) {
     return (
         <div className="hidden sm:flex sm:flex-col justify-start items-center p-4 xl:p-8 gap-5">
-            <button className="flex flex-row justify-start items-center gap-2 w-full">
+            <button onClick={ () => props.update("upvoted") } className="flex flex-row justify-start items-center gap-2 w-full">
                 <img src="/assets/posts/arrow-up.svg" alt="Upvotes"/>
-                <span className="font-semibold text-sm lg:text-base dark:text-white">{ props.upvotes }</span>
+                <span className={"font-semibold text-sm lg:text-base " + (props.option !== "upvoted" ? "text-black dark:text-white" : "text-green-800 dark:text-green-500")}>{ props.upvotes }</span>
             </button>
-            <button className="flex flex-row justify-start items-center gap-2 w-full">
+            <button onClick={ () => props.update("downvoted") } className="flex flex-row justify-start items-center gap-2 w-full">
                 <img src="/assets/posts/arrow-down.svg" alt="Downvotes"/>
-                <span className="font-semibold text-sm lg:text-base dark:text-white">{ props.downvotes }</span>
+                <span className={"font-semibold text-sm lg:text-base " + (props.option !== "downvoted" ? "text-black dark:text-white" : "text-red-500 dark:text-red-400")}>{ props.downvotes }</span>
             </button>
-            <button className="flex flex-row justify-start items-center gap-2 w-full">
-                <img src="/assets/posts/flag.svg" alt="Upvotes"/>
-                <span className="font-semibold text-sm lg:text-base dark:text-white">{ props.flags }</span>
+            <button onClick={ () => props.update("flagged") } className="flex flex-row justify-start items-center gap-2 w-full">
+                <img src="/assets/posts/flag.svg" alt="Flags"/>
+                <span className={"font-semibold text-sm lg:text-base " + (props.option !== "flagged" ? "text-black dark:text-white" : "text-red-500 dark:text-red-400")}>{ props.flags }</span>
             </button>
         </div>
     )
