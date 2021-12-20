@@ -1,0 +1,124 @@
+html, body {
+	font-family: 'Montserrat', sans-serif;
+	color: black;
+}
+
+.grad-home {
+	background: #000428;
+	background: -webkit-linear-gradient(to right, #004e92, #000428);
+	background: linear-gradient(-45deg, #004e92, #000428);
+	background-size: 400% 400%;
+    animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+h1 {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 1.17rem;
+	font-weight: bold;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+h4 {
+	font-size: .83rem;
+	font-weight: bold;
+}
+
+h5, h6 {
+	font-size: .67rem;
+	font-weight: bold;
+}
+
+blockquote {
+	display: block;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	padding-left: 24px;
+	padding-right: 24px;
+	background-color: #E0E0E0;
+	border-left-width: medium;
+	border-color: #757575;
+}
+
+p > a:link, p > a:visited {
+	color: #2196F3
+}
+
+a:hover, a:focus {
+	text-decoration: underline;
+}
+
+li {
+	display: list-item;
+}
+
+ol {
+	list-style-type: decimal;
+	padding-left: 1.5rem;
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem;
+}
+
+ul {
+	list-style-type: disc;
+	padding-left: 1.5rem;
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+code {
+	border-radius: 8px;
+	padding: 0.25rem 0.5rem;
+	background-color: #E0E0E0;
+}
+
+pre > code {
+	display: block;
+	width: 100%;
+}
+
+input:disabled {
+	background-color: #F5F5F5;
+}
+
+@media (prefers-color-scheme: dark) {
+	html, body {
+		color: white;
+	}
+
+	blockquote {
+		background-color: #424242;
+		border-color: #F5F5F5
+	}
+
+	code {
+		background-color: #424242;
+	}
+
+	input:disabled {
+		background-color: #212121;
+	}
+}
