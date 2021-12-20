@@ -8,6 +8,7 @@ import TabContent from '../components/profile/tabcontent'
 import { useState, useEffect } from 'react'
 import { getSession } from 'next-auth/react'
 import client from '../server/loaders/database'
+import TagBar from '../components/posts/tagbar'
 
 export default function Profile(props) {
     const [navStatus, setNavStatus] = useState(false)
@@ -34,6 +35,9 @@ export default function Profile(props) {
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Profile</h2>
+                    <div className={(props.user.tags.length > 0 ? "flex " : "hidden ") + "flex-row flex-wrap gap-2 justify-start items-start w-full"}>
+                        { props.user.tags.map((tag, index) => { return <TagBar key={ index } name={ tag }/> }) }
+                    </div>
                     <TabLayout tab={ props.tab }/>
                     <TabContent yourPosts={ props.yourPosts } saved={ props.user.saved }/>
                 </div>

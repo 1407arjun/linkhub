@@ -52,9 +52,6 @@ export default function Post(props) {
                             <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.title }</h2>
                             <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "At " + new Date(data.date.toLocaleString()) }</p>
                         </div>
-                        { status === "authenticated" && <button className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
-                            <img src="/assets/home/plus-sq.svg" className="w-6 md:w-10" alt="Add"/>
-                        </button> }
                     </div>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         <PostMini id={ data._id.toString() } name={ data.author.name }

@@ -8,6 +8,7 @@ import { getSession, useSession } from 'next-auth/react'
 import getProfile from '../../server/services/read/profile'
 import client from '../../server/loaders/database'
 import { useRouter } from 'next/router'
+import TagBar from '../../components/posts/tagbar'
 
 export default function Post(props) {
     const router = useRouter()
@@ -52,6 +53,9 @@ export default function Post(props) {
                             <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.name }</h2>
                             <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "@ " + data.username }</p>
                         </div>
+                    </div>
+                    <div className={(data.tags.length > 0 ? "flex " : "hidden ") + "flex-row flex-wrap gap-2 justify-start items-start w-full"}>
+                        { data.tags.map((tag, index) => { return <TagBar key={ index } name={ tag }/> }) }
                     </div>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         { props.posts.map((post, index) => {

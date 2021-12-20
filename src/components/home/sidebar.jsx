@@ -7,7 +7,7 @@ export default function SideBar(props) {
             <div className="flex flex-col place-content-start p-4 gap-4 rounded-3xl bg-white dark:bg-black">
                 <h1 className="text-black dark:text-white text-2xl xl:text-3xl font-bold">Learn today</h1>
                 <SavedMini saved={ props.saved }/>
-                <ExploreMini/>
+                <ExploreMini tags={ props.tags }/>
             </div>
         </div>    
     )

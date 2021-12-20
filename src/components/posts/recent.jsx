@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
+import axios from 'axios'
 
 export default function Recent(props) {
     const [add, setAdd] = useState(props.add)

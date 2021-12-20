@@ -38,7 +38,7 @@ export default function Home(props) {
                     </div>
                     <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                 </div>
-                <SideBar saved={ props.saved }/>
+                <SideBar saved={ props.saved } tags={ props.tags }/>
             </div>
             <Footer username={ props.user.username } signedin={ true }/>
         </div>
@@ -61,8 +61,10 @@ export async function getServerSideProps(context) {
         else {
             const oidArray = profile.saved.map(id => { return new ObjectId(id) })
             const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).limit(3).toArray()))
+            const tags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$match: {tags: {$nin: profile.tags}}}, {$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(5).toArray()))
+            console.log(tags)
             return {
-                props: { user: profile, saved: saved }
+                props: { user: profile, saved: saved, tags: tags }
             }
         }
     } else {

@@ -8,6 +8,7 @@ import { getSession, useSession } from 'next-auth/react'
 import getTag from '../../server/services/read/tag'
 import client from '../../server/loaders/database'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 export default function Post(props) {
     const router = useRouter()
@@ -36,6 +37,30 @@ export default function Post(props) {
     if (error)
         window.alert(JSON.stringify(data))
 
+    const [follow, setFollow] = useState(props.user.tags.includes(data.name))
+
+    async function addToTags(newFollow) {
+        setFollow(!newFollow)
+        try {
+            const r = await axios.post("/api/tag/update", { tag: data.name, remove: false })
+            if (r.status !== 200)
+                setFollow(newFollow)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async function removeFromTags(newFollow) {
+        setFollow(!newFollow)
+        try {
+            const r = await axios.post("/api/tag/update", { tag: data.name, remove: true })
+            if (r.status !== 200)
+                setFollow(newFollow)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     return (
         <div className="dark:bg-black">
             <Head title={  data.name + " on LinkHub" }/>
@@ -52,8 +77,11 @@ export default function Post(props) {
                             <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.name }</h2>
                             <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ props.posts.length + " posts, " + data.followers.length + " followers" }</p>
                         </div>
-                        { status === "authenticated" && <button className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
+                        { status === "authenticated" && !follow && <button onClick={ () => addToTags(follow) } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
                             <img src="/assets/home/plus-sq.svg" className="w-6 md:w-10" alt="Add"/>
+                        </button> }
+                        { status === "authenticated" && follow && <button onClick={ () => removeFromTags(follow) } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
+                            <img src="/assets/home/delete-sq.svg" className="w-6 md:w-10" alt="Add"/>
                         </button> }
                     </div>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
