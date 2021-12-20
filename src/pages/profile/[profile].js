@@ -54,7 +54,7 @@ export default function Post(props) {
                             <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "@ " + data.username }</p>
                         </div>
                     </div>
-                    <div className={(data.tags.length > 0 ? "flex " : "hidden ") + "flex-row flex-wrap gap-2 justify-start items-start w-full"}>
+                    <div className={(data.tags.length > 0 ? "flex " : "hidden ") + "flex-row flex-wrap gap-2 justify-start items-start w-full px-3"}>
                         { data.tags.map((tag, index) => { return <TagBar key={ index } name={ tag }/> }) }
                     </div>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">

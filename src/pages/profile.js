@@ -35,7 +35,7 @@ export default function Profile(props) {
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Profile</h2>
-                    <div className={(props.user.tags.length > 0 ? "flex " : "hidden ") + "flex-row flex-wrap gap-2 justify-start items-start w-full"}>
+                    <div className={(props.user.tags.length > 0 ? "flex " : "hidden ") + "flex-row flex-wrap gap-2 justify-start items-start w-full px-3"}>
                         { props.user.tags.map((tag, index) => { return <TagBar key={ index } name={ tag }/> }) }
                     </div>
                     <TabLayout tab={ props.tab }/>
