@@ -15,6 +15,7 @@ export default function Settings(props) {
     const [windowSize, setWindowSize] = useState()
     const [disableProfile, setDisableProfile] = useState(true)
     const [username, setUsername] = useState(props.user.username)
+    const [name, setName] = useState(props.user.name)
     const router = useRouter()
     
     useEffect(() => {
@@ -28,19 +29,35 @@ export default function Settings(props) {
     }, [windowSize])
 
     function handleUsernameChange(ev) {
-        setUsername(ev.target.value)
+        let re = new RegExp("^[a-z0-9_]*$")
+        let val = ev.target.value.toLowerCase()
+
+        if (val.length > 20) {
+            setUsername(val.slice(0, 20))
+        } else if (re.test(val) && val.length <= 20)
+            setUsername(val)
+    }
+
+    function handleNameChange(ev) {
+        let re = new RegExp("^[a-zA-Z0-9_\\- ]*$")
+        let val = ev.target.value
+
+        if (val.length > 50) {
+            setName(val.slice(0, 50))
+        } else if (re.test(val) && val.length <= 50)
+            setName(val)
     }
 
     async function check(ev) {
         ev.preventDefault()
         try {
-            const res = await axios.get("/api/profile/create?username=" + ev.target[0].value)
+            const res = await axios.get("/api/profile/create?username=" + username)
 
             if (res.status === 200) {
                 if (res.data.exists)
                     alert("Username already exists.")
                 else {
-                    const r = await axios.post("/api/profile/update", { username: props.user.username, newUsername: ev.target[0].value, email: props.user.email })
+                    const r = await axios.post("/api/profile/update", { username: props.user.username, newUsername: username, email: props.user.email })
                     if (r.status === 200)
                         router.reload()
                     else
@@ -89,7 +106,7 @@ export default function Settings(props) {
                         </div>
                         <div className="w-full">
                             <label htmlFor="name" className="w-full font-semibold mb-1 dark:text-white">Full Name</label>
-                            <input name="name" type="text" placeholder="Full Name" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100" pattern="[a-zA-Z0-9_\- ]+" disabled={ /*disableProfile ? "disabled" : ""*/ "disabled" } required minLength="2" maxLength="20" value={ props.user.name }/>
+                            <input onChange={ handleNameChange } name="name" type="text" placeholder="Full Name" className="mt-1 w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100" disabled={ /*disableProfile ? "disabled" : ""*/ "disabled" } required minLength="2" value={ name }/>
                             <p className="px-1 py-0.5 text-left text-gray-500 dark:text-gray-300 text-xs md:text-sm">Special characters except hyphens ( - ) and underscores ( _ ) are not allowed</p>
                         </div>
                         <div className="w-full">
@@ -99,7 +116,7 @@ export default function Settings(props) {
                         <div className="w-full flex flex-col sm:flex-row gap-4">
                             <button type="submit" className="w-full sm:w-1/3 bg-blue-500 py-2 rounded-md font-bold text-white hover:bg-blue-600 focus:bg-blue-600" disabled={ disableProfile ? true : false}>Save</button>
                             <button className="w-full sm:w-1/3 bg-white py-2 rounded-md font-bold dark:bg-black text-black dark:text-white border border-gray-400 dark:border-gray-600 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-900 dark:focus:bg-gray-900" onClick={ (ev) => { ev.preventDefault(); setDisableProfile(false) } }>Edit profile</button>
-                            <button className="w-full sm:w-1/3 bg-red-500 py-2 rounded-md font-bold text-white hover:bg-red-600 focus:bg-red-600" onClick={ (ev) => { ev.preventDefault(); deleteProfile(props.user._id.toString(), props.user.username, props.user.email) } }>Delete account</button>
+                            <button className="w-full sm:w-1/3 bg-red-500 py-2 rounded-md font-bold text-white hover:bg-red-600 focus:bg-red-600" onClick={ (ev) => { ev.preventDefault(); deleteProfile(props.user._id.toString(), username, props.user.email) } }>Delete account</button>
                         </div>
                     </form>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Security</h2>
