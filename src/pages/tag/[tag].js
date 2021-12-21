@@ -97,9 +97,9 @@ export default function Post(props) {
                                     upvotes={ post.upvotes }
                                     downvotes={ post.downvotes }
                                     flags={ post.flags }
-                                    option={ props.user ? (props.user.upvoted.includes(data._id) ? "upvoted" : 
-                                        (props.user.downvoted.includes(data._id) ? "downvoted" : 
-                                        (props.user.flagged.includes(data._id) ? "flagged" : null))) : null }
+                                    option={ props.user ? (props.user.upvoted.includes(post._id) ? "upvoted" : 
+                                        (props.user.downvoted.includes(post._id) ? "downvoted" : 
+                                        (props.user.flagged.includes(post._id) ? "flagged" : null))) : null }
                                     saved ={ props.user && props.user.saved.includes(post._id) }
                                     delete ={ props.user && props.user.email === post.author.email }/>
                             )
@@ -123,6 +123,7 @@ export async function getServerSideProps(context) {
         const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({tags: tag}).sort({upvotes: -1}).toArray()))
         if (session) {
             const prof = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
+            console.log(prof)
             //await mClient.close()
             if (!prof)
                 return {

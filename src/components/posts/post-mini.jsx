@@ -20,6 +20,7 @@ function getInitials(name) {
 }
 
 export default function PostMini(props) {
+    console.log(props.option)
     const [option, setOption] = useState(props.option)
     const [upvotes, setUpvotes] = useState(props.upvotes)
     const [downvotes, setDownvotes] = useState(props.downvotes)
@@ -27,40 +28,45 @@ export default function PostMini(props) {
 
     async function updateOption(newOption) {
         let prevOption = option
+        console.log(prevOption)
+        console.log(newOption)
 
         if (prevOption === newOption) {
             newOption = null
             setOption(null)
+
+            console.log(prevOption)
+            console.log(newOption)
         } else {    
             setOption(newOption)
+        }     
 
-            switch(newOption) {
-                case "upvoted":
-                    setUpvotes((prev) => {return prev + 1})
-                    break
-                case "downvoted":
-                    setDownvotes((prev) => {return prev + 1})
-                    break
-                case "flagged":
-                    setFlags((prev) => {return prev + 1})
-                    break
-                default:
-                    break            
-            }
+        switch(newOption) {
+            case "upvoted":
+                setUpvotes((prev) => {return prev + 1})
+                break
+            case "downvoted":
+                setDownvotes((prev) => {return prev + 1})
+                break
+            case "flagged":
+                setFlags((prev) => {return prev + 1})
+                break
+            default:
+                break            
+        }
 
-            switch(prevOption) {
-                case "upvoted":
-                    setUpvotes((prev) => {return prev - 1})
-                    break
-                case "downvoted":
-                    setDownvotes((prev) => {return prev - 1})
-                    break
-                case "flagged":
-                    setFlags((prev) => {return prev - 1})
-                    break
-                default:
-                    break            
-            }
+        switch(prevOption) {
+            case "upvoted":
+                setUpvotes((prev) => {return prev - 1})
+                break
+            case "downvoted":
+                setDownvotes((prev) => {return prev - 1})
+                break
+            case "flagged":
+                setFlags((prev) => {return prev - 1})
+                break
+            default:
+                break            
         }
 
         try {
