@@ -78,7 +78,7 @@ export async function getServerSideProps(context) {
             }
         else {
             const oidArray = profile.saved.map(id => { return new ObjectId(id) })
-            const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).toArray()))
+            const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).sort({ date: 1 }).toArray()))
             const oidUpArray = profile.upvoted.map(id => { return new ObjectId(id) })
             const upvoted = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidUpArray}}).limit(5).toArray()))
             return {

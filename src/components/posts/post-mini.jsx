@@ -20,7 +20,6 @@ function getInitials(name) {
 }
 
 export default function PostMini(props) {
-    console.log(props.option)
     const [option, setOption] = useState(props.option)
     const [upvotes, setUpvotes] = useState(props.upvotes)
     const [downvotes, setDownvotes] = useState(props.downvotes)

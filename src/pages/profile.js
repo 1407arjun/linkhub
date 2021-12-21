@@ -64,18 +64,18 @@ export async function getServerSideProps(context) {
             }
         else {
             if (!tab) {
-                const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({"author.username": profile.username}).sort({date: -1}).toArray()))
+                const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({"author.username": profile.username}).sort({date: 1}).toArray()))
                 return {
                     props: { user: profile, posts: posts, tab: null }
                 } 
             } else {
                 if (tab === "upvoted") {
-                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": profile.upvoted}}).sort({date: -1}).toArray()))
+                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": profile.upvoted}}).sort({date: 1}).toArray()))
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }
                 } else {
-                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": profile.downvoted}}).sort({date: -1}).toArray()))
+                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": profile.downvoted}}).sort({date: 1}).toArray()))
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }
