@@ -16,7 +16,7 @@ export default async function createPost(data: any, email: string): Promise<Resp
             upvotes: 0,
             downvotes: 0,
             flags: 0,
-            author: { name: profile!.name, username: profile!.username, email: profile!.email }
+            author: { name: profile!.name, username: profile!.username, email: profile!.email, image: profile!.image }
         }
         const response = await mClient.db("Client").collection("posts").insertOne(newPost)
         //await mClient.close()

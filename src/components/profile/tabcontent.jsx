@@ -7,7 +7,8 @@ export default function TabContent(props) {
                 { props.posts.map((data, index) => { return (
                     <PostMini key={ index } id={ data._id.toString() } name={ data.author.name }
                         username={ data.author.username }
-                        email = { data.author.email }
+                        email={ data.author.email }
+                        image={ data.author.image } 
                         title={ data.title }
                         body={ data.body }
                         tags={ data.tags }

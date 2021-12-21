@@ -1,15 +1,12 @@
 import Link from 'next/link'
-import { useState } from 'react'
 import axios from 'axios'
 
 export default function Recent(props) {
-    const [add, setAdd] = useState(props.add)
-
     async function addToSaved() {
         try {
             const r = await axios.post("/api/saved/update", { postId: props.id, remove: false })
             if (r.status === 200)
-                setAdd(false)
+                props.update(props.id)
         } catch (e) {
             console.log(e)
         }
@@ -23,12 +20,12 @@ export default function Recent(props) {
                 </div>
                 <div className="self-center flex flex-col justify-center items-start">
                     <h4 className="text-sm xl:text-base font-semibold dark:text-white">{ props.title.length > 25 ? props.title.slice(0, 25) + "..." : props.title }</h4>
-                    <p className="text-gray-500 dark:text-gray-300 text-xs xl:text-sm">{ props.author }</p>
+                    <p className="text-gray-500 dark:text-gray-300 text-xs xl:text-sm">{ props.desc }</p>
                 </div>
             </div></a></Link>
-            { add && <button onClick={ () => addToSaved() } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
+            <button onClick={ () => addToSaved() } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
                 <img src="/assets/home/plus-sq.svg" className="w-6 xl:w-8" alt="Add"/>
-            </button> }
+            </button>
         </div>
     )
 } 

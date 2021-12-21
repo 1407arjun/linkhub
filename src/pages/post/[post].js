@@ -57,6 +57,7 @@ export default function Post(props) {
                         <PostMini id={ data._id.toString() } name={ data.author.name }
                             username={ data.author.username }
                             email = { data.author.email }
+                            image={ data.author.image }
                             title={ data.title }
                             body={ data.body }
                             tags={ data.tags }

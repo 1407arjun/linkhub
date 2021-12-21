@@ -60,9 +60,10 @@ export default function Post(props) {
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         { props.posts.map((post, index) => {
                             return (
-                                <PostMini key={ index } id={ post._id.toString() } name={ data.name }
-                                    username={ data.username }
-                                    email = { data.email }
+                                <PostMini key={ index } id={ post._id.toString() } name={ post.author.name }
+                                    username={ post.author.username }
+                                    email = { post.author.email }
+                                    image={ post.author.image }
                                     title={ post.title }
                                     body={ post.body }
                                     tags={ post.tags }

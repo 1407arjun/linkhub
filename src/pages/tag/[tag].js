@@ -90,6 +90,7 @@ export default function Post(props) {
                                 <PostMini key={ index } id={ post._id.toString() } name={ post.author.name }
                                     username={ post.author.username }
                                     email = { post.author.email }
+                                    image={ post.author.image }
                                     title={ post.title }
                                     body={ post.body }
                                     tags={ post.tags }

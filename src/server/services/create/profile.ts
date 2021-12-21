@@ -2,7 +2,7 @@ import client from '../../loaders/database'
 import { Response } from '../../types/response'
 import { ObjectId } from 'mongodb'
 
-export default async function createPost(username: string, name: string, email: string): Promise<Response> {
+export default async function createPost(username: string, name: string, email: string, image: string): Promise<Response> {
     try {
         const mClient = await client
         const user = await mClient.db("Client").collection("users").findOne({email: email})
@@ -11,6 +11,7 @@ export default async function createPost(username: string, name: string, email: 
             username: username,
             name: name,
             email: email,
+            image: image,
             roles: [],
             tags: [],
             saved: [],

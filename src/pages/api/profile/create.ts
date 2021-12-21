@@ -7,7 +7,7 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
     const session = await getSession({ req })
     if (session && session.user) {
         if (req.method === 'POST') {
-            const response = await createProfile(req.body.username, session.user.name!, session.user.email!)
+            const response = await createProfile(req.body.username, session.user.name!, session.user.email!, session.user.image!)
             
             if (!response.error)
                 res.status(200).end()

@@ -110,7 +110,7 @@ export default function PostMini(props) {
         <div className="flex flex-col gap-1 place-content-start rounded-xl border border-gray-300 dark:border-gray-600 w-full p-2">
             <div className="flex flex-row flex-nowrap justify-between items-center gap-2 xl:gap-3 px-2 w-full">
                 <div className="flex-none flex flex-row justify-start items-center gap-2 xl:gap-3">
-                    <h3 className="p-2 select-none self-center inline-block font-bold text-lg sm:text-xl xl:text-2xl text-white dark:text-black rounded-full bg-black dark:bg-white text-center">{ getInitials(props.name) }</h3>
+                    <span className={"select-none self-center inline-block font-bold text-lg sm:text-xl xl:text-2xl text-white dark:text-black rounded-full text-center" + (props.image ? "" : " p-2 bg-black dark:bg-white")}>{ props.image ? <img src={ props.image } alt="" className="rounded-full w-9 sm:w-10 xl:w-12"/> : getInitials(props.name) }</span>
                     <div className="self-center flex flex-col justify-center items-start">
                         <Link href={ "/profile/" + props.username }><a className="hover:no-underline focus:no-underline">
                             <h4 className="text-sm xl:text-base font-semibold hover:underline focus:underline dark:text-white">{ props.name }</h4>

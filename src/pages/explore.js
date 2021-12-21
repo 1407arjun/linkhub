@@ -4,6 +4,7 @@ import Footer from '../components/uni/footer'
 import NavBar from '../components/uni/navbar'
 import SearchBar from '../components/uni/searchbar'
 import Tag from '../components/home/tag'
+import Recent from '../components/posts/recent'
 import Profile from '../components/profile/profile'
 import { useState, useEffect } from 'react'
 import { getSession, useSession } from 'next-auth/react'
@@ -13,6 +14,11 @@ export default function Explore(props) {
     const { data: session, status } = useSession()
     const [navStatus, setNavStatus] = useState(false)
     const [windowSize, setWindowSize] = useState()
+    const [trendTags, setTrendTags] = useState(props.trendTags)
+
+    function updateTrendTags(name) {
+        setTrendTags((prev) => { return prev.filter(tag => { return tag._id !== name })})
+    }
     
     useEffect(() => {
         setWindowSize(window.innerWidth)
@@ -38,10 +44,9 @@ export default function Explore(props) {
                     <div className="w-full">
                         <h3 className="w-full text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl font-bold mb-1 dark:text-white">Trending</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
-                            <Tag name="app-development" follow="8.2K"/>
-                            <Tag name="web-development" follow="15K"/>
-                            <Tag name="machine-learning" follow="5K"/>
-                            <Profile name="Arjun Sivaraman" username="1407arjun"/>
+                            { trendTags.map((tag, index) => {
+                                return <Tag key={ index } name={ tag._id } post={ tag.count } update={ updateTrendTags }/>
+                            }) }
                         </div>
                     </div>
                     <div className="w-full"> 
@@ -74,13 +79,17 @@ export async function getServerSideProps(context) {
                 },
                 props: {}
             }
-        else
+        else {
+            const trendTags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$match: {tags: {$nin: profile.tags}}}, {$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(10).toArray()))
             return {
-                props: { user: profile }
+                props: { user: profile, trendTags: trendTags }
             }
+        }     
     } else {
+        const mClient = await client
+        const trendTags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(5).toArray()))
         return {
-            props: {}
+            props: { trendTags: trendTags }
         }
     }
 }
