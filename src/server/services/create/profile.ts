@@ -11,6 +11,7 @@ export default async function createPost(username: string, name: string, email: 
             username: username,
             name: name,
             email: email,
+            roles: [],
             tags: [],
             saved: [],
             upvoted: [],
