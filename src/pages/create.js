@@ -11,6 +11,7 @@ import SearchBar from '../components/uni/searchbar'
 import TagBar from '../components/editor/tagbar'
 import client from '../server/loaders/database'
 import axios from 'axios'
+import nprogress from 'nprogress'
 
 export default function Create(props) {
     const [titleText, setTitleText] = useState("")
@@ -31,6 +32,7 @@ export default function Create(props) {
     }
 
     async function post(title, body) {
+        nprogress.start()
         try {
             const res = await axios.post("/api/post/create", {
                 title: title,
@@ -38,6 +40,7 @@ export default function Create(props) {
                 tags: tags,
                 date: (new Date()).toUTCString()
             })
+            nprogress.done()
 
             if (res.status === 200)
                 router.push("/post/" + res.data.id)
@@ -45,6 +48,7 @@ export default function Create(props) {
                 router.push("/home")
         } catch (e) {
             console.log(e)
+            nprogress.done()
             router.push("/home")
         }
     }

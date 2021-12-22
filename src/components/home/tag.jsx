@@ -1,14 +1,18 @@
 import Link from 'next/link'
 import axios from 'axios'
+import nprogress from 'nprogress'
 
 export default function Tag(props) {
     async function addToTags() {
+        nprogress.start()
         try {
             const r = await axios.post("/api/tag/update", { tag: props.name, remove: false })
             if (r.status === 200)
                 props.update(props.name)
         } catch (e) {
             console.log(e)
+        } finally {
+            nprogress.done()
         }
     }
 

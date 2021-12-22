@@ -1,14 +1,18 @@
 import Link from 'next/link'
 import axios from 'axios'
+import nprogress from 'nprogress'
 
 export default function Save(props) {
     async function removeFromSaved() {
+        nprogress.start()
         try {
             const r = await axios.post("/api/saved/update", { postId: props.id, remove: true })
             if (r.status === 200)
                 props.update(props.id)
         } catch (e) {
             console.log(e)
+        } finally {
+            nprogress.done()
         }
     }
 

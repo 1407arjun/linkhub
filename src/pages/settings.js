@@ -9,6 +9,7 @@ import { getSession } from 'next-auth/react'
 import client from '../server/loaders/database'
 import { signOut } from 'next-auth/react'
 import axios from 'axios'
+import nprogress from 'nprogress'
 
 export default function Settings(props) {
     const [navStatus, setNavStatus] = useState(false)
@@ -50,24 +51,36 @@ export default function Settings(props) {
 
     async function check(ev) {
         ev.preventDefault()
-        try {
-            const res = await axios.get("/api/profile/create?username=" + username)
 
-            if (res.status === 200) {
-                if (res.data.exists)
-                    alert("Username already exists.")
-                else {
-                    const r = await axios.post("/api/profile/update", { username: props.user.username, newUsername: username, email: props.user.email })
-                    if (r.status === 200)
-                        router.reload()
-                    else
-                        router.reload()
-                }
-            } else
-                router.reload()
-        } catch (e) {
-            console.log(e)
+        if (username === props.user.username)
             router.reload()
+        else {
+            nprogress.start()
+            try {
+                const res = await axios.get("/api/profile/create?username=" + username)
+
+                if (res.status === 200) {
+                    if (res.data.exists) {
+                        nprogress.done()
+                        alert("Username already exists.")
+                    } else {
+                        const r = await axios.post("/api/profile/update", { username: props.user.username, newUsername: username, email: props.user.email })
+                        nprogress.done()
+
+                        if (r.status === 200)
+                            router.reload()
+                        else
+                            router.reload()
+                    }
+                } else {
+                    nprogress.done()
+                    router.reload()
+                }     
+            } catch (e) {
+                console.log(e)
+                nprogress.done()
+                router.reload()
+            }
         }
     }
 

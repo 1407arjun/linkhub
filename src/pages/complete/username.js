@@ -5,6 +5,7 @@ import { getSession } from "next-auth/react"
 import client from '../../server/loaders/database'
 import axios from 'axios'
 import { useState } from "react"
+import nprogress from "nprogress"
 
 /*headers: {
     'Accept': 'application/json',
@@ -17,23 +18,30 @@ export default function Username(props) {
 
     async function check(ev) {
         ev.preventDefault()
+        nprogress.start()
         try {
             const res = await axios.get("/api/profile/create?username=" + username)
             
             if (res.status === 200) {
-                if (res.data.exists)
+                if (res.data.exists) {
+                    nprogress.done()
                     alert("Username already exists.")
-                else {
+                } else {
                     const r = await axios.post("/api/profile/create", { username: username })
+                    nprogress.done()
+
                     if (r.status === 200)
                         router.push("/home")
                     else
                         router.reload()     
                 }
-            } else
+            } else {
+                nprogress.done()
                 router.reload()
+            }     
         } catch (e) {
             console.log(e)
+            nprogress.done()
             router.reload()
         }
     }

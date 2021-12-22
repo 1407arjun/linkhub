@@ -21,11 +21,11 @@ export default function NavBar(props) {
                     <img src="/assets/home/cancel.svg" className="w-6 md:w-8 mx-auto dark:filter dark:invert" alt=""/>
                 </button>
             </div>
-            <NavBtn src="/assets/home/grid.svg" href="/home" alt="Home" current={ props.current === "Home"}/>
-            <NavBtn src="/assets/home/stars.svg" href="/explore" alt="Explore" current={ props.current === "Explore"}/>
-            <NavBtn src="/assets/home/bookmark.svg" href="/saved" alt="Saved" current={ props.current === "Saved"}/>
-            <NavBtn src="/assets/home/person.svg" href="/profile" alt="Profile" current={ props.current === "Profile"}/>
-            <NavBtn src="/assets/home/settings.svg" href="/settings" alt="Settings" current={ props.current === "Settings"}/>
+            <NavBtn src="/assets/home/home" href="/home" alt="Home" current={ props.current === "Home"}/>
+            <NavBtn src="/assets/home/star" href="/explore" alt="Explore" current={ props.current === "Explore"}/>
+            <NavBtn src="/assets/home/bookmark" href="/saved" alt="Saved" current={ props.current === "Saved"}/>
+            <NavBtn src="/assets/home/person" href="/profile" alt="Profile" current={ props.current === "Profile"}/>
+            <NavBtn src="/assets/home/settings" href="/settings" alt="Settings" current={ props.current === "Settings"}/>
             <br/>
 
             <div className="px-1 md:px-2 lg:px-4 xl:px-8 text-center w-full">

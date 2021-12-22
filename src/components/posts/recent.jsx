@@ -1,14 +1,18 @@
 import Link from 'next/link'
 import axios from 'axios'
+import nprogress from 'nprogress'
 
 export default function Recent(props) {
     async function addToSaved() {
+        nprogress.start()
         try {
             const r = await axios.post("/api/saved/update", { postId: props.id, remove: false })
             if (r.status === 200)
                 props.update(props.id)
         } catch (e) {
             console.log(e)
+        } finally {
+            nprogress.done()
         }
     }
 
