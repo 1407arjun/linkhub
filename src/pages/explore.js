@@ -39,7 +39,7 @@ export default function Explore(props) {
                 <div className={ "flex flex-col gap-4 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
                     <div className="w-full flex flex-row justify-start items-center gap-4">
                         { status === "authenticated" && !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:filter dark:invert" alt="Nav"/></button> }
-                        <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
+                        <SearchBar text={ props.query ? props.query : "" } placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Explore</h2>
                     { !props.results && <div className="w-full">
@@ -112,7 +112,7 @@ export async function getServerSideProps(context) {
                     }
                 }
                 return {
-                    props: { user: profile, results: results.data }
+                    props: { user: profile, query: query, results: results.data }
                 }
             }
         }     
@@ -132,7 +132,7 @@ export async function getServerSideProps(context) {
                 }
             }
             return {
-                props: { results: results.data }
+                props: { query: query, results: results.data }
             }
         }
     }
