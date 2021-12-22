@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { signOut } from "next-auth/react"
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import router from 'next/router'
 
 function getInitials(name) {
     let array = name.split(" ")
@@ -19,10 +20,15 @@ export default function SearchBar(props) {
     const { data: session, status } = useSession()
     const [optState, setOptState] = useState(false)
 
+    async function postQuery(ev) {
+        ev.preventDefault()
+        router.push("/explore?query=" + ev.target[0].value)
+    }
+
     return (
         <div className={"flex flex-row flex-nowrap " + (props.smhidesearch ? "justify-end" : "justify-start") + " items-center gap-4 w-full py-1"}>
-            <form action="/api/search" method="POST" className={ (props.smhidesearch ? "hidden " : "inline ") + "sm:inline self-center w-full" }>
-                <input type="text" className="rounded-md bg-gray-300 dark:bg-gray-500 bg-opacity-20 dark:bg-opacity-20 filter backdrop-blur-sm placeholder-gray-500 dark:placeholder-gray-300 text-sm sm:text-base md:text-lg xl:text-xl p-3 focus:outline-none text-black dark:text-white ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:focus:ring-gray-100 ring-opacity-100 focus:ring-opacity-40 w-full"
+            <form onSubmit={ postQuery } className={ (props.smhidesearch ? "hidden " : "inline ") + "sm:inline self-center w-full" }>
+                <input name="query" type="text" className="rounded-md bg-gray-300 dark:bg-gray-500 bg-opacity-20 dark:bg-opacity-20 filter backdrop-blur-sm placeholder-gray-500 dark:placeholder-gray-300 text-sm sm:text-base md:text-lg xl:text-xl p-3 focus:outline-none text-black dark:text-white ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:focus:ring-gray-100 ring-opacity-100 focus:ring-opacity-40 w-full"
                         placeholder={ props.placeholder } autoComplete="off"/>
             </form>
             { status === "authenticated" && <button onClick={ () => { setOptState(!optState) } } className={ (optState ? "hidden " : "inline-block ") + "select-none self-center font-bold text-lg sm:text-xl xl:text-2xl text-white dark:text-black rounded-full text-center" + (session.user.image ? "" : " p-2 md:p-3 bg-black dark:bg-white")}>{ session.user.image ? <img src={ session.user.image } alt="" className="rounded-full w-12 sm:w-14"/> : getInitials(session.user.name) }</button> }

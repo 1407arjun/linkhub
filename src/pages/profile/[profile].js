@@ -48,7 +48,7 @@ export default function Post(props) {
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false }/>
                     </div>
                     <div className="flex flex-row flex-nowrap justify-between items-center w-full px-4 gap-4">
-                        <img src="/assets/profile/person.svg" className="w-8 md:w-12 filter invert dark:invert-0" alt=""/>
+                        <img src={ data.image ? data.image : "/assets/profile/person.svg" } className={ "rounded-full w-12 md:w-16" + (data.image ? "" : " filter invert dark:invert-0") } alt=""/>
                         <div className="flex flex-col justify-start items-center gap-1 w-full">
                             <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.name }</h2>
                             <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "@ " + data.username }</p>

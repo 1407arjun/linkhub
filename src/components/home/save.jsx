@@ -20,7 +20,7 @@ export default function Save(props) {
         <div className="flex flex-row flex-nowrap justify-between items-center gap-2 xl:gap-3 p-2 rounded-xl hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-700">
             <Link href={ "/post/" + props.id }><a className="hover:no-underline focus:no-underline"><div className="flex-none flex flex-row justify-start items-center gap-2 xl:gap-3">
                 <div className="self-center p-2 xl:p-3 rounded-full bg-black dark:bg-white">
-                    <img src="/assets/home/bookmark-white.svg" className="w-3 xl:w-6 mx-auto dark:filter dark:invert" alt=""/>
+                    <img src="/assets/home/bookmark-white.svg" className="w-3 md:w-6 mx-auto dark:filter dark:invert" alt=""/>
                 </div>
                 <div className="self-center flex flex-col justify-center items-start">
                     <h4 className="text-sm xl:text-base font-semibold dark:text-white">{ props.title.length > 25 ? props.title.slice(0, 25) + "..." : props.title }</h4>

@@ -9,6 +9,7 @@ import Profile from '../components/profile/profile'
 import { useState, useEffect } from 'react'
 import { getSession, useSession } from 'next-auth/react'
 import client from '../server/loaders/database'
+import search from '../server/services/search'
 
 export default function Explore(props) {
     const { data: session, status } = useSession()
@@ -41,23 +42,38 @@ export default function Explore(props) {
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Explore</h2>
-                    <div className="w-full">
+                    { !props.results && <div className="w-full">
                         <h3 className="w-full text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl font-bold mb-1 dark:text-white">Trending</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
                             { trendTags.map((tag, index) => {
-                                return <Tag key={ index } name={ tag._id } post={ tag.count } update={ updateTrendTags }/>
+                                return <Tag key={ index } name={ tag._id } post={ tag.count } update={ updateTrendTags } add={ true }/>
                             }) }
                         </div>
-                    </div>
-                    <div className="w-full"> 
-                        <h4 className="w-full font-normal text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Found <Link href="/explore"><a><span className="font-semibold underline">10 posts</span></a></Link>, <Link href="/explore"><a><span className="font-semibold underline">5 tags</span></a></Link> and <Link href="/explore"><a><span className="font-semibold underline">2 users</span></a></Link>.</h4>
+                    </div> }
+                    { props.results && <div className="w-full"> 
+                        <h3 className="w-full font-normal text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Found <Link href="/explore"><a><span className="font-semibold underline">{props.results.tags.length + " tags"}</span></a></Link>, <Link href="/explore"><a><span className="font-semibold underline">{props.results.posts.length + " posts"}</span></a></Link> and <Link href="/explore"><a><span className="font-semibold underline">{props.results.profiles.length + " users"}</span></a></Link>.</h3>
+                        <br/>
+                        <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Tags</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
-                            <Tag name="app-development" follow="8.2K"/>
-                            <Tag name="web-development" follow="15K"/>
-                            <Tag name="machine-learning" follow="5K"/>
-                            <Profile name="Arjun Sivaraman" username="1407arjun"/>
+                            { props.results.tags.map((tag, index) => {
+                                return <Tag key={ index } name={ tag._id } post={ tag.count } add={ false }/>
+                            }) }
                         </div>
-                    </div>
+                        <br/>
+                        <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Posts</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
+                            { props.results.posts.map((post, index) => {
+                                return <Recent key={ index } title={ post.title } desc={ "@" + post.author.username } id={ post._id.toString() } add={ false }/>
+                            }) }
+                        </div>
+                        <br/>
+                        <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Users</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
+                            { props.results.profiles.map((profile, index) => {
+                                return <Profile key={ index } name={ profile.name } username={ profile.username } image={ profile.image }/>
+                            }) }
+                        </div>
+                    </div> }
                     <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                 </div>
             </div>
@@ -68,6 +84,8 @@ export default function Explore(props) {
 
 export async function getServerSideProps(context) {
     const session = await getSession(context)
+    const { query } = context.query
+
     if (session) {
         const mClient = await client
         const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
@@ -80,16 +98,42 @@ export async function getServerSideProps(context) {
                 props: {}
             }
         else {
-            const trendTags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$match: {tags: {$nin: profile.tags}}}, {$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(10).toArray()))
-            return {
-                props: { user: profile, trendTags: trendTags }
+            if (!query) {
+                const trendTags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$match: {tags: {$nin: profile.tags}}}, {$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(10).toArray()))
+                return {
+                    props: { user: profile, trendTags: trendTags }
+                }
+            } else {
+                const results = JSON.parse(JSON.stringify(await search(query)))
+                if (results.error) {
+                    const trendTags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$match: {tags: {$nin: profile.tags}}}, {$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(10).toArray()))
+                    return {
+                        props: { user: profile, trendTags: trendTags }
+                    }
+                }
+                return {
+                    props: { user: profile, results: results.data }
+                }
             }
         }     
     } else {
         const mClient = await client
-        const trendTags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(5).toArray()))
-        return {
-            props: { trendTags: trendTags }
+        if (!query) {
+            const trendTags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(5).toArray()))
+            return {
+                props: { trendTags: trendTags }
+            }
+        } else {
+            const results = JSON.parse(JSON.stringify(await search(query)))
+            if (results.error) {
+                const trendTags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(5).toArray()))
+                return {
+                    props: { trendTags: trendTags }
+                }
+            }
+            return {
+                props: { results: results.data }
+            }
         }
     }
 }
