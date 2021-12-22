@@ -19,16 +19,13 @@ export default async function createPost(username: string, name: string, email: 
             downvoted: [],
             flagged: []
         }
+
         const response = await mClient.db("Client").collection("profiles").insertOne(newProfile)
-        //await mClient.close()
         return {error: !response.acknowledged}
     } catch (err: object|unknown) {
-        if (err && typeof err === "object") {
-            //await mClient.close()
+        if (err && typeof err === "object")
             return {error: true, data: err}
-        } else {
-            //await mClient.close()
+        else
             return {error: true, data: {name: "Unknown error", message:"Unknown error occurred. Please try again."}}
-        }
     }     
 }

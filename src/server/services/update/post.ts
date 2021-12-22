@@ -3,9 +3,10 @@ import client from '../../loaders/database'
 import { Response } from '../../types/response'
 
 export default async function updatePost(email: string, postId: string, add: string|null, remove: string|null): Promise<Response> {
-    const mClient = await client
     try {
+        const mClient = await client
         const profile = await mClient.db("Client").collection("profiles").findOne({email: email})
+        
         if (profile) {
             let upvoted: ObjectId[] = profile.upvoted
             let downvoted: ObjectId[] = profile.downvoted
@@ -61,18 +62,13 @@ export default async function updatePost(email: string, postId: string, add: str
                 res1 = await mClient.db("Client").collection("posts").updateOne({_id: new ObjectId(postId)}, {"$inc": {upvotes: 0}})
             
             const res2 = await mClient.db("Client").collection("profiles").updateOne({email: email}, { "$set": { upvoted: upvoted, downvoted: downvoted, flagged: flagged }})
-            //await mClient.close()
             return {error: !(res1.acknowledged && res2.acknowledged)}
         }
-        //await mClient.close()
         return {error: !(profile)}
     } catch (err: object|unknown) {
-        if (err && typeof err === "object") {
-            //await mClient.close()
+        if (err && typeof err === "object")
             return {error: true, data: err}
-        } else {
-            //await mClient.close()
-            return {error: true, data: {name: "Unknown error", message:"Unknown error occurred. Please try again."}}
-        }      
+        else
+            return {error: true, data: {name: "Unknown error", message:"Unknown error occurred. Please try again."}} 
     }
 }

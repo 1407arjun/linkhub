@@ -7,7 +7,7 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
     if (session && session.user) {
         if (req.method === 'POST') {
             const response = await createPost(req.body, session.user.email!)
-            //await mClient.close()
+
             if (!response.error && response.data) {
                 //@ts-ignore
                 res.status(200).send({id: response.data.insertedId.toString()})

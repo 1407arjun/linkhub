@@ -3,8 +3,9 @@ import client from '../../loaders/database'
 import { Response } from '../../types/response'
 
 export default async function deleteProfile(username: string, userId: string): Promise<Response> {
-    const mClient = await client
     try {
+        const mClient = await client
+        
         const res0 = await mClient.db("Client").collection("profiles").findOne({username: username})
         const res1 = await mClient.db("Client").collection("posts").deleteMany({"author.username": username})
         //@ts-ignore
@@ -13,15 +14,11 @@ export default async function deleteProfile(username: string, userId: string): P
         const res4 = await mClient.db("Client").collection("users").deleteOne({_id: new ObjectId(userId)})
         const res5 = await mClient.db("Client").collection("accounts").deleteOne({userId: new ObjectId(userId)})
         
-        //await mClient.close()
         return {error: !(res0 && res1.acknowledged && res2.acknowledged && res3.acknowledged && res4.acknowledged && res5.acknowledged)}
     } catch (err: object|unknown) {
-        if (err && typeof err === "object") {
-            //await mClient.close()
+        if (err && typeof err === "object")
             return {error: true, data: err}
-        } else {
-            //await mClient.close()
-            return {error: true, data: {name: "Unknown error", message:"Unknown error occurred. Please try again."}}
-        }      
+        else
+            return {error: true, data: {name: "Unknown error", message:"Unknown error occurred. Please try again."}}   
     }
 }
