@@ -1,5 +1,8 @@
 import NextHead from 'next/head'
 import { useState, useEffect } from 'react'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 export default function Head(props) {
     const [theme, setTheme] = useState()
@@ -14,6 +17,7 @@ export default function Head(props) {
 
     return (
       <NextHead>
+        <meta name="google-site-verification" content={ process.env.GOOGLE_SITE_VERIFICATION } />
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>{ props.title }</title>
