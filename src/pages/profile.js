@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react'
 import { getSession } from 'next-auth/react'
 import client from '../server/loaders/database'
 import TagBar from '../components/posts/tagbar'
+import { ObjectId } from 'mongodb'
 
 export default function Profile(props) {
     const [navStatus, setNavStatus] = useState(false)
@@ -70,12 +71,14 @@ export async function getServerSideProps(context) {
                 } 
             } else {
                 if (tab === "upvoted") {
-                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": profile.upvoted}}).sort({date: 1}).toArray()))
+                    const oidArray = profile.upvoted.map(id => { return new ObjectId(id) })
+                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).sort({date: 1}).toArray()))
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }
                 } else {
-                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": profile.downvoted}}).sort({date: 1}).toArray()))
+                    const oidArray = profile.downvoted.map(id => { return new ObjectId(id) })
+                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).sort({date: 1}).toArray()))
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }

@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown'
 import Link from 'next/link'
 import { useState } from 'react'
 import axios from 'axios'
+import { useSession } from 'next-auth/react'
  
 function getInitials(name) {
     let array = name.split(" ")
@@ -24,86 +25,90 @@ export default function PostMini(props) {
     const [upvotes, setUpvotes] = useState(props.upvotes)
     const [downvotes, setDownvotes] = useState(props.downvotes)
     const [flags, setFlags] = useState(props.flags)
+    const { data: session, status } = useSession()
 
     async function updateOption(newOption) {
-        let prevOption = option
-        console.log(prevOption)
-        console.log(newOption)
-
-        if (prevOption === newOption) {
-            newOption = null
-            setOption(null)
-
+        if (session && session.user && status === "authenticated") {
+            let prevOption = option
             console.log(prevOption)
             console.log(newOption)
-        } else {    
-            setOption(newOption)
-        }     
 
-        switch(newOption) {
-            case "upvoted":
-                setUpvotes((prev) => {return prev + 1})
-                break
-            case "downvoted":
-                setDownvotes((prev) => {return prev + 1})
-                break
-            case "flagged":
-                setFlags((prev) => {return prev + 1})
-                break
-            default:
-                break            
-        }
+            if (prevOption === newOption) {
+                newOption = null
+                setOption(null)
 
-        switch(prevOption) {
-            case "upvoted":
-                setUpvotes((prev) => {return prev - 1})
-                break
-            case "downvoted":
-                setDownvotes((prev) => {return prev - 1})
-                break
-            case "flagged":
-                setFlags((prev) => {return prev - 1})
-                break
-            default:
-                break            
-        }
-
-        try {
-            const r = await axios.post("/api/post/update", { postId: props.id, add: newOption, remove: prevOption })
-            if (r.status !== 200) {
-                setOption(prevOption)
-
-                switch(prevOption) {
-                    case "upvoted":
-                        setUpvotes((prev) => {return prev + 1})
-                        break
-                    case "downvoted":
-                        setDownvotes((prev) => {return prev + 1})
-                        break
-                    case "flagged":
-                        setFlags((prev) => {return prev + 1})
-                        break
-                    default:
-                        break            
-                }
-
-                switch(newOption) {
-                    case "upvoted":
-                        setUpvotes((prev) => {return prev - 1})
-                        break
-                    case "downvoted":
-                        setDownvotes((prev) => {return prev - 1})
-                        break
-                    case "flagged":
-                        setFlags((prev) => {return prev - 1})
-                        break
-                    default:
-                        break            
-                }
+                console.log(prevOption)
+                console.log(newOption)
+            } else {    
+                setOption(newOption)
             }     
-        } catch (e) {
-            console.log(e)
-        }
+
+            switch(newOption) {
+                case "upvoted":
+                    setUpvotes((prev) => {return prev + 1})
+                    break
+                case "downvoted":
+                    setDownvotes((prev) => {return prev + 1})
+                    break
+                case "flagged":
+                    setFlags((prev) => {return prev + 1})
+                    break
+                default:
+                    break            
+            }
+
+            switch(prevOption) {
+                case "upvoted":
+                    setUpvotes((prev) => {return prev - 1})
+                    break
+                case "downvoted":
+                    setDownvotes((prev) => {return prev - 1})
+                    break
+                case "flagged":
+                    setFlags((prev) => {return prev - 1})
+                    break
+                default:
+                    break            
+            }
+
+            try {
+                const r = await axios.post("/api/post/update", { postId: props.id, add: newOption, remove: prevOption })
+                if (r.status !== 200) {
+                    setOption(prevOption)
+
+                    switch(prevOption) {
+                        case "upvoted":
+                            setUpvotes((prev) => {return prev + 1})
+                            break
+                        case "downvoted":
+                            setDownvotes((prev) => {return prev + 1})
+                            break
+                        case "flagged":
+                            setFlags((prev) => {return prev + 1})
+                            break
+                        default:
+                            break            
+                    }
+
+                    switch(newOption) {
+                        case "upvoted":
+                            setUpvotes((prev) => {return prev - 1})
+                            break
+                        case "downvoted":
+                            setDownvotes((prev) => {return prev - 1})
+                            break
+                        case "flagged":
+                            setFlags((prev) => {return prev - 1})
+                            break
+                        default:
+                            break            
+                    }
+                }     
+            } catch (e) {
+                console.log(e)
+            }
+        } else
+            alert("You must be logged in to perform this action")
     }
 
     return (

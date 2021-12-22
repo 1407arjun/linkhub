@@ -65,7 +65,7 @@ export default function Create(props) {
             <Head title="New post &middot; LinkHub"/>
             <div className="flex flex-col justify-start items-start py-4 px-4 md:px-8 gap-6 min-h-screen">
                 <div className="flex flex-row justify-start items-center gap-2 w-full">
-                    <Link href="/home"><a className="p-2 md:p-4 rounded-full hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-800 dark:focus:bg-gray-800 hover:no-underline focus:no-underline"><img src="/assets/editor/arrow-left.svg" className="w-8 sm:w-10 md:w-12 mx-auto dark:filter dark:invert" alt="Back"/></a></Link>
+                    <button onClick={ () => router.back() } className="p-2 md:p-4 rounded-full hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-800 dark:focus:bg-gray-800"><img src="/assets/editor/arrow-left.svg" className="w-8 sm:w-10 md:w-12 mx-auto dark:filter dark:invert" alt="Back"/></button>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">New post</h2>
                     <div className="justify-self-end self-center w-2/3">
                         <SearchBar placeholder="Search LinkHub" smhidesearch={ true } />

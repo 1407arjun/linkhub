@@ -90,6 +90,14 @@ export default function Post(props) {
 export async function getServerSideProps(context) {
     const session = await getSession(context)
     const { profile } = context.query
+
+    if (profile !== profile.toLowerCase())
+        return {
+            redirect: {
+                destination: "/profile/" + profile.toLowerCase()
+            }     
+        }
+
     const profileData = JSON.parse(JSON.stringify(await getProfile(profile)))
     
     if (profileData.data) {
