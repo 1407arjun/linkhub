@@ -20,6 +20,7 @@ export default function Head(props) {
         <title>{ props.title }</title>
         <meta name='description' content={ props.desc }/>
         <link rel='icon' href={ theme === "dark" ? '/assets/icon.svg' : '/assets/icon-black.svg'}/>
+        <link rel="image_src" href="/assets/icon-black.svg"/>
       </NextHead>
     )
   }

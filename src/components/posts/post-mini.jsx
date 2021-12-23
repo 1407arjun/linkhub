@@ -3,6 +3,7 @@ import HBar from './hbar'
 import TagBar from './tagbar'
 import Dropdown from './dropdown'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import Link from 'next/link'
 import { useState } from 'react'
 import axios from 'axios'
@@ -124,7 +125,7 @@ export default function PostMini(props) {
                 <Bar upvotes={ upvotes } downvotes={ downvotes } flags={ flags } option={ option } update={ updateOption }/>
                 <div className="flex flex-col gap-1 place-content-start w-full sm:w-5/6 py-2">
                     <h1 className="dark:text-white">{ props.title }</h1>
-                    <ReactMarkdown className="dark:text-white overflow-y-auto break-words">{ props.body }</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={ [remarkGfm] } className="dark:text-white overflow-y-auto break-words">{ props.body }</ReactMarkdown>
                     <div className="flex flex-row flex-wrap gap-2 justify-start items-center pt-2 pb-3">
                         { props.tags.map((tag, index) => { return <TagBar key={ index } name={ tag }/> }) }
                     </div>

@@ -85,6 +85,11 @@ ul {
 	margin-bottom: 0.25rem;
 }
 
+ul.contains-task-list {
+	list-style-type: none;
+	padding-left: 0.25rem;
+}
+
 del {
 	text-decoration: line-through;
 }
@@ -104,6 +109,32 @@ input:disabled {
 	background-color: #F5F5F5;
 }
 
+table {
+	display: table;
+	border-collapse: separate;
+	border-spacing: 2px;
+	border-color: #424242;
+}
+
+thead {
+	display: table-header-group;
+	vertical-align: middle;
+	border-color: inherit;
+}
+
+th {
+	display: table-cell;
+	vertical-align: inherit;
+	font-weight: bold;
+	text-align: center;
+}
+
+tr {
+	display: table-row;
+	vertical-align: inherit;
+	border-color: inherit;
+}
+
 @media (prefers-color-scheme: dark) {
 	html, body {
 		color: white;
@@ -116,6 +147,10 @@ input:disabled {
 
 	code {
 		background-color: #424242;
+	}
+
+	table {
+		border-color: #E0E0E0;
 	}
 
 	input:disabled {
