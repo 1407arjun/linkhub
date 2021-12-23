@@ -38,7 +38,6 @@ export default function Create(props) {
                 title: title,
                 body: body,
                 tags: tags,
-                date: (new Date()).toUTCString()
             })
             nprogress.done()
 
@@ -64,6 +63,11 @@ export default function Create(props) {
         }       
     }
 
+    function handleEnter(ev) {
+        if (ev.code === "Enter")
+            ev.preventDefault()
+    }   
+
     return (
         <div className="dark:bg-black">
             <Head title="New post &middot; LinkHub"/>
@@ -78,7 +82,7 @@ export default function Create(props) {
                 <form onSubmit={ newPost } className="flex flex-col gap-3 justify-center items-start w-full px-0 md:px-2 h-full">
                     <div className="w-full md:w-4/5 lg:w-2/3 xl:w-1/2">
                     <p className="px-1 py-0.5 text-left font-semibold text-gray-500 dark:text-gray-300 text-sm md:text-base">Title (enhances search)</p>
-                        <input onChange={ handleTitleChange } name="title" type="text" placeholder="Title" className="w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100 text-lg md:text-xl font-semibold" value={ titleText } autoComplete="off" required/>
+                        <input onKeyDown={ handleEnter } onChange={ handleTitleChange } name="title" type="text" placeholder="Title" className="w-full p-2 focus:outline-none rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:bg-black dark:text-white dark:focus:ring-gray-100 text-lg md:text-xl font-semibold" value={ titleText } autoComplete="off" required/>
                         <p className="px-1 py-0.5 text-right text-gray-500 dark:text-gray-300 text-sm md:text-base">{ titleText.length + " of 50 characters" }</p>
                     </div>
                     <div className="w-full h-full">

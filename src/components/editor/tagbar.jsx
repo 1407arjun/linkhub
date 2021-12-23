@@ -17,7 +17,11 @@ export default function TagBar(props) {
                 setTags((prev) => { return [...prev, tag]})
             }
             setTagInput("")
-        } else*/ if (ev.target.value === "" && ev.code === "Backspace") {
+        } else*/ 
+        if (ev.code === "Enter")
+            ev.preventDefault()
+        
+        if (ev.target.value === "" && ev.code === "Backspace") {
             setTags((prev) => { return prev.filter(tag => { return tag !== prev[prev.length - 1] })})
         }
     }

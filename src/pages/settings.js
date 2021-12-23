@@ -87,14 +87,17 @@ export default function Settings(props) {
     async function deleteProfile(id, username, email) {
         const submit = confirm("Are you sure you want to delete your account? This action is irreversible.")
         if (submit) {
+            nprogress.start()
             try {
                 const res = await axios.post("/api/profile/delete", { _id: id, username: username, email: email })
+                nprogress.done()
                 if (res.status === 200)
                     signOut()
                 else
                     router.reload()    
             } catch (e) {
                 console.log(e)
+                nprogress.done()
                 router.reload()
             }
         }     

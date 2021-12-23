@@ -12,7 +12,7 @@ export default async function createPost(data: any, email: string): Promise<Resp
             title: data.title,
             body: data.body,
             tags: data.tags,
-            date: data.date,
+            date: new Date(),
             upvotes: 0,
             downvotes: 0,
             flags: 0,

@@ -62,20 +62,20 @@ export async function getServerSideProps(context) {
             }
         else {
             if (!tab) {
-                const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({"author.username": profile.username}).sort({date: 1}).toArray()))
+                const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({"author.username": profile.username}).sort({date: -1}).toArray()))
                 return {
                     props: { user: profile, posts: posts, tab: null }
                 } 
             } else {
                 if (tab === "upvoted") {
                     const oidArray = profile.upvoted.map(id => { return new ObjectId(id) })
-                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).sort({date: 1}).toArray()))
+                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).sort({date: -1}).toArray()))
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }
                 } else if (tab === "downvoted") {
                     const oidArray = profile.downvoted.map(id => { return new ObjectId(id) })
-                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).sort({date: 1}).toArray()))
+                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).sort({date: -1}).toArray()))
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }

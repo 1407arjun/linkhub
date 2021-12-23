@@ -1,7 +1,7 @@
 export default interface Post {
     title: string;
     body: string;
-    date: string;
+    date: Date;
     upvotes: number;
     downvotes: number;
     flags: number;

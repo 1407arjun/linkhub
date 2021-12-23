@@ -82,10 +82,11 @@ export async function getServerSideProps(context) {
                                 .aggregate([{"$match": {"author.username": {"$ne": profile.username}, 
                                         tags: {"$in": profile.tags}}},
                                     {"$project": {title : 1, body : 1, date: 1, upvotes: 1, downvotes: 1, flags: 1, author: 1, tags: 1, ratio: {"$cond": {"if": {downvotes: 0}, "then": "$upvotes", "else": {"$divide": ["$upvotes", "$downvotes"]}}}}},
-                                    {"$sort": {date: 1, ratio: -1}}
+                                    {"$sort": {date: -1, ratio: -1}}
                                     ]).limit(25).toArray()))
 
-            const oidArray = profile.saved.map(id => { return new ObjectId(id) })
+            //const oidArray = profile.saved.map(id => { return new ObjectId(id) })
+            const oidArray = [new ObjectId(profile.saved[profile.saved.length - 1]), new ObjectId(profile.saved[profile.saved.length - 2]), new ObjectId(profile.saved[profile.saved.length - 3])]
             const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).limit(3).toArray()))
             const tags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$match: {tags: {$nin: profile.tags}}}, {$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(5).toArray()))
             return {

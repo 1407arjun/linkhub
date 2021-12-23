@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Profile(props) {
     return (
-        <Link href={ "/profile/" + props.username }><a className="hover:no-underline focus:no-underline">
+        <Link href={ "/profile/" + props.username }><a className="hover:no-underline focus:no-underline w-full">
             <div className="flex flex-row flex-nowrap justify-between items-center gap-2 xl:gap-3 p-2 rounded-xl hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                 <div className="flex-none flex flex-row justify-start items-center gap-2 xl:gap-3">
                     <div className={ "self-center rounded-full" + (props.image ? "" : " p-2 xl:p-3 bg-black dark:bg-white") }>

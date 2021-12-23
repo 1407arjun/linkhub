@@ -50,7 +50,7 @@ export default function Post(props) {
                         <img src="/assets/posts/link-45.svg" className="w-12 md:w-16 filter invert dark:invert-0" alt=""/>
                         <div className="flex flex-col justify-start items-center gap-1 w-full">
                             <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.title }</h2>
-                            <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "At " + new Date(data.date.toLocaleString()) }</p>
+                            <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "by " + data.author.name }</p>
                         </div>
                     </div>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">

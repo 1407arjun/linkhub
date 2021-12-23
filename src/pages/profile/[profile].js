@@ -102,7 +102,7 @@ export async function getServerSideProps(context) {
     
     if (profileData.data) {
         const mClient = await client
-        const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({"author.username": profile}).sort({date: 1}).toArray()))
+        const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({"author.username": profile}).sort({date: -1}).toArray()))
         if (session) {
             const prof = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
             

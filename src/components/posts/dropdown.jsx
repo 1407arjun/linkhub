@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import axios from 'axios'
+import nprogress from 'nprogress'
 
 export default function Dropdown(props) {
     const { data: session, status } = useSession()
@@ -12,14 +13,17 @@ export default function Dropdown(props) {
     async function deletePost(id, email) {
         const submit = confirm("Are you sure you want to delete this post?")
         if (submit) {
+            nprogress.start()
             try {
                 const res = await axios.post("/api/post/delete", { _id: id, email: email })
+                nprogress.done()
                 if (res.status === 200)
                     router.push("/home")
                 else
                     router.reload()    
             } catch (e) {
                 console.log(e)
+                nprogress.done()
                 router.reload()
             }
         }     

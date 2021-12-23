@@ -7,6 +7,7 @@ const uri = process.env.MONGODB_CLIENT_URI!
 const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
+  keepAlive: true
 }
 
 //@ts-ignore

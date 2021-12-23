@@ -79,9 +79,21 @@ export async function getServerSideProps(context) {
             }
         else {
             const oidArray = profile.saved.map(id => { return new ObjectId(id) })
-            const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).sort({ date: 1 }).toArray()))
-            const oidUpArray = profile.upvoted.map(id => { return new ObjectId(id) })
-            const upvoted = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidUpArray, "$nin": oidArray}}).limit(5).toArray()))
+            const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).sort({date: -1}).toArray()))
+            
+            const count = 0
+            let upArray = []
+            for (var i = profile.upvoted.length - 1; i >= 0; i--) {
+                if (count >= 5)
+                    break
+                else {
+                    if (!profile.saved.includes(profile.upvoted[i]))
+                        upArray.push(profile.upvoted[i])
+                }
+            }
+
+            const oidUpArray = upArray.map(id => { return new ObjectId(id) })
+            const upvoted = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidUpArray}}).limit(5).toArray()))
             return {
                 props: { user: profile, posts: saved, upvoted: upvoted }
             }
