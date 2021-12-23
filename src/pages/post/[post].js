@@ -14,9 +14,10 @@ export default function Post(props) {
     const { data: session, status } = useSession()
     const [navStatus, setNavStatus] = useState(false)
     const [windowSize, setWindowSize] = useState()
+    const { error, data } = props.postData
 
     useEffect(() => {
-        if (props.postData.error) {
+        if (error) {
             alert(JSON.stringify(data))
             router.replace("/home")
         }     
@@ -31,10 +32,6 @@ export default function Post(props) {
         else
             setNavStatus(false)
     }, [windowSize])
-
-    const { error, data } = props.postData
-    if (error)
-        window.alert(JSON.stringify(data))
 
     return (
         <div className="dark:bg-black">

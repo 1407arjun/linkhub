@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import axios from 'axios'
 import nprogress from 'nprogress'
+import Link from 'next/link'
 
 export default function Dropdown(props) {
     const { data: session, status } = useSession()
@@ -68,8 +69,11 @@ export default function Dropdown(props) {
 
     return (
         <div className="flex flex-row justify-end items-center">
+            <Link href={ "/post/" + props.id }><a className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2">
+                <img src="/assets/posts/box-arrow-up-right.svg" className="w-4 xl:w-6 dark:filter dark:invert" alt="Open post"/>
+            </a></Link>
             { status === "authenticated" && <button onClick={ () => deletePost(props.id, props.email) } className={ "flex-none self-center justify-self-end bg-white dark:bg-black rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2" + (props.delete ? "" : " hidden") }>
-                <img src="/assets/posts/delete.svg" className="w-4 xl:w-6" alt="Menu"/>
+                <img src="/assets/posts/delete.svg" className="w-4 xl:w-6" alt="Delete"/>
             </button> }
             { status === "authenticated" && <button onClick={ () => {updateSaved(saved)} } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2">
                 { saved && <img src="/assets/posts/bookmark-done.svg" className="w-4 xl:w-6" alt="Saved"/> }

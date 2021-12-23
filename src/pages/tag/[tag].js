@@ -15,9 +15,11 @@ export default function Post(props) {
     const { data: session, status } = useSession()
     const [navStatus, setNavStatus] = useState(false)
     const [windowSize, setWindowSize] = useState()
+    const { error, data } = props.tagData
+    const [follow, setFollow] = useState(props.user && props.user.tags.includes(data.name))
 
     useEffect(() => {
-        if (props.tagData.error) {
+        if (error) {
             alert(JSON.stringify(data))
             router.replace("/home")
         }     
@@ -32,12 +34,6 @@ export default function Post(props) {
         else
             setNavStatus(false)
     }, [windowSize])
-
-    const { error, data } = props.tagData
-    if (error)
-        window.alert(JSON.stringify(data))
-
-    const [follow, setFollow] = useState(props.user && props.user.tags.includes(data.name))
 
     async function addToTags(newFollow) {
         setFollow(!newFollow)

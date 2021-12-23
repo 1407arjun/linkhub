@@ -51,23 +51,23 @@ export default function Explore(props) {
                         </div>
                     </div> }
                     { props.results && <div className="w-full"> 
-                        <h3 className="w-full font-normal text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Found <Link href="/explore"><a><span className="font-semibold underline">{props.results.tags.length + " tags"}</span></a></Link>, <Link href="/explore"><a><span className="font-semibold underline">{props.results.posts.length + " posts"}</span></a></Link> and <Link href="/explore"><a><span className="font-semibold underline">{props.results.profiles.length + " users"}</span></a></Link>.</h3>
+                        <h3 className="w-full font-normal text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Found <Link href="#tags"><a><span className="font-semibold underline">{props.results.tags.length + " tags"}</span></a></Link>, <Link href="#posts"><a><span className="font-semibold underline">{props.results.posts.length + " posts"}</span></a></Link> and <Link href="#users"><a><span className="font-semibold underline">{props.results.profiles.length + " users"}</span></a></Link>.</h3>
                         <br/>
-                        <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Tags</h4>
+                        <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white" id="tags">Tags</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
                             { props.results.tags.map((tag, index) => {
                                 return <Tag key={ index } name={ tag._id } post={ tag.count } follow={ props.user && props.user.tags.includes(tag._id) }/>
                             }) }
                         </div>
                         <br/>
-                        <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Posts</h4>
+                        <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white" id="posts">Posts</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
                             { props.results.posts.map((post, index) => {
                                 return <Recent key={ index } title={ post.title } desc={ "@" + post.author.username } id={ post._id.toString() } save={ props.user && props.user.saved.includes(post._id) }/>
                             }) }
                         </div>
                         <br/>
-                        <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Users</h4>
+                        <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white" id="users">Users</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
                             { props.results.profiles.map((profile, index) => {
                                 return <Profile key={ index } name={ profile.name } username={ profile.username } image={ profile.image }/>
