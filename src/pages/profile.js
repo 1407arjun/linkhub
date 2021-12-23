@@ -8,7 +8,6 @@ import TabContent from '../components/profile/tabcontent'
 import { useState, useEffect } from 'react'
 import { getSession } from 'next-auth/react'
 import client from '../server/loaders/database'
-import TagBar from '../components/posts/tagbar'
 import { ObjectId } from 'mongodb'
 
 export default function Profile(props) {

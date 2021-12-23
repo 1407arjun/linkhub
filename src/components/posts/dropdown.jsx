@@ -69,9 +69,6 @@ export default function Dropdown(props) {
 
     return (
         <div className="flex flex-row justify-end items-center">
-            <Link href={ "/post/" + props.id }><a className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2">
-                <img src="/assets/posts/box-arrow-up-right.svg" className="w-4 xl:w-6 dark:filter dark:invert" alt="Open post"/>
-            </a></Link>
             { status === "authenticated" && <button onClick={ () => deletePost(props.id, props.email) } className={ "flex-none self-center justify-self-end bg-white dark:bg-black rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2" + (props.delete ? "" : " hidden") }>
                 <img src="/assets/posts/delete.svg" className="w-4 xl:w-6" alt="Delete"/>
             </button> }
@@ -79,6 +76,9 @@ export default function Dropdown(props) {
                 { saved && <img src="/assets/posts/bookmark-done.svg" className="w-4 xl:w-6" alt="Saved"/> }
                 { !saved && <img src="/assets/posts/bookmark.svg" className="w-4 xl:w-6 dark:filter dark:invert" alt="Save"/> }
             </button> }
+            <button onClick={ () => {navigator.clipboard.writeText("https://linkhub-live.vercel.app/post/" + props.id); alert("Copied the link to the post - " + props.title)} } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2">
+                <img src="/assets/posts/share.svg" className="w-4 xl:w-6 dark:filter dark:invert" alt="Open post"/>
+            </button>
             <p className="inline-block text-gray-500 dark:text-gray-300 text-base xl:text-lg p-2">{ diff }</p>
         </div>
     )

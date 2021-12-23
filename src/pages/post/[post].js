@@ -43,13 +43,13 @@ export default function Post(props) {
                         { status === "authenticated" && !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:filter dark:invert" alt="Nav"/></button> }
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false }/>
                     </div>
-                    <div className="flex flex-row flex-nowrap justify-between items-center w-full px-4 gap-4">
+                    {/* <div className="flex flex-row flex-nowrap justify-between items-center w-full px-4 gap-4">
                         <img src="/assets/posts/link-45.svg" className="w-12 md:w-16 filter invert dark:invert-0" alt=""/>
                         <div className="flex flex-col justify-start items-center gap-1 w-full">
                             <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.title }</h2>
                             <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "by " + data.author.name }</p>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         <PostMini id={ data._id.toString() } name={ data.author.name }
                             username={ data.author.username }

@@ -2,6 +2,9 @@ import PostMini from "../posts/post-mini"
 import Tag from "../home/tag"
 
 export default function TabContent(props) {
+    if (props.tags)
+        props.tags.sort()
+
     return (
         <div className="flex flex-col gap-4 justify-start items-center w-full">
             { props.posts && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">

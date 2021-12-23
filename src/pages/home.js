@@ -54,6 +54,29 @@ export default function Home(props) {
                                     delete ={ props.user && props.user.email === post.author.email }/>
                             )
                         }) }
+                    </div>  
+                    <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
+                        <h3 className="w-full text-left text-lg md:text-xl xl:text-2xl font-bold mb-1 dark:text-white mt-4">Older posts</h3>
+                        { props.olderPosts.map((post, index) => {
+                            return (
+                                <PostMini key={ index } id={ post._id.toString() } name={ post.author.name }
+                                    username={ post.author.username }
+                                    email = { post.author.email }
+                                    image={ post.author.image }
+                                    title={ post.title }
+                                    body={ post.body }
+                                    tags={ post.tags }
+                                    date={ post.date }
+                                    upvotes={ post.upvotes }
+                                    downvotes={ post.downvotes }
+                                    flags={ post.flags }
+                                    option={ props.user ? (props.user.upvoted.includes(post._id) ? "upvoted" : 
+                                        (props.user.downvoted.includes(post._id) ? "downvoted" : 
+                                        (props.user.flagged.includes(post._id) ? "flagged" : null))) : null }
+                                    saved ={ props.user && props.user.saved.includes(post._id) }
+                                    delete ={ props.user && props.user.email === post.author.email }/>
+                            )
+                        }) }
                     </div>
                     <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                 </div>
@@ -78,9 +101,18 @@ export async function getServerSideProps(context) {
                 props: {}
             }
         else {
+            let date = new Date()
+            date.setDate(date.getDate() - 3)
             const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts")
                                 .aggregate([{"$match": {"author.username": {"$ne": profile.username}, 
-                                        tags: {"$in": profile.tags}}},
+                                        tags: {"$in": profile.tags}, date: {"$gte": date}}},
+                                    {"$project": {title : 1, body : 1, date: 1, upvotes: 1, downvotes: 1, flags: 1, author: 1, tags: 1, ratio: {"$cond": {"if": {downvotes: 0}, "then": "$upvotes", "else": {"$divide": ["$upvotes", "$downvotes"]}}}}},
+                                    {"$sort": {date: -1, ratio: -1}}
+                                    ]).toArray()))
+
+            const olderPosts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts")
+                                .aggregate([{"$match": {"author.username": {"$ne": profile.username}, 
+                                        tags: {"$in": profile.tags}, date: {"$lt": date}}},
                                     {"$project": {title : 1, body : 1, date: 1, upvotes: 1, downvotes: 1, flags: 1, author: 1, tags: 1, ratio: {"$cond": {"if": {downvotes: 0}, "then": "$upvotes", "else": {"$divide": ["$upvotes", "$downvotes"]}}}}},
                                     {"$sort": {date: -1, ratio: -1}}
                                     ]).limit(25).toArray()))
@@ -90,7 +122,7 @@ export async function getServerSideProps(context) {
             const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).limit(3).toArray()))
             const tags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$match: {tags: {$nin: profile.tags}}}, {$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(5).toArray()))
             return {
-                props: { user: profile, posts: posts, saved: saved, tags: tags }
+                props: { user: profile, posts: posts, olderPosts: olderPosts, saved: saved, tags: tags }
             }
         }
     } else {

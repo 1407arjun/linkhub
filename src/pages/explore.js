@@ -16,10 +16,6 @@ export default function Explore(props) {
     const [navStatus, setNavStatus] = useState(false)
     const [windowSize, setWindowSize] = useState()
     const [trendTags, setTrendTags] = useState(props.trendTags)
-
-    function updateTrendTags(name) {
-        setTrendTags((prev) => { return prev.filter(tag => { return tag._id !== name })})
-    }
     
     useEffect(() => {
         setWindowSize(window.innerWidth)

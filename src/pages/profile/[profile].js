@@ -17,6 +17,9 @@ export default function Post(props) {
     const [windowSize, setWindowSize] = useState()
     const { error, data } = props.profileData
 
+    if (!error)
+        data.tags.sort()
+
     useEffect(() => {
         if (error) {
             alert(JSON.stringify(data))
