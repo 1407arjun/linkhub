@@ -105,7 +105,7 @@ export default function Settings(props) {
 
     return (
         <div className="dark:bg-black">
-            <Head title="Settings &middot; LinkHub"/>
+            <Head title="Settings &middot; LinkHub" desc="Manage your account on LinkHub"/>
             <div className="flex flex-row place-content-start min-h-screen">
                 { navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Settings"/> }
                 <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>

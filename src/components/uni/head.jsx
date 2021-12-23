@@ -18,7 +18,7 @@ export default function Head(props) {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>{ props.title }</title>
-        <meta name='description' content="An open source resources network"/>
+        <meta name='description' content={ props.desc }/>
         <link rel='icon' href={ theme === "dark" ? '/assets/icon.svg' : '/assets/icon-black.svg'}/>
       </NextHead>
     )

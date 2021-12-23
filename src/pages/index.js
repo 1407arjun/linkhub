@@ -9,7 +9,7 @@ const tagline = "A portal to help you find the right resources to boost your lea
 export default function Index() {
   return (
     <div> {/* className="flex flex-col place-content-center" */}
-      <Head title="LinkHub &middot; An open source resources network"/>
+      <Head title="LinkHub &middot; An open source resources network" desc="LinkHub Homepage"/>
       <div className="grad-home min-h-screen">
         <HomeBar/>
         <div className="mx-auto my-4 flex flex-col-reverse lg:flex-row place-content-center w-full text-center lg:text-left px-4">

@@ -70,7 +70,7 @@ export default function Create(props) {
 
     return (
         <div className="dark:bg-black">
-            <Head title="New post &middot; LinkHub"/>
+            <Head title="New post &middot; LinkHub" desc="Create a new post"/>
             <div className="flex flex-col justify-start items-start py-4 px-4 md:px-8 gap-6 min-h-screen">
                 <div className="flex flex-row justify-start items-center gap-2 w-full">
                     <button onClick={ () => router.back() } className="p-2 md:p-4 rounded-full hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-800 dark:focus:bg-gray-800"><img src="/assets/editor/arrow-left.svg" className="w-8 sm:w-10 md:w-12 mx-auto dark:filter dark:invert" alt="Back"/></button>

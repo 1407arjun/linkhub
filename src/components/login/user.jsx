@@ -6,7 +6,7 @@ import SignOpts from './signopts'
 export default function User(props) {
     return (
         <div className="dark:bg-black">
-            <Head title={props.type + " \u00b7 LinkHub"}/>
+            <Head title={props.type + " \u00b7 LinkHub"} desc="Sign in or create an account on LinkHub"/>
             <div className="flex flex-col-reverse md:flex-row place-content-center gap-x-4 min-h-screen">
                 <div className="md:w-1/2 p-8 bg-cover bg-home-1">
                     <img src="/assets/logo.svg" className="object-contain h-full" alt=""/>

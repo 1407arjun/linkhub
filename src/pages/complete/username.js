@@ -58,7 +58,7 @@ export default function Username(props) {
 
     return (
         <div className="text-center dark:bg-black">
-            <Head title="Complete your profile &middot; LinkHub"/>
+            <Head title="Complete your profile &middot; LinkHub" desc="Choose a username for your account"/>
             <div className="inline-flex flex-col place-content-center gap-4 w-full md:w-2/3 lg:w-1/2 p-6 min-h-screen">
                 <img src="/assets/logo-black.svg" alt="LinkHub" className="w-1/2 mx-auto dark:filter dark:invert"/>
                 <h2 className="w-full font-bold text-2xl md:text-3xl text-center dark:text-white">Complete your profile</h2>

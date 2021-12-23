@@ -29,7 +29,7 @@ export default function Explore(props) {
 
     return (
         <div className="dark:bg-black">
-            <Head title="Explore &middot; LinkHub"/>
+            <Head title="Explore &middot; LinkHub" desc="Explore tags, posts and profiles on LinkHub"/>
             <div className="flex flex-row justify-center items-start min-h-screen">
                 { status === "authenticated" && navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Explore"/> }
                 <div className={ "flex flex-col gap-4 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
