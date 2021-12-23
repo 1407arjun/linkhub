@@ -1,19 +1,32 @@
 import Link from 'next/link'
 import axios from 'axios'
-import nprogress from 'nprogress'
+import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 
 export default function Recent(props) {
-    async function addToSaved() {
-        nprogress.start()
+    const { data: session, status } = useSession()
+    const [save, setSave] = useState(props.save)
+
+    async function addToSaved(newSave) {
+        setSave(!newSave)
         try {
             const r = await axios.post("/api/saved/update", { postId: props.id, remove: false })
-            if (r.status === 200)
-                props.update(props.id)
+            if (r.status !== 200)
+                setSave(newSave)
         } catch (e) {
             console.log(e)
-        } finally {
-            nprogress.done()
         }
+    }
+
+    async function removeFromSaved(newSave) {
+        setSave(!newSave)
+        try {
+            const r = await axios.post("/api/saved/update", { postId: props.id, remove: true })
+            if (r.status !== 200)
+                setSave(newSave)
+        } catch (e) {
+            console.log(e)
+        }     
     }
 
     return (
@@ -27,8 +40,11 @@ export default function Recent(props) {
                     <p className="text-gray-500 dark:text-gray-300 text-xs xl:text-sm">{ props.desc }</p>
                 </div>
             </div></a></Link>
-            { props.add && <button onClick={ () => addToSaved() } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
+            { status === "authenticated" && !save && <button onClick={ () => addToSaved(save) } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
                 <img src="/assets/home/plus-sq.svg" className="w-6 xl:w-8" alt="Add"/>
+            </button> }
+            { status === "authenticated" && save && <button onClick={ () => removeFromSaved(save) } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
+                <img src="/assets/home/delete-sq.svg" className="w-6 xl:w-8" alt="Remove"/>
             </button> }
         </div>
     )

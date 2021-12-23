@@ -36,11 +36,8 @@ export default function Profile(props) {
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Profile</h2>
-                    <div className={(props.user.tags.length > 0 ? "flex " : "hidden ") + "flex-row flex-wrap gap-2 justify-start items-start w-full px-3"}>
-                        { props.user.tags.map((tag, index) => { return <TagBar key={ index } name={ tag }/> }) }
-                    </div>
                     <TabLayout tab={ props.tab }/>
-                    <TabContent posts={ props.posts } profile={ props.user }/>
+                    <TabContent posts={ props.posts } profile={ props.user } tags={ props.posts ? null : props.user.tags }/>
                 </div>
                 <SideBar/>
             </div>
@@ -76,13 +73,16 @@ export async function getServerSideProps(context) {
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }
-                } else {
+                } else if (tab === "downvoted") {
                     const oidArray = profile.downvoted.map(id => { return new ObjectId(id) })
                     const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).sort({date: 1}).toArray()))
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }
-                } 
+                } else
+                    return {
+                        props: { user: profile, tab: tab }
+                    }
             }
         }     
     } else {

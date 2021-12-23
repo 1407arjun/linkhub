@@ -30,15 +30,10 @@ export default function PostMini(props) {
     async function updateOption(newOption) {
         if (session && session.user && status === "authenticated") {
             let prevOption = option
-            console.log(prevOption)
-            console.log(newOption)
 
             if (prevOption === newOption) {
                 newOption = null
                 setOption(null)
-
-                console.log(prevOption)
-                console.log(newOption)
             } else {    
                 setOption(newOption)
             }     

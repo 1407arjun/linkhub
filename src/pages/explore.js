@@ -46,7 +46,7 @@ export default function Explore(props) {
                         <h3 className="w-full text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl font-bold mb-1 dark:text-white">Trending</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
                             { trendTags.map((tag, index) => {
-                                return <Tag key={ index } name={ tag._id } post={ tag.count } update={ updateTrendTags } add={ true }/>
+                                return <Tag key={ index } name={ tag._id } post={ tag.count } follow={ props.user && props.user.tags.includes(tag._id) }/>
                             }) }
                         </div>
                     </div> }
@@ -56,14 +56,14 @@ export default function Explore(props) {
                         <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Tags</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
                             { props.results.tags.map((tag, index) => {
-                                return <Tag key={ index } name={ tag._id } post={ tag.count } add={ false }/>
+                                return <Tag key={ index } name={ tag._id } post={ tag.count } follow={ props.user && props.user.tags.includes(tag._id) }/>
                             }) }
                         </div>
                         <br/>
                         <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Posts</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
                             { props.results.posts.map((post, index) => {
-                                return <Recent key={ index } title={ post.title } desc={ "@" + post.author.username } id={ post._id.toString() } add={ false }/>
+                                return <Recent key={ index } title={ post.title } desc={ "@" + post.author.username } id={ post._id.toString() } save={ props.user && props.user.saved.includes(post._id) }/>
                             }) }
                         </div>
                         <br/>
@@ -119,14 +119,14 @@ export async function getServerSideProps(context) {
     } else {
         const mClient = await client
         if (!query) {
-            const trendTags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(5).toArray()))
+            const trendTags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(10).toArray()))
             return {
                 props: { trendTags: trendTags }
             }
         } else {
             const results = JSON.parse(JSON.stringify(await search(query)))
             if (results.error) {
-                const trendTags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(5).toArray()))
+                const trendTags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(10).toArray()))
                 return {
                     props: { trendTags: trendTags }
                 }

@@ -81,7 +81,7 @@ export default function Post(props) {
                             <img src="/assets/home/plus-sq.svg" className="w-6 md:w-10" alt="Add"/>
                         </button> }
                         { status === "authenticated" && follow && <button onClick={ () => removeFromTags(follow) } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
-                            <img src="/assets/home/delete-sq.svg" className="w-6 md:w-10" alt="Add"/>
+                            <img src="/assets/home/delete-sq.svg" className="w-6 md:w-10" alt="Remove"/>
                         </button> }
                     </div>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
@@ -132,7 +132,6 @@ export async function getServerSideProps(context) {
         const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({tags: tag}).sort({upvotes: -1}).toArray()))
         if (session) {
             const prof = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
-            console.log(prof)
             
             if (!prof)
                 return {

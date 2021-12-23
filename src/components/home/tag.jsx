@@ -1,18 +1,31 @@
 import Link from 'next/link'
 import axios from 'axios'
-import nprogress from 'nprogress'
+import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 
 export default function Tag(props) {
-    async function addToTags() {
-        nprogress.start()
+    const { data: session, status } = useSession()
+    const [follow, setFollow] = useState(props.follow)
+
+    async function addToTags(newFollow) {
+        setFollow(!newFollow)
         try {
             const r = await axios.post("/api/tag/update", { tag: props.name, remove: false })
-            if (r.status === 200)
-                props.update(props.name)
+            if (r.status !== 200)
+                setFollow(newFollow)
         } catch (e) {
             console.log(e)
-        } finally {
-            nprogress.done()
+        }
+    }
+
+    async function removeFromTags(newFollow) {
+        setFollow(!newFollow)
+        try {
+            const r = await axios.post("/api/tag/update", { tag: props.name, remove: true })
+            if (r.status !== 200)
+                setFollow(newFollow)
+        } catch (e) {
+            console.log(e)
         }
     }
 
@@ -27,8 +40,11 @@ export default function Tag(props) {
                     <p className="text-gray-500 dark:text-gray-300 text-xs xl:text-sm">{ props.post + " posts"}</p>
                 </div>
             </div></a></Link>
-            { props.add && <button onClick={ () => addToTags() } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
+            { status === "authenticated" && !follow && <button onClick={ () => addToTags(follow) } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
                 <img src="/assets/home/plus-sq.svg" className="w-6 xl:w-8" alt="Add"/>
+            </button> }
+            { status === "authenticated" && follow && <button onClick={ () => removeFromTags(follow) } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
+                <img src="/assets/home/delete-sq.svg" className="w-6 xl:w-8" alt="Remove"/>
             </button> }
         </div>
     )
