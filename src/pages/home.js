@@ -33,7 +33,7 @@ export default function Home(props) {
                         { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:filter dark:invert" alt="Nav"/></button> }
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
-                    <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
+                    { props.posts.length > 0 && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         { props.posts.map((post, index) => {
                             return (
                                 <PostMini key={ index } id={ post._id.toString() } name={ post.author.name }
@@ -54,9 +54,9 @@ export default function Home(props) {
                                     delete ={ props.user && props.user.email === post.author.email }/>
                             )
                         }) }
-                    </div>  
-                    <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
-                        <h3 className="w-full text-left text-lg md:text-xl xl:text-2xl font-bold mb-1 dark:text-white mt-4">Older posts</h3>
+                    </div> } 
+                    { props.olderPosts.length > 0 && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
+                        <h3 className="w-full text-left text-lg md:text-xl xl:text-2xl font-bold dark:text-white">Older posts</h3>
                         { props.olderPosts.map((post, index) => {
                             return (
                                 <PostMini key={ index } id={ post._id.toString() } name={ post.author.name }
@@ -77,7 +77,7 @@ export default function Home(props) {
                                     delete ={ props.user && props.user.email === post.author.email }/>
                             )
                         }) }
-                    </div>
+                    </div> }
                     <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                 </div>
                 <SideBar saved={ props.saved } tags={ props.tags }/>

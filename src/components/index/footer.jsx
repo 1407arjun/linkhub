@@ -5,11 +5,11 @@ export default function Footer() {
         <footer className="w-full text-center px-8">
             <div className="flex flex-row flex-wrap gap-2 justify-evenly items-center border-t border-white p-4">
                 <p className="text-white font-semibold">&copy; 2021 LinkHub</p>
-                <a className="text-white hover:underline focus:underline">API</a>
-                <Link href="https://github.com/linkhub-org"><a className="text-white hover:underline focus:underline">Developers</a></Link>
+                <button onClick={ () => alert("Coming soon") } className="text-white hover:underline focus:underline">API</button>
+                <Link href="https://github.com/1407arjun/linkhub"><a className="text-white hover:underline focus:underline">Developers</a></Link>
                 <Link href="https://twitter.com/LinkHub_Org"><a className="text-white hover:underline focus:underline">Twitter</a></Link>
-                <a className="text-white hover:underline focus:underline">About</a>
-                <a className="text-white hover:underline focus:underline">Contact Us</a>
+                <button onClick={ () => alert("Page under construction") } className="text-white hover:underline focus:underline">About</button>
+                <button onClick={ () => alert("Page under construction") } className="text-white hover:underline focus:underline">Contact Us</button>
             </div>
         </footer>
     )
