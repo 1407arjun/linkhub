@@ -7,7 +7,7 @@ export default function Footer() {
                 <p className="text-white font-semibold">&copy; 2021 LinkHub</p>
                 <button onClick={ () => alert("Coming soon") } className="text-white hover:underline focus:underline">API</button>
                 <Link href="https://github.com/1407arjun/linkhub"><a className="text-white hover:underline focus:underline">Developers</a></Link>
-                <Link href="https://twitter.com/LinkHub_Org"><a className="text-white hover:underline focus:underline">Twitter</a></Link>
+                <button onClick={ () => alert("Coming soon") } className="text-white hover:underline focus:underline">Twitter</button>
                 <button onClick={ () => alert("Page under construction") } className="text-white hover:underline focus:underline">About</button>
                 <button onClick={ () => alert("Page under construction") } className="text-white hover:underline focus:underline">Contact Us</button>
             </div>

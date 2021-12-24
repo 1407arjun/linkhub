@@ -11,7 +11,7 @@ export default function Footer(props) {
                 <p className="text-black dark:text-white font-semibold">&copy; 2021 LinkHub</p>
                 <button onClick={ () => alert("Coming soon") } className="text-gray-600 dark:text-gray-200 hover:underline focus:underline">API</button>
                 <Link href="https://github.com/1407arjun/linkhub"><a className="text-gray-600 dark:text-gray-200 hover:underline focus:underline">Developers</a></Link>
-                <Link href="https://twitter.com/LinkHub_Org"><a className="text-gray-600 dark:text-gray-200 hover:underline focus:underline">Twitter</a></Link>
+                <button onClick={ () => alert("Coming soon") } className="text-gray-600 dark:text-gray-200 hover:underline focus:underline">Twitter</button>
                 <button onClick={ () => alert("Page under construction") } className="text-gray-600 dark:text-gray-200 hover:underline focus:underline">About</button>
                 <button onClick={ () => alert("Page under construction") } className="text-gray-600 dark:text-gray-200 hover:underline focus:underline">Contact Us</button>
             </div>
