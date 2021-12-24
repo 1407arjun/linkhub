@@ -125,7 +125,10 @@ export async function getServerSideProps(context) {
     
     if (tagData.data) {
         const mClient = await client
-        const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({tags: tag}).sort({upvotes: -1}).toArray()))
+        const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts")
+                                .aggregate([{"$match": {tags: tag}},
+                                    {"$project": {title : 1, body : 1, date: 1, upvotes: 1, downvotes: 1, flags: 1, author: 1, tags: 1, ratio: {"$cond": {"if": {downvotes: 0}, "then": "$upvotes", "else": {"$divide": ["$upvotes", "$downvotes"]}}}}},
+                                    {"$sort": {ratio: -1, date: -1}}]).toArray()))
         if (session) {
             const prof = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
             

@@ -7,8 +7,8 @@ export default async function search(query: string): Promise<Response> {
         const mClient = await client
         const posts = await mClient.db("Client").collection("posts")
                                 .aggregate([{"$match": {"$or": [{title: {"$regex": ".*(" + regex + ").*", "$options": "$i"}}, {body: {"$regex": ".*(" + regex + ").*", "$options": "$i"}}, {tags: {"$regex": ".*(" + regex + ").*", "$options": "$i"}}]}},
-                                    {"$project": {title : 1, author: 1, ratio: {"$cond": {"if": {downvotes: 0}, "then": "$upvotes", "else": {"$divide": ["$upvotes", "$downvotes"]}}}}},
-                                    {"$sort": {ratio: -1}}]).toArray()
+                                    {"$project": {title : 1, author: 1, date: 1, ratio: {"$cond": {"if": {downvotes: 0}, "then": "$upvotes", "else": {"$divide": ["$upvotes", "$downvotes"]}}}}},
+                                    {"$sort": {ratio: -1, date: -1}}]).toArray()
         const profiles = await mClient.db("Client").collection("profiles").find({"$or": [{name: {"$regex": ".*(" + regex + ").*", "$options": "$i"}}, {username: {"$regex": ".*(" + regex + ").*", "$options": "$i"}}]}).project({name: 1, username: 1, image: 1}).sort({name: 1}).toArray()
         
         let matchedTags = await await mClient.db("Client").collection("tags").find({name: {"$regex": ".*(" + regex + ").*", "$options": "$i"}}).project({name: 1, _id: 0}).toArray()

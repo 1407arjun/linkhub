@@ -107,14 +107,14 @@ export async function getServerSideProps(context) {
                                 .aggregate([{"$match": {"author.username": {"$ne": profile.username}, 
                                         tags: {"$in": profile.tags}, date: {"$gte": date}}},
                                     {"$project": {title : 1, body : 1, date: 1, upvotes: 1, downvotes: 1, flags: 1, author: 1, tags: 1, ratio: {"$cond": {"if": {downvotes: 0}, "then": "$upvotes", "else": {"$divide": ["$upvotes", "$downvotes"]}}}}},
-                                    {"$sort": {date: -1, ratio: -1}}
+                                    {"$sort": {ratio: -1, date: -1}}
                                     ]).toArray()))
 
             const olderPosts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts")
                                 .aggregate([{"$match": {"author.username": {"$ne": profile.username}, 
                                         tags: {"$in": profile.tags}, date: {"$lt": date}}},
                                     {"$project": {title : 1, body : 1, date: 1, upvotes: 1, downvotes: 1, flags: 1, author: 1, tags: 1, ratio: {"$cond": {"if": {downvotes: 0}, "then": "$upvotes", "else": {"$divide": ["$upvotes", "$downvotes"]}}}}},
-                                    {"$sort": {date: -1, ratio: -1}}
+                                    {"$sort": {ratio: -1, date: -1}}
                                     ]).limit(25).toArray()))
 
             //const oidArray = profile.saved.map(id => { return new ObjectId(id) })
