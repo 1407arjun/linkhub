@@ -21,6 +21,7 @@ export default function Head(props) {
         <meta name='description' content={ props.desc }/>
         <link rel='icon' href={ theme === "dark" ? '/assets/icon.svg' : '/assets/icon-black.svg'}/>
         <link rel="image_src" href="/assets/icon-black.svg"/>
+        <link type="application/opensearchdescription+xml" rel="search" href="/assets/xml/osdd.xml"/>
       </NextHead>
     )
   }
