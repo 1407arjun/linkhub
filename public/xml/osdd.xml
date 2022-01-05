@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-    <ShortName>Search My Site</ShortName>
-    <Description>Search My Site</Description>
-    <InputEncoding>[UTF-8]</InputEncoding>
-    <Image width="16" height="16" type="image/x-icon">[/assets/favicon.ico]</Image>
-    <Url type="text/html" method="get" template="https://linkhub-live.vercel.app/explore?query={searchTerms}"/>
-</OpenSearchDescription>
