@@ -59,7 +59,7 @@ export default function Post(props) {
 
     return (
         <div className="dark:bg-black">
-            <Head title={  data.name + " on LinkHub" } desc={ "View posts of the " + data.name + " tag on LinkHub" }/>
+            <Head title={  data.name + " on LinkHub" } desc={ "View posts of the " + data.name + " tag on LinkHub" } image="https://linkhub-live.vercel.app/assets/seo/tag.png"/>
             <div className="flex flex-row justify-center items-start min-h-screen">
                 { status === "authenticated" && navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Explore"/> }
                 <div className={ "flex flex-col gap-6 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
