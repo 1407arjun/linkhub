@@ -112,14 +112,8 @@ export default function Post(props) {
 
 export async function getServerSideProps(context) {
     const session = await getSession(context)
-    const { tag } = context.query
-
-    if (tag !== tag.toLowerCase())
-        return {
-            redirect: {
-                destination: "/tag/" + tag.toLowerCase()
-            }     
-        }
+    var { tag } = context.query
+    tag = tag.toLowerCase()
 
     const tagData = JSON.parse(JSON.stringify(await getTag(tag)))
     
