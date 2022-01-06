@@ -59,7 +59,7 @@ blockquote {
 	border-color: #757575;
 }
 
-p > a:link, p > a:visited {
+p > a:link, p > a:visited, li > a:link, li > a:visited {
 	color: #2196F3
 }
 
