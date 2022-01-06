@@ -87,7 +87,7 @@ export default function Create(props) {
                     </div>
                     <div className="w-full h-full">
                         <EditorContext.Provider value={ contextValue }>
-                            <div className="grid grid-rows-2 grid-cols-1 lg:grid-rows-1 lg:grid-cols-2 justify-center items-start gap-4 rounded-md border border-gray-300 p-3 lg:p-4">
+                            <div className="grid grid-rows-2 grid-cols-1 lg:grid-rows-1 lg:grid-cols-2 justify-center items-start gap-4 rounded-md border border-gray-300 p-3 lg:p-4 h-full">
                                 <Markdown/>
                                 <Preview/>
                             </div>
@@ -97,7 +97,7 @@ export default function Create(props) {
                             <a href="https://www.markdownguide.org/cheat-sheet/" target="_blank" rel="noreferrer" className="text-gray-500 dark:text-gray-300 hover:underline focus:underline"><p className="text-sm md:text-base">Markdown supported</p></a>
                         </div>
                     </div>
-                    <TagBar update={ handleTagsChange }/>
+                    <TagBar update={ handleTagsChange } suggestions={ props.suggestions }/>
                     <button className="w-full md:w-auto flex flex-row justify-center items-center gap-3 px-6 py-3 rounded-md bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:ring-opacity-60">
                         <img src="/assets/editor/send.svg" className="w-5 md:w-6" alt="Post"/>
                         <span className="text-lg md:text-xl font-semibold text-white">Post</span>
@@ -122,10 +122,12 @@ export async function getServerSideProps(context) {
                 },
                 props: {}
             }
-        else
+        else {
+            const suggestions = JSON.parse(JSON.stringify(await mClient.db("Meta").collection("tags").find({}).project({ name: 1, _id: 0 }).sort({ name: 1 }).toArray()))
             return {
-                props: { user: profile }
+                props: { user: profile, suggestions: suggestions }
             }
+        }     
     } else {
         return {
             redirect: {
