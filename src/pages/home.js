@@ -120,6 +120,7 @@ export async function getServerSideProps(context) {
             //const oidArray = profile.saved.map(id => { return new ObjectId(id) })
             const oidArray = [new ObjectId(profile.saved[profile.saved.length - 1]), new ObjectId(profile.saved[profile.saved.length - 2]), new ObjectId(profile.saved[profile.saved.length - 3])]
             const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).limit(3).toArray()))
+            saved.reverse()
             const tags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$match: {tags: {$nin: profile.tags}}}, {$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(5).toArray()))
             return {
                 props: { user: profile, posts: posts, olderPosts: olderPosts, saved: saved, tags: tags }

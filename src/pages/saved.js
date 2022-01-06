@@ -94,6 +94,7 @@ export async function getServerSideProps(context) {
 
             const oidUpArray = upArray.map(id => { return new ObjectId(id) })
             const upvoted = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidUpArray}}).limit(5).toArray()))
+            upvoted.reverse()
             return {
                 props: { user: profile, posts: saved, upvoted: upvoted }
             }
