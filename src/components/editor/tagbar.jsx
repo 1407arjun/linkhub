@@ -57,8 +57,10 @@ export default function TagBar(props) {
                 setTags((prev) => { return [...prev, tag]})
                 
             setTagInput("")
-        } else 
-            setTagInput(val)
+        } else {
+            if (re.test(val))
+                setTagInput(val)
+        }
     }
 
     return (
