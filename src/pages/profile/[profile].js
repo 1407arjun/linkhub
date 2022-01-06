@@ -51,7 +51,7 @@ export default function Post(props) {
                         <img src={ data.image ? data.image : "/assets/profile/person.svg" } className={ "rounded-full w-12 md:w-16" + (data.image ? "" : " filter invert dark:invert-0") } alt=""/>
                         <div className="flex flex-col justify-start items-center gap-1 w-full">
                             <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.name }</h2>
-                            <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "@ " + data.username }</p>
+                            <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "@" + data.username }</p>
                         </div>
                     </div>
                     <div className={(data.tags.length > 0 ? "flex " : "hidden ") + "flex-row flex-wrap gap-2 justify-start items-start w-full px-3"}>
