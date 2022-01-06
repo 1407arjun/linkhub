@@ -47,32 +47,25 @@ export default function TagBar(props) {
         let re = new RegExp("^[a-z\-]*$")
         let val = ev.target.value.toLowerCase()
 
-        if (props.suggestions.includes(val)) {
-            if (!tags.includes(tag))
+        if (val.substring(val.length - 1) === " ") {
+            if (val.length > 32) {
+                setTagInput(val.slice(0, 32))
+            } else if (re.test(val) && val.length <= 32)
+                setTagInput(val)
+            
+            let arr = tagInput.split('-')
+            arr = arr.filter(data => {return data.length > 0})
+            let tag = arr.join('-')
+
+            if (tag.trim().length > 0 && !tags.includes(tag))
                 setTags((prev) => { return [...prev, tag]})
                 
             setTagInput("")
         } else {
-            if (val.substring(val.length - 1) === " ") {
-                if (val.length > 32) {
-                    setTagInput(val.slice(0, 32))
-                } else if (re.test(val) && val.length <= 32)
-                    setTagInput(val)
-                
-                let arr = tagInput.split('-')
-                arr = arr.filter(data => {return data.length > 0})
-                let tag = arr.join('-')
-
-                if (tag.trim().length > 0 && !tags.includes(tag))
-                    setTags((prev) => { return [...prev, tag]})
-                    
-                setTagInput("")
-            } else {
-                if (val.length > 32) {
-                    setTagInput(val.slice(0, 32))
-                } else if (re.test(val) && val.length <= 32)
-                    setTagInput(val)
-            }
+            if (val.length > 32) {
+                setTagInput(val.slice(0, 32))
+            } else if (re.test(val) && val.length <= 32)
+                setTagInput(val)
         }
     }
 
@@ -84,7 +77,7 @@ export default function TagBar(props) {
                 <p className="px-1 py-0.5 w-full text-right text-gray-500 dark:text-gray-300 text-sm md:text-base">{ tagInput.length + " of 32 characters" }</p>
                 <datalist id="suggestions">
                     { props.suggestions.map((tag, index) => {
-                        <option key={ index } value={ tag }/>
+                        return <option key={ index } value={ tag.name }/>
                     }) }
                 </datalist>
             </div>    
