@@ -108,7 +108,7 @@ export default function Settings(props) {
             <Head title="Settings &middot; LinkHub" desc="Manage your account on LinkHub"/>
             <div className="flex flex-row place-content-start min-h-screen">
                 { navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Settings"/> }
-                <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
+                <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 border-l border-gray-300 dark:border-gray-600 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
                     <div className="w-full flex flex-row justify-start items-center gap-4">
                         { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:invert" alt="Nav"/></button> }
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />

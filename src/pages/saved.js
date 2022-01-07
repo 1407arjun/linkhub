@@ -29,33 +29,35 @@ export default function Saved(props) {
             <Head title="Saved Posts &middot; LinkHub" desc="View your saved posts on LinkHub"/>
             <div className="flex flex-row place-content-start min-h-screen">
                 { navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Saved"/> }
-                <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
-                    <div className="w-full flex flex-row justify-start items-center gap-4">
+                <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 border-l border-gray-300 dark:border-gray-600 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 py-4" }>
+                    <div className="w-full flex flex-row justify-start items-center gap-4 px-4">
                         { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:invert" alt="Nav"/></button> }
                         <SearchBar placeholder="Search saved posts" smhidesearch={ false } />
                     </div>
-                    <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Saved Posts</h2>
-                    <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
-                        { props.posts.map((data, index) => { return (
-                            <PostMini key={ data._id.toString() } id={ data._id.toString() } name={ data.author.name }
-                                username={ data.author.username }
-                                email = { data.author.email }
-                                image={ data.author.image }
-                                title={ data.title }
-                                body={ data.body }
-                                tags={ data.tags }
-                                date={ data.date }
-                                upvotes={ data.upvotes }
-                                downvotes={ data.downvotes }
-                                flags={ data.flags }
-                                option={ props.user.upvoted.includes(data._id) ? "upvoted" : 
-                                    (props.user.downvoted.includes(data._id) ? "downvoted" : 
-                                    (props.user.flagged.includes(data._id) ? "flagged" : null)) }
-                                saved ={ true }
-                                delete ={ data.author.email === props.user.email }/>
-                        ) }) }
-                    </div>
-                    <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
+                    <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white px-4">Saved Posts</h2>
+                    <div className="h-screen overflow-y-auto w-full">
+                        <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
+                            { props.posts.map((data, index) => { return (
+                                <PostMini key={ data._id.toString() } id={ data._id.toString() } name={ data.author.name }
+                                    username={ data.author.username }
+                                    email = { data.author.email }
+                                    image={ data.author.image }
+                                    title={ data.title }
+                                    body={ data.body }
+                                    tags={ data.tags }
+                                    date={ data.date }
+                                    upvotes={ data.upvotes }
+                                    downvotes={ data.downvotes }
+                                    flags={ data.flags }
+                                    option={ props.user.upvoted.includes(data._id) ? "upvoted" : 
+                                        (props.user.downvoted.includes(data._id) ? "downvoted" : 
+                                        (props.user.flagged.includes(data._id) ? "flagged" : null)) }
+                                    saved ={ true }
+                                    delete ={ data.author.email === props.user.email }/>
+                            ) }) }
+                        </div>
+                        <p className="text-sm md:text-base italic dark:text-white text-center mt-4">-- You have reached the end --</p>
+                   </div>     
                 </div>
                 <SideBar saved={ props.posts } upvoted={ props.upvoted }/>
             </div>

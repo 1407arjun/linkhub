@@ -38,7 +38,7 @@ export default function Post(props) {
             <Head title={  "Post by " + data.author.name.split(" ")[0] + " \u00b7 LinkHub" } desc={ data.title + " - a post on LinkHub" } image="https://linkhub-live.vercel.app/assets/seo/link-45.png"/>
             <div className="flex flex-row justify-center items-start min-h-screen">
                 { status === "authenticated" && navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Explore"/> }
-                <div className={ "flex flex-col gap-6 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
+                <div className={ "flex flex-col gap-6 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 border-l border-gray-300 dark:border-gray-600 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
                     <div className="w-full flex flex-row justify-start items-center gap-4">
                         { status === "authenticated" && !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:invert" alt="Nav"/></button> }
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false }/>
@@ -50,25 +50,27 @@ export default function Post(props) {
                             <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "by " + data.author.name }</p>
                         </div>
                     </div> */}
-                    <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
-                        <PostMini id={ data._id.toString() } name={ data.author.name }
-                            username={ data.author.username }
-                            email = { data.author.email }
-                            image={ data.author.image }
-                            title={ data.title }
-                            body={ data.body }
-                            tags={ data.tags }
-                            date={ data.date }
-                            upvotes={ data.upvotes }
-                            downvotes={ data.downvotes }
-                            flags={ data.flags }
-                            option={ props.user ? (props.user.upvoted.includes(data._id) ? "upvoted" : 
-                                (props.user.downvoted.includes(data._id) ? "downvoted" : 
-                                (props.user.flagged.includes(data._id) ? "flagged" : null))) : null }
-                            saved ={ props.user && props.user.saved.includes(data._id) }
-                            delete ={ props.user && props.user.email === data.author.email }/>
-                    </div>
-                    <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
+                    <div className="h-screen overflow-y-auto w-full">
+                        <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
+                            <PostMini id={ data._id.toString() } name={ data.author.name }
+                                username={ data.author.username }
+                                email = { data.author.email }
+                                image={ data.author.image }
+                                title={ data.title }
+                                body={ data.body }
+                                tags={ data.tags }
+                                date={ data.date }
+                                upvotes={ data.upvotes }
+                                downvotes={ data.downvotes }
+                                flags={ data.flags }
+                                option={ props.user ? (props.user.upvoted.includes(data._id) ? "upvoted" : 
+                                    (props.user.downvoted.includes(data._id) ? "downvoted" : 
+                                    (props.user.flagged.includes(data._id) ? "flagged" : null))) : null }
+                                saved ={ props.user && props.user.saved.includes(data._id) }
+                                delete ={ props.user && props.user.email === data.author.email }/>
+                        </div>
+                        <p className="text-sm md:text-base italic dark:text-white text-center mt-4">-- You have reached the end --</p>
+                    </div>    
                 </div>
             </div>
             { status === "authenticated" ? <Footer username={ props.user.username } signedin={ true }/> : <Footer signedin={ false }/>}

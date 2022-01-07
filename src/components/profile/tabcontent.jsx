@@ -6,7 +6,7 @@ export default function TabContent(props) {
         props.tags.sort()
 
     return (
-        <div className="flex flex-col gap-4 justify-start items-center w-full">
+        <div className="flex flex-col gap-4 justify-start items-center w-full h-screen overflow-y-auto">
             { props.posts && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                 { props.posts.map((data, index) => { return (
                     <PostMini key={ data._id.toString() } id={ data._id.toString() } name={ data.author.name }

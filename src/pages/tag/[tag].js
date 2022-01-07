@@ -62,47 +62,49 @@ export default function Post(props) {
             <Head title={  data.name + " on LinkHub" } desc={ "View posts of the " + data.name + " tag on LinkHub" } image="https://linkhub-live.vercel.app/assets/seo/tag.png"/>
             <div className="flex flex-row justify-center items-start min-h-screen">
                 { status === "authenticated" && navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Explore"/> }
-                <div className={ "flex flex-col gap-6 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
+                <div className={ "flex flex-col gap-6 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 border-l border-gray-300 dark:border-gray-600 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
                     <div className="w-full flex flex-row justify-start items-center gap-4">
                         { status === "authenticated" && !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:invert" alt="Nav"/></button> }
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false }/>
                     </div>
-                    <div className="flex flex-row flex-nowrap justify-between items-center w-full px-4 gap-4">
-                        <img src="/assets/home/tag.svg" className="w-12 md:w-16 invert dark:invert-0" alt=""/>
-                        <div className="flex flex-col justify-start items-center gap-1 w-full">
-                            <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.name }</h2>
-                            <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ props.posts.length + " posts" }</p>
+                    <div className="h-screen overflow-y-auto w-full">
+                        <div className="flex flex-row flex-nowrap justify-between items-center w-full px-4 gap-4">
+                            <img src="/assets/home/tag.svg" className="w-12 md:w-16 invert dark:invert-0" alt=""/>
+                            <div className="flex flex-col justify-start items-center gap-1 w-full">
+                                <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.name }</h2>
+                                <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ props.posts.length + " posts" }</p>
+                            </div>
+                            { status === "authenticated" && !follow && <button onClick={ () => addToTags(follow) } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
+                                <img src="/assets/home/plus-sq.svg" className="w-6 md:w-10" alt="Add"/>
+                            </button> }
+                            { status === "authenticated" && follow && <button onClick={ () => removeFromTags(follow) } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
+                                <img src="/assets/home/delete-sq.svg" className="w-6 md:w-10" alt="Remove"/>
+                            </button> }
                         </div>
-                        { status === "authenticated" && !follow && <button onClick={ () => addToTags(follow) } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
-                            <img src="/assets/home/plus-sq.svg" className="w-6 md:w-10" alt="Add"/>
-                        </button> }
-                        { status === "authenticated" && follow && <button onClick={ () => removeFromTags(follow) } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full">
-                            <img src="/assets/home/delete-sq.svg" className="w-6 md:w-10" alt="Remove"/>
-                        </button> }
-                    </div>
-                    <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
-                        { props.posts.map((post, index) => {
-                            return (
-                                <PostMini key={ post._id.toString() } id={ post._id.toString() } name={ post.author.name }
-                                    username={ post.author.username }
-                                    email = { post.author.email }
-                                    image={ post.author.image }
-                                    title={ post.title }
-                                    body={ post.body }
-                                    tags={ post.tags }
-                                    date={ post.date }
-                                    upvotes={ post.upvotes }
-                                    downvotes={ post.downvotes }
-                                    flags={ post.flags }
-                                    option={ props.user ? (props.user.upvoted.includes(post._id) ? "upvoted" : 
-                                        (props.user.downvoted.includes(post._id) ? "downvoted" : 
-                                        (props.user.flagged.includes(post._id) ? "flagged" : null))) : null }
-                                    saved ={ props.user && props.user.saved.includes(post._id) }
-                                    delete ={ props.user && props.user.email === post.author.email }/>
-                            )
-                        }) }
-                    </div>
-                    <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
+                        <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-4">
+                            { props.posts.map((post, index) => {
+                                return (
+                                    <PostMini key={ post._id.toString() } id={ post._id.toString() } name={ post.author.name }
+                                        username={ post.author.username }
+                                        email = { post.author.email }
+                                        image={ post.author.image }
+                                        title={ post.title }
+                                        body={ post.body }
+                                        tags={ post.tags }
+                                        date={ post.date }
+                                        upvotes={ post.upvotes }
+                                        downvotes={ post.downvotes }
+                                        flags={ post.flags }
+                                        option={ props.user ? (props.user.upvoted.includes(post._id) ? "upvoted" : 
+                                            (props.user.downvoted.includes(post._id) ? "downvoted" : 
+                                            (props.user.flagged.includes(post._id) ? "flagged" : null))) : null }
+                                        saved ={ props.user && props.user.saved.includes(post._id) }
+                                        delete ={ props.user && props.user.email === post.author.email }/>
+                                )
+                            }) }
+                        </div>
+                        <p className="text-sm md:text-base italic dark:text-white text-center mt-4">-- You have reached the end --</p>
+                   </div>     
                 </div>
             </div>
             { status === "authenticated" ? <Footer username={ props.user.username } signedin={ true }/> : <Footer signedin={ false }/>}

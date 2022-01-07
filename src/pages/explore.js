@@ -32,45 +32,47 @@ export default function Explore(props) {
             <Head title="Explore &middot; LinkHub" desc="Explore tags, posts and profiles on LinkHub"/>
             <div className="flex flex-row justify-center items-start min-h-screen">
                 { status === "authenticated" && navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Explore"/> }
-                <div className={ "flex flex-col gap-4 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
+                <div className={ "flex flex-col gap-4 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 border-l border-gray-300 dark:border-gray-600 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
                     <div className="w-full flex flex-row justify-start items-center gap-4">
                         { status === "authenticated" && !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:invert" alt="Nav"/></button> }
                         <SearchBar text={ props.query ? props.query : "" } placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Explore</h2>
-                    { !props.results && <div className="w-full">
-                        <h3 className="w-full text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl font-bold mb-1 dark:text-white">Trending</h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
-                            { trendTags.map((tag, index) => {
-                                return <Tag key={ tag._id } name={ tag._id } post={ tag.count } follow={ props.user && props.user.tags.includes(tag._id) }/>
-                            }) }
-                        </div>
-                    </div> }
-                    { props.results && <div className="w-full"> 
-                        <h3 className="w-full font-normal text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Found <Link href="#tags"><a><span className="font-semibold underline">{props.results.tags.length + " tags"}</span></a></Link>, <Link href="#posts"><a><span className="font-semibold underline">{props.results.posts.length + " posts"}</span></a></Link> and <Link href="#users"><a><span className="font-semibold underline">{props.results.profiles.length + " users"}</span></a></Link>.</h3>
-                        <br/>
-                        <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white" id="tags">Tags</h4>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
-                            { props.results.tags.map((tag, index) => {
-                                return <Tag key={ tag._id } name={ tag._id } post={ tag.count } follow={ props.user && props.user.tags.includes(tag._id) }/>
-                            }) }
-                        </div>
-                        <br/>
-                        <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white" id="posts">Posts</h4>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
-                            { props.results.posts.map((post, index) => {
-                                return <Recent key={ post._id.toString() } title={ post.title } desc={ "@" + post.author.username } id={ post._id.toString() } save={ props.user && props.user.saved.includes(post._id) }/>
-                            }) }
-                        </div>
-                        <br/>
-                        <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white" id="users">Users</h4>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
-                            { props.results.profiles.map((profile, index) => {
-                                return <Profile key={ profile.username } name={ profile.name } username={ profile.username } image={ profile.image }/>
-                            }) }
-                        </div>
-                    </div> }
-                    <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
+                    <div className="h-screen overflow-y-auto w-full">
+                        { !props.results && <div className="w-full">
+                            <h3 className="w-full text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl font-bold mb-1 dark:text-white">Trending</h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
+                                { trendTags.map((tag, index) => {
+                                    return <Tag key={ tag._id } name={ tag._id } post={ tag.count } follow={ props.user && props.user.tags.includes(tag._id) }/>
+                                }) }
+                            </div>
+                        </div> }
+                        { props.results && <div className="w-full"> 
+                            <h3 className="w-full font-normal text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white">Found <Link href="#tags"><a><span className="font-semibold underline">{props.results.tags.length + " tags"}</span></a></Link>, <Link href="#posts"><a><span className="font-semibold underline">{props.results.posts.length + " posts"}</span></a></Link> and <Link href="#users"><a><span className="font-semibold underline">{props.results.profiles.length + " users"}</span></a></Link>.</h3>
+                            <br/>
+                            <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white" id="tags">Tags</h4>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
+                                { props.results.tags.map((tag, index) => {
+                                    return <Tag key={ tag._id } name={ tag._id } post={ tag.count } follow={ props.user && props.user.tags.includes(tag._id) }/>
+                                }) }
+                            </div>
+                            <br/>
+                            <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white" id="posts">Posts</h4>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
+                                { props.results.posts.map((post, index) => {
+                                    return <Recent key={ post._id.toString() } title={ post.title } desc={ "@" + post.author.username } id={ post._id.toString() } save={ props.user && props.user.saved.includes(post._id) }/>
+                                }) }
+                            </div>
+                            <br/>
+                            <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white" id="users">Users</h4>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
+                                { props.results.profiles.map((profile, index) => {
+                                    return <Profile key={ profile.username } name={ profile.name } username={ profile.username } image={ profile.image }/>
+                                }) }
+                            </div>
+                        </div> }
+                        <p className="text-sm md:text-base italic dark:text-white text-center mt-4">-- You have reached the end --</p>
+                    </div>
                 </div>
             </div>
             { status === "authenticated" ? <Footer username={ props.user.username } signedin={ true }/> : <Footer signedin={ false }/>}

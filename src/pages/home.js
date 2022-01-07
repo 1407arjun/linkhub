@@ -28,57 +28,59 @@ export default function Home(props) {
             <Head title="Home &middot; LinkHub" desc="View what's trending on your timeline"/>
             <div className="flex flex-row place-content-start min-h-screen">
                 { navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Home"/> }
-                <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
-                    <div className="w-full flex flex-row justify-start items-center gap-4">
+                <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 border-l border-gray-300 dark:border-gray-600 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 py-4" }>
+                    <div className="w-full flex flex-row justify-start items-center gap-4 px-4">
                         { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:invert" alt="Nav"/></button> }
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
-                    { props.posts.length > 0 && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
-                        { props.posts.map((post, index) => {
-                            return (
-                                <PostMini key={ post._id.toString() } id={ post._id.toString() } name={ post.author.name }
-                                    username={ post.author.username }
-                                    email = { post.author.email }
-                                    image={ post.author.image }
-                                    title={ post.title }
-                                    body={ post.body }
-                                    tags={ post.tags }
-                                    date={ post.date }
-                                    upvotes={ post.upvotes }
-                                    downvotes={ post.downvotes }
-                                    flags={ post.flags }
-                                    option={ props.user ? (props.user.upvoted.includes(post._id) ? "upvoted" : 
-                                        (props.user.downvoted.includes(post._id) ? "downvoted" : 
-                                        (props.user.flagged.includes(post._id) ? "flagged" : null))) : null }
-                                    saved ={ props.user && props.user.saved.includes(post._id) }
-                                    delete ={ props.user && props.user.email === post.author.email }/>
-                            )
-                        }) }
-                    </div> } 
-                    { props.olderPosts.length > 0 && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
-                        <h3 className="w-full text-left text-lg md:text-xl xl:text-2xl font-bold dark:text-white">Older posts</h3>
-                        { props.olderPosts.map((post, index) => {
-                            return (
-                                <PostMini key={ post._id.toString() } id={ post._id.toString() } name={ post.author.name }
-                                    username={ post.author.username }
-                                    email = { post.author.email }
-                                    image={ post.author.image }
-                                    title={ post.title }
-                                    body={ post.body }
-                                    tags={ post.tags }
-                                    date={ post.date }
-                                    upvotes={ post.upvotes }
-                                    downvotes={ post.downvotes }
-                                    flags={ post.flags }
-                                    option={ props.user ? (props.user.upvoted.includes(post._id) ? "upvoted" : 
-                                        (props.user.downvoted.includes(post._id) ? "downvoted" : 
-                                        (props.user.flagged.includes(post._id) ? "flagged" : null))) : null }
-                                    saved ={ props.user && props.user.saved.includes(post._id) }
-                                    delete ={ props.user && props.user.email === post.author.email }/>
-                            )
-                        }) }
-                    </div> }
-                    <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
+                    <div className="h-screen overflow-y-auto w-full">
+                        { props.posts.length > 0 && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
+                            { props.posts.map((post, index) => {
+                                return (
+                                    <PostMini key={ post._id.toString() } id={ post._id.toString() } name={ post.author.name }
+                                        username={ post.author.username }
+                                        email = { post.author.email }
+                                        image={ post.author.image }
+                                        title={ post.title }
+                                        body={ post.body }
+                                        tags={ post.tags }
+                                        date={ post.date }
+                                        upvotes={ post.upvotes }
+                                        downvotes={ post.downvotes }
+                                        flags={ post.flags }
+                                        option={ props.user ? (props.user.upvoted.includes(post._id) ? "upvoted" : 
+                                            (props.user.downvoted.includes(post._id) ? "downvoted" : 
+                                            (props.user.flagged.includes(post._id) ? "flagged" : null))) : null }
+                                        saved ={ props.user && props.user.saved.includes(post._id) }
+                                        delete ={ props.user && props.user.email === post.author.email }/>
+                                )
+                            }) }
+                        </div> } 
+                        { props.olderPosts.length > 0 && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-4">
+                            <h3 className="w-full text-left text-lg md:text-xl xl:text-2xl font-bold dark:text-white">Older posts</h3>
+                            { props.olderPosts.map((post, index) => {
+                                return (
+                                    <PostMini key={ post._id.toString() } id={ post._id.toString() } name={ post.author.name }
+                                        username={ post.author.username }
+                                        email = { post.author.email }
+                                        image={ post.author.image }
+                                        title={ post.title }
+                                        body={ post.body }
+                                        tags={ post.tags }
+                                        date={ post.date }
+                                        upvotes={ post.upvotes }
+                                        downvotes={ post.downvotes }
+                                        flags={ post.flags }
+                                        option={ props.user ? (props.user.upvoted.includes(post._id) ? "upvoted" : 
+                                            (props.user.downvoted.includes(post._id) ? "downvoted" : 
+                                            (props.user.flagged.includes(post._id) ? "flagged" : null))) : null }
+                                        saved ={ props.user && props.user.saved.includes(post._id) }
+                                        delete ={ props.user && props.user.email === post.author.email }/>
+                                )
+                            }) }
+                        </div> }
+                        <p className="text-sm md:text-base italic dark:text-white text-center mt-4">-- You have reached the end --</p>
+                    </div>
                 </div>
                 <SideBar saved={ props.saved } tags={ props.tags }/>
             </div>

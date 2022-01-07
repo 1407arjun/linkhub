@@ -29,12 +29,12 @@ export default function Profile(props) {
             <Head title="Profile &middot; LinkHub" desc="View your LinkHub profile - posts, upvotes, downvotes and tags"/>
             <div className="flex flex-row place-content-start min-h-screen">
                 { navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Profile"/> }
-                <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 p-4" }>
-                    <div className="w-full flex flex-row justify-start items-center gap-4">
+                <div className={ "flex flex-col gap-4 justify-start items-center" + ( navStatus ? " w-5/6 border-l border-gray-300 dark:border-gray-600 " : " w-full ") + "md:w-5/6 lg:w-7/12 xl:w-3/6 py-4" }>
+                    <div className="w-full flex flex-row justify-start items-center gap-4 px-4">
                         { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:invert" alt="Nav"/></button> }
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
-                    <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Profile</h2>
+                    <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white px-4">Profile</h2>
                     <TabLayout tab={ props.tab }/>
                     <TabContent posts={ props.posts } profile={ props.user } tags={ props.posts ? null : props.user.tags }/>
                 </div>

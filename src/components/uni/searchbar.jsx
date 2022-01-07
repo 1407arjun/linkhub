@@ -28,7 +28,7 @@ export default function SearchBar(props) {
 
     return (
         <div className={"flex flex-row flex-nowrap " + (props.smhidesearch ? "justify-end" : "justify-start") + " items-center gap-4 w-full py-1"}>
-            { status !== "authenticated" && <Link href="/home"><a className="inline-block p-2 rounded-full hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-800 dark:focus:bg-gray-800 hover:no-underline focus:no-underline"><img src="/assets/icon-black.svg" className="w-12 md:w-14 dark:invert" alt=""/></a></Link> }
+            { status !== "authenticated" && <Link href="/"><a className="inline-block p-2 rounded-full hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-800 dark:focus:bg-gray-800 hover:no-underline focus:no-underline"><img src="/assets/icon-black.svg" className="w-12 md:w-14 dark:invert" alt=""/></a></Link> }
             <form onSubmit={ postQuery } className={ (props.smhidesearch ? "hidden " : "inline ") + "sm:inline self-center w-full" }>
                 <input name="query" onChange={ (ev) => setText(ev.target.value) } type="text" className="rounded-md bg-gray-300 dark:bg-gray-500 bg-opacity-20 dark:bg-opacity-20 backdrop-blur-sm placeholder-gray-500 dark:placeholder-gray-300 text-sm sm:text-base md:text-lg xl:text-xl p-3 focus:outline-none text-black dark:text-white ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 dark:focus:ring-gray-100 ring-opacity-100 focus:ring-opacity-40 w-full"
                         placeholder={ props.placeholder } value={ text } autoComplete="off"/>

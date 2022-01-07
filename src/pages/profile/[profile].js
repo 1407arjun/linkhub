@@ -42,44 +42,46 @@ export default function Post(props) {
             <Head title={  data.username + "'s posts on LinkHub" } desc={ "View " + data.username + "'s profile on LinkHub" } image="https://linkhub-live.vercel.app/assets/seo/person.png"/>
             <div className="flex flex-row justify-center items-start min-h-screen">
                 { status === "authenticated" && navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Explore"/> }
-                <div className={ "flex flex-col gap-6 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
+                <div className={ "flex flex-col gap-6 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 border-l border-gray-300 dark:border-gray-600 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>
                     <div className="w-full flex flex-row justify-start items-center gap-4">
                         { status === "authenticated" && !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:invert" alt="Nav"/></button> }
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false }/>
                     </div>
-                    <div className="flex flex-row flex-nowrap justify-between items-center w-full px-4 gap-4">
-                        <img src={ data.image ? data.image : "/assets/profile/person.svg" } className={ "rounded-full w-12 md:w-16" + (data.image ? "" : " invert dark:invert-0") } alt=""/>
-                        <div className="flex flex-col justify-start items-center gap-1 w-full">
-                            <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.name }</h2>
-                            <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "@" + data.username }</p>
+                    <div className="h-screen overflow-y-auto w-full">
+                        <div className="flex flex-row flex-nowrap justify-between items-center w-full px-4 gap-4">
+                            <img src={ data.image ? data.image : "/assets/profile/person.svg" } className={ "rounded-full w-12 md:w-16" + (data.image ? "" : " invert dark:invert-0") } alt=""/>
+                            <div className="flex flex-col justify-start items-center gap-1 w-full">
+                                <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.name }</h2>
+                                <p className="w-full text-left text-base md:text-lg xl:text-xltext-gray-500 dark:text-gray-300">{ "@" + data.username }</p>
+                            </div>
                         </div>
+                        <div className={(data.tags.length > 0 ? "flex " : "hidden ") + "flex-row flex-wrap gap-2 justify-start items-start w-full px-3 my-4"}>
+                            { data.tags.map((tag, index) => { return <TagBar key={ tag } name={ tag }/> }) }
+                        </div>
+                        <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
+                            { props.posts.map((post, index) => {
+                                return (
+                                    <PostMini key={ post._id.toString() } id={ post._id.toString() } name={ post.author.name }
+                                        username={ post.author.username }
+                                        email = { post.author.email }
+                                        image={ post.author.image }
+                                        title={ post.title }
+                                        body={ post.body }
+                                        tags={ post.tags }
+                                        date={ post.date }
+                                        upvotes={ post.upvotes }
+                                        downvotes={ post.downvotes }
+                                        flags={ post.flags }
+                                        option={ props.user ? (props.user.upvoted.includes(post._id) ? "upvoted" : 
+                                            (props.user.downvoted.includes(post._id) ? "downvoted" : 
+                                            (props.user.flagged.includes(post._id) ? "flagged" : null))) : null }
+                                        saved ={ props.user && props.user.saved.includes(post._id) }
+                                        delete ={ false }/>
+                                )
+                            }) }
+                        </div>
+                        <p className="text-sm md:text-base italic dark:text-white text-center mt-4">-- You have reached the end --</p>
                     </div>
-                    <div className={(data.tags.length > 0 ? "flex " : "hidden ") + "flex-row flex-wrap gap-2 justify-start items-start w-full px-3"}>
-                        { data.tags.map((tag, index) => { return <TagBar key={ tag } name={ tag }/> }) }
-                    </div>
-                    <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
-                        { props.posts.map((post, index) => {
-                            return (
-                                <PostMini key={ post._id.toString() } id={ post._id.toString() } name={ post.author.name }
-                                    username={ post.author.username }
-                                    email = { post.author.email }
-                                    image={ post.author.image }
-                                    title={ post.title }
-                                    body={ post.body }
-                                    tags={ post.tags }
-                                    date={ post.date }
-                                    upvotes={ post.upvotes }
-                                    downvotes={ post.downvotes }
-                                    flags={ post.flags }
-                                    option={ props.user ? (props.user.upvoted.includes(post._id) ? "upvoted" : 
-                                        (props.user.downvoted.includes(post._id) ? "downvoted" : 
-                                        (props.user.flagged.includes(post._id) ? "flagged" : null))) : null }
-                                    saved ={ props.user && props.user.saved.includes(post._id) }
-                                    delete ={ false }/>
-                            )
-                        }) }
-                    </div>
-                    <p className="text-sm md:text-base italic dark:text-white">-- You have reached the end --</p>
                 </div>
             </div>
             { status === "authenticated" ? <Footer username={ props.user.username } signedin={ true }/> : <Footer signedin={ false }/>}
