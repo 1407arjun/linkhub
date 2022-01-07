@@ -37,7 +37,7 @@ export default function Saved(props) {
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Saved Posts</h2>
                     <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         { props.posts.map((data, index) => { return (
-                            <PostMini key={ index } id={ data._id.toString() } name={ data.author.name }
+                            <PostMini key={ data._id.toString() } id={ data._id.toString() } name={ data.author.name }
                                 username={ data.author.username }
                                 email = { data.author.email }
                                 image={ data.author.image }

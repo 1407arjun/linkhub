@@ -36,7 +36,7 @@ export default function Home(props) {
                     { props.posts.length > 0 && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
                         { props.posts.map((post, index) => {
                             return (
-                                <PostMini key={ index } id={ post._id.toString() } name={ post.author.name }
+                                <PostMini key={ post._id.toString() } id={ post._id.toString() } name={ post.author.name }
                                     username={ post.author.username }
                                     email = { post.author.email }
                                     image={ post.author.image }
@@ -59,7 +59,7 @@ export default function Home(props) {
                         <h3 className="w-full text-left text-lg md:text-xl xl:text-2xl font-bold dark:text-white">Older posts</h3>
                         { props.olderPosts.map((post, index) => {
                             return (
-                                <PostMini key={ index } id={ post._id.toString() } name={ post.author.name }
+                                <PostMini key={ post._id.toString() } id={ post._id.toString() } name={ post.author.name }
                                     username={ post.author.username }
                                     email = { post.author.email }
                                     image={ post.author.image }

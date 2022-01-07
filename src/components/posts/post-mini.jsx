@@ -127,7 +127,7 @@ export default function PostMini(props) {
                     <h1 className="dark:text-white">{ props.title }</h1>
                     <ReactMarkdown remarkPlugins={ [remarkGfm] } className="dark:text-white overflow-y-auto break-words">{ props.body }</ReactMarkdown>
                     <div className="flex flex-row flex-wrap gap-2 justify-start items-center pt-2 pb-3">
-                        { props.tags.map((tag, index) => { return <TagBar key={ index } name={ tag }/> }) }
+                        { props.tags.map((tag, index) => { return <TagBar key={ tag } name={ tag }/> }) }
                     </div>
                 </div>
             </div>

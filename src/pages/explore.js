@@ -42,7 +42,7 @@ export default function Explore(props) {
                         <h3 className="w-full text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl font-bold mb-1 dark:text-white">Trending</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
                             { trendTags.map((tag, index) => {
-                                return <Tag key={ index } name={ tag._id } post={ tag.count } follow={ props.user && props.user.tags.includes(tag._id) }/>
+                                return <Tag key={ tag._id } name={ tag._id } post={ tag.count } follow={ props.user && props.user.tags.includes(tag._id) }/>
                             }) }
                         </div>
                     </div> }
@@ -52,21 +52,21 @@ export default function Explore(props) {
                         <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white" id="tags">Tags</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
                             { props.results.tags.map((tag, index) => {
-                                return <Tag key={ index } name={ tag._id } post={ tag.count } follow={ props.user && props.user.tags.includes(tag._id) }/>
+                                return <Tag key={ tag._id } name={ tag._id } post={ tag.count } follow={ props.user && props.user.tags.includes(tag._id) }/>
                             }) }
                         </div>
                         <br/>
                         <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white" id="posts">Posts</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
                             { props.results.posts.map((post, index) => {
-                                return <Recent key={ index } title={ post.title } desc={ "@" + post.author.username } id={ post._id.toString() } save={ props.user && props.user.saved.includes(post._id) }/>
+                                return <Recent key={ post._id.toString() } title={ post.title } desc={ "@" + post.author.username } id={ post._id.toString() } save={ props.user && props.user.saved.includes(post._id) }/>
                             }) }
                         </div>
                         <br/>
                         <h4 className="w-full font-bold text-left px-2 sm:px-4 text-base md:text-lg xl:text-xl mb-1 dark:text-white" id="users">Users</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-1">
                             { props.results.profiles.map((profile, index) => {
-                                return <Profile key={ index } name={ profile.name } username={ profile.username } image={ profile.image }/>
+                                return <Profile key={ profile.username } name={ profile.name } username={ profile.username } image={ profile.image }/>
                             }) }
                         </div>
                     </div> }

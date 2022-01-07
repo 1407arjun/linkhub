@@ -66,11 +66,11 @@ export default function TagBar(props) {
     return (
         <div className="w-full lg:w-4/5 xl:w-2/3">
             <div className="p-1.5 flex flex-row flex-wrap gap-2 justify-start items-center rounded-md ring-1 focus:ring-2 ring-gray-300 focus:ring-gray-500 w-full">
-                { tags.map((tag, index) => { return <Tag key={ index } name={ tag } update={ setTags }/>}) }
+                { tags.map((tag, index) => { return <Tag key={ tag } name={ tag } update={ setTags }/>}) }
                 <input list="suggestions" onChange={ onTagChange } onKeyDown={ handleTagsChange } name="tags" type="text" placeholder="Tags" className="w-full p-1 focus:outline-none dark:text-white dark:focus:ring-gray-100 dark:bg-black text-base md:text-lg font-semibold" value={ tagInput } autoComplete="off"/>
                 <datalist id="suggestions">
                     { suggestions.map((tag, index) => {
-                        return <option key={ index } value={ tag.name }/>
+                        return <option key={ tag._id.toString() } value={ tag.name }/>
                     }) }
                 </datalist>
             </div>    

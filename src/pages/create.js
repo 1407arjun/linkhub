@@ -123,7 +123,7 @@ export async function getServerSideProps(context) {
                 props: {}
             }
         else {
-            const suggestions = JSON.parse(JSON.stringify(await mClient.db("Client").collection("tags").find({}).project({ name: 1, _id: 0 }).sort({ name: 1 }).toArray()))
+            const suggestions = JSON.parse(JSON.stringify(await mClient.db("Client").collection("tags").find({}).project({ name: 1 }).sort({ name: 1 }).toArray()))
             return {
                 props: { user: profile, suggestions: suggestions }
             }
