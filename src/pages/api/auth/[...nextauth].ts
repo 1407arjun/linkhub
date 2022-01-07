@@ -28,6 +28,7 @@ export default async function Auth(req: NextApiRequest, res: NextApiResponse) {
         secret: process.env.AUTH_SECRET!,
         pages: {
             signIn: '/login',
+            signOut: '',
             newUser: '/complete/username'
         },
         callbacks: {

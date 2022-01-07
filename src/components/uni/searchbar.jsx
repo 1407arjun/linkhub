@@ -27,7 +27,6 @@ export default function SearchBar(props) {
     }
 
     return (
-        <div className="fixed-top">
         <div className={"flex flex-row flex-nowrap " + (props.smhidesearch ? "justify-end" : "justify-start") + " items-center gap-4 w-full py-1"}>
             { status !== "authenticated" && <Link href="/home"><a className="inline-block p-2 rounded-full hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-800 dark:focus:bg-gray-800 hover:no-underline focus:no-underline"><img src="/assets/icon-black.svg" className="w-12 md:w-14 dark:invert" alt=""/></a></Link> }
             <form onSubmit={ postQuery } className={ (props.smhidesearch ? "hidden " : "inline ") + "sm:inline self-center w-full" }>
@@ -41,6 +40,5 @@ export default function SearchBar(props) {
                 <button onClick={ () => signOut() } className="self-center rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-1 md:p-3"><img src="/assets/home/box-arrow-left.svg" alt="Logout" className="w-6 md:w-12 mx-auto dark:invert"/></button>
             </div> }
         </div>
-        </div>    
     )
 }
