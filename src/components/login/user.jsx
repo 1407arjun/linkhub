@@ -12,7 +12,7 @@ export default function User(props) {
                     <img src="/assets/logo.svg" className="p-8 md:p-auto object-contain h-full" alt=""/>
                 </div>    
                 <div className="flex flex-col place-content-start md:w-1/2 p-8 gap-4 bg-white dark:bg-black">
-                    <img src="/assets/icon-black.svg" className="object-contain w-16 mb-8 dark:filter dark:invert" alt="LinkHub Icon"/>
+                    <img src="/assets/icon-black.svg" className="object-contain w-16 mb-8 dark:invert" alt="LinkHub Icon"/>
                     <h1 className="text-black dark:text-white text-5xl font-bold mb-6">{ props.line1 }</h1>
                     <h2 className="text-black dark:text-white text-4xl font-bold mb-4">{ props.line2 }</h2>
                     <SignOpts type={ props.type } href={ props.loc }/>

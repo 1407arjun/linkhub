@@ -13,12 +13,12 @@ export default function NavBar(props) {
         <div className="flex flex-col justify-start items-center xl:items-start pt-2 pb-4 gap-1 border-r border-gray-300 dark:border-gray-600 w-1/6 lg:w-1/12 xl:w-1/6 min-h-screen">
             <div className="hidden md:block px-1 md:px-2 lg:px-4 xl:px-8 py-2">
                 <Link href="/home"><a className="inline-block p-4 rounded-full hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-800 dark:focus:bg-gray-800 hover:no-underline focus:no-underline">
-                    <img src="/assets/icon-black.svg" className="w-6 md:w-8 dark:filter dark:invert" alt=""/>
+                    <img src="/assets/icon-black.svg" className="w-6 md:w-8 dark:invert" alt=""/>
                 </a></Link>
             </div>
             <div className="px-1 md:px-2 lg:px-4 xl:px-8 py-2 text-center w-full">
                 <button onClick={ () => {setNavStatus(!navStatus)} } className="inline-block md:hidden p-4">
-                    <img src="/assets/home/cancel.svg" className="w-6 md:w-8 mx-auto dark:filter dark:invert" alt=""/>
+                    <img src="/assets/home/cancel.svg" className="w-6 md:w-8 mx-auto dark:invert" alt=""/>
                 </button>
             </div>
             <NavBtn src="/assets/home/home" href="/home" alt="Home" current={ props.current === "Home"}/>

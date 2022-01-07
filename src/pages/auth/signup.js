@@ -8,7 +8,7 @@ export default function SignUp() {
         <div className="text-center dark:bg-black">
             <Head title="Sign up &middot; LinkHub" desc="Enter your details to create an account on LinkHub"/>
             <div className="inline-flex flex-col place-content-center gap-4 w-full md:w-4/5 xl:w-1/2 p-6 min-h-screen">
-                <img src="/assets/logo-black.svg" alt="LinkHub" className="w-1/2 mx-auto dark:filter dark:invert"/>
+                <img src="/assets/logo-black.svg" alt="LinkHub" className="w-1/2 mx-auto dark:invert"/>
                 <h2 className="w-full font-bold text-2xl md:text-3xl text-center dark:text-white">Sign up</h2>
                 <form action="/api/auth/local/signup" method="POST" className="inline-flex flex-col md:grid md:grid-cols-2 mx-auto gap-4 justify-start items-center w-full p-1">
                     <div className="w-full self-start">

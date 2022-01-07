@@ -13,7 +13,7 @@ export default function Index() {
       <div className="grad-home min-h-screen">
         <HomeBar/>
         <div className="mx-auto my-4 flex flex-col-reverse lg:flex-row place-content-center w-full text-center lg:text-left px-4">
-          <div className="flex flex-col flex-grow-1 place-content-center p-6 lg:p-8 gap-y-2 lg:justify-center lg:content-start w-full lg:w-2/3 xl:w-1/2">
+          <div className="flex flex-col grow-1 place-content-center p-6 lg:p-8 gap-y-2 lg:justify-center lg:content-start w-full lg:w-2/3 xl:w-1/2">
             <h1 className="lg:mt-8 text-white text-4xl sm:text-5xl lg:text-6xl font-bold">An open source resources network</h1>
             <h2 className="text-white font-normal text-base sm:text-lg lg:text-2xl text-opacity-60">{ tagline }</h2>
             <SignUpBar/>
