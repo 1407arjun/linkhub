@@ -24,7 +24,7 @@ export default function TabContent(props) {
                             (props.profile.downvoted.includes(data._id) ? "downvoted" : 
                             (props.profile.flagged.includes(data._id) ? "flagged" : null)) }
                         saved ={ props.profile.saved.includes(data._id) }
-                        delete ={ props.profile.email === data.author.email || (props.tab && props.tab === "moderation") }
+                        delete ={ props.profile.email === data.author.email }
                         moderation={ props.tab && props.tab === "moderation" }/>
                 ) }) }
             </div> }

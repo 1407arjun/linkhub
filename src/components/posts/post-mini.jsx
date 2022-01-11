@@ -111,14 +111,14 @@ export default function PostMini(props) {
     }
 
     async function classify(id, email, action) {
-        const submit = confirm("This action is irreversible. Continue?")
+        const submit = confirm((action === 0 ? "Classify as unappropriate and delete post?" : "Classify as false flags and clear all flags from this post?") + "This action is irreversible.")
         if (submit) {
             nprogress.start()
             try {
                 const res = await axios.post("/api/moderation/classify", { _id: id, email: email, action: action })
                 nprogress.done()
                 if (res.status === 200)
-                    router.push("/profile?tab=moderation")
+                    router.reload()
                 else
                     router.reload()    
             } catch (e) {
@@ -130,9 +130,9 @@ export default function PostMini(props) {
     }
 
     return (
-        <div className="flex flex-row place-content-start w-full p-2">
-            <div className="flex flex-col gap-1 place-content-start rounded-xl border border-gray-300 dark:border-gray-600 w-full">
-                <div className="flex flex-row flex-nowrap justify-between items-center gap-2 xl:gap-3 px-2 w-full">
+        <div className="flex flex-row place-content-start w-full gap-2">
+            <div className="flex flex-col gap-1 place-content-start rounded-xl border border-gray-300 dark:border-gray-600 w-full p-2">
+                <div className="flex flex-row flex-nowrap justify-between items-center gap-2 xl:gap-3 px-2 py-1 w-full">
                     <div className="flex-none flex flex-row justify-start items-center gap-2 xl:gap-3">
                         <span className={"select-none self-center inline-block font-bold text-lg sm:text-xl xl:text-2xl text-white dark:text-black rounded-full text-center" + (props.image ? "" : " p-2 bg-black dark:bg-white")}>{ props.image ? <img src={ props.image } alt="" className="rounded-full w-9 sm:w-10 xl:w-12"/> : getInitials(props.name) }</span>
                         <div className="self-center flex flex-col justify-center items-start">
@@ -146,7 +146,7 @@ export default function PostMini(props) {
                 </div>
                 <div className="flex flex-row gap-2 place-content-start w-full px-2 sm:px-0">
                     <Bar upvotes={ upvotes } downvotes={ downvotes } flags={ flags } option={ option } update={ updateOption }/>
-                    <div className="flex flex-col gap-1 place-content-start w-full sm:w-5/6 py-2">
+                    <div className="flex flex-col gap-1 place-content-start w-full sm:w-5/6 py-2 sm:pr-2">
                         <h1 className="dark:text-white">{ props.title }</h1>
                         <ReactMarkdown remarkPlugins={ [remarkGfm] } className="dark:text-white overflow-y-auto break-words">{ props.body }</ReactMarkdown>
                         <div className="flex flex-row flex-wrap gap-2 justify-start items-center pt-2 pb-3">
@@ -156,12 +156,12 @@ export default function PostMini(props) {
                 </div>
                 <HBar upvotes={ upvotes } downvotes={ downvotes } flags={ flags } option={ option } update={ updateOption }/>
             </div>
-            { props.moderation && <div className="flex flex-col justify-start items-center p-4 xl:p-8 gap-5">
-                <button onClick={ () => classify(props.id, props.email, 1) } className="flex flex-row justify-start items-center gap-2 w-full">
-                    <img src="/assets/moderation/thumbs-up.svg" alt="Unflag" className="w-8 md:w-10"/>
+            { props.moderation && <div className="flex flex-col justify-start items-center p-2 lg:p-4 gap-6">
+                <button onClick={ () => classify(props.id, props.email, 1) } className="flex flex-row justify-start items-center gap-2 w-full rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2">
+                    <img src="/assets/moderation/thumbs-up.svg" alt="Unflag" className="w-8 lg:w-10 dark:invert"/>
                 </button>
-                <button onClick={ () => () => classify(props.id, props.email, 0) } className="flex flex-row justify-start items-center gap-2 w-full">
-                    <img src="/assets/moderation/thumbs-down.svg" alt="Delete" className="w-8 md:w-10"/>
+                <button onClick={ () => classify(props.id, props.email, 0) } className="flex flex-row justify-start items-center gap-2 w-full rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2">
+                    <img src="/assets/moderation/thumbs-down.svg" alt="Delete" className="w-8 lg:w-10 dark:invert"/>
                 </button>
             </div> }
         </div>

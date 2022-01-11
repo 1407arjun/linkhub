@@ -9,6 +9,7 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
     if (session && session.user) {
         if (req.method === 'POST') {
             const data = req.body
+            console.log(data)
             try {
                 const mClient = await client
                 const profile = await mClient.db("Client").collection("profiles").findOne({email: session.user.email})
@@ -16,9 +17,10 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
                 if (profile && profile.roles.includes("moderator")) {
                     if (data.action === 1) {
                         //@ts-ignore
-                        const res1: UpdateResult = await mClient.db("Client").collection("profiles").updateMany({}, { "$pull": { flagged: new ObjectId(postId) }})
+                        const res1: UpdateResult = await mClient.db("Client").collection("profiles").updateMany({}, { "$pull": { flagged: new ObjectId(data._id) }})
                         const res2 = await mClient.db("Client").collection("posts").updateOne({_id: new ObjectId(data._id)}, { "$set": { flags: 0 }})
-
+                        console.log(res1)
+                        console.log(res2)
                         if (res1.acknowledged && res2.acknowledged)
                             res.status(200).end()
                         else

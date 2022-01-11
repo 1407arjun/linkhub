@@ -81,8 +81,14 @@ export async function getServerSideProps(context) {
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }
+                } else if (tab === "flagged") {
+                    const oidArray = profile.flagged.map(id => { return new ObjectId(id) })
+                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).sort({date: -1}).toArray()))
+                    return {
+                        props: { user: profile, posts: posts, tab: tab }
+                    }
                 } else if (profile.roles.includes("moderator") && tab === "moderation") {
-                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{"$match": {tags: {"$in": profile.tags}, flags: {"$gte": {"$subtract": ["$upvotes", "$downvotes"]}}}}, {"$sort": {flags: -1, date: -1}}]).toArray()))
+                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{"$match": {tags: {"$in": profile.tags}, flags: {"$gt": 0}}}, {"$addFields":{diff: {"$subtract": ["$upvotes", "$downvotes"]}}}, {"$match": {"$expr": {"$gt": ["$flags", "$diff"]}}}, {"$sort": {flags: -1, date: -1}}]).toArray()))
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }    
