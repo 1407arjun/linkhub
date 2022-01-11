@@ -35,6 +35,9 @@ export default function Profile(props) {
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white px-4">Profile</h2>
+                    { props.user.roles.length > 0 && <div className="flex-row flex-wrap gap-2 justify-start items-start w-full px-4 my-2">
+                        { props.user.roles.includes("moderator") && <p className="flex-none px-1.5 py-0.5 text-xs text-red-500 dark:text-red-400 sm:text-sm rounded-full border border-red-500 dark:border-red-400 font-semibold">Moderator</p> }
+                    </div> }
                     <TabLayout tab={ props.tab } moderator={ props.user.roles.includes("moderator") }/>
                     <TabContent tab={ props.tab } posts={ props.posts } profile={ props.user } tags={ props.posts ? null : props.user.tags }/>
                 </div>
@@ -46,8 +49,7 @@ export default function Profile(props) {
 }
 
 export async function getServerSideProps(context) {
-    //const session = await getSession(context)
-    const session = { user: { email: "arjun140702@gmail.com" }}
+    const session = await getSession(context)
     const { tab } = context.query
     if (session) {
         const mClient = await client
