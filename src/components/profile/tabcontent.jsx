@@ -24,7 +24,8 @@ export default function TabContent(props) {
                             (props.profile.downvoted.includes(data._id) ? "downvoted" : 
                             (props.profile.flagged.includes(data._id) ? "flagged" : null)) }
                         saved ={ props.profile.saved.includes(data._id) }
-                        delete ={ props.profile.email === data.author.email || (props.tab && props.tab === "moderation") }/>
+                        delete ={ props.profile.email === data.author.email || (props.tab && props.tab === "moderation") }
+                        moderation={ props.tab && props.tab === "moderation" }/>
                 ) }) }
             </div> }
             { props.tags && <div className="grid grid-cols-1 sm:grid-cols-2 justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">

@@ -14,24 +14,8 @@ export default async function New(req: NextApiRequest, res: NextApiResponse): Pr
                     res.status(200).end()
                 else
                     res.status(500).end()
-            } else {
-                try {
-                    const mClient = await client
-                    const profile = await mClient.db("Client").collection("profiles").findOne({email: session.user.email})
-
-                    if (profile && profile.roles.includes("moderator")) {
-                        const response = await deletePost(data._id)
-                        if (!response.error)
-                            res.status(200).end()
-                        else
-                            res.status(500).end()
-                    } else
-                        res.status(401).statusMessage
-                } catch (e) {
-                    console.log(e)
-                    res.status(500).end()
-                }
-            }
+            } else 
+                res.status(401).statusMessage
         }
     } else {
         res.status(401).statusMessage
