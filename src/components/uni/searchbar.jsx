@@ -37,7 +37,7 @@ export default function SearchBar(props) {
             { status !== "authenticated" && <Link href="/login"><a className="whitespace-nowrap h-full text-base sm:text-lg xl:text-xl text-black dark:text-white rounded-md border-2 border-gray-500 dark:border-gray-300 p-2 md:p-3 hover:no-underline focus:no-underline hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800">Sign In</a></Link>}
             { optState && <div className="flex flex-row gap-2 justify-start items-center">
                 <button onClick={ () => { setOptState(!optState) } } className="self-center rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-1 md:p-3"><img src="/assets/home/cancel.svg" alt="Logout" className="w-6 md:w-12 mx-auto dark:invert"/></button>
-                <button onClick={ () => signOut() } className="self-center rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-1 md:p-3"><img src="/assets/home/box-arrow-left.svg" alt="Logout" className="w-6 md:w-12 mx-auto dark:invert"/></button>
+                <button onClick={ () => signOut() } className="self-center rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-1 md:p-3"><img src="/assets/home/box-arrow-left.svg" alt="Logout" className="w-6 md:w-10 mx-auto dark:invert"/></button>
             </div> }
         </div>
     )
