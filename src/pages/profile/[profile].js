@@ -52,7 +52,7 @@ export default function Post(props) {
                             <img src={ data.image ? data.image : "/assets/profile/person.svg" } className={ "rounded-full w-12 md:w-16" + (data.image ? "" : " invert dark:invert-0") } alt=""/>
                             <div className="flex flex-col justify-start items-center gap-1 w-full">
                                 <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.name }</h2>
-                                { props.user.roles.length > 0 && <div className="flex flex-col gap-4 justify-start items-start w-full">
+                                { props.user.roles.length > 0 && <div className="flex flex-row gap-4 justify-start items-start w-full">
                                     <p className="text-left text-base md:text-lg xl:text-xl text-gray-500 dark:text-gray-300">{ "@" + data.username }</p>
                                     { props.user.roles.includes("moderator") && <p className="flex-none px-1.5 py-0.5 text-xs text-red-500 dark:text-red-400 sm:text-sm rounded-full border border-red-500 dark:border-red-400 font-semibold">Moderator</p> }
                                 </div> }

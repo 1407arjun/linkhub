@@ -36,7 +36,7 @@ export default function Profile(props) {
                     </div>
                     <div className="w-full flex flex-row gap-2 justify-start items-start px-4 my-2">
                         <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Profile</h2>
-                        { props.user.roles.includes("moderator") && <p className="flex-none px-1.5 py-0.5 text-xs text-red-500 dark:text-red-400 sm:text-sm rounded-full border border-red-500 dark:border-red-400 font-semibold">Moderator</p> }  
+                        { props.user.roles.includes("moderator") && <p className="self-end justify-self-center px-1.5 py-0.5 text-xs text-red-500 dark:text-red-400 sm:text-sm rounded-full border border-red-500 dark:border-red-400 font-semibold">Moderator</p> }  
                     </div>
                     <TabLayout tab={ props.tab } moderator={ props.user.roles.includes("moderator") }/>
                     <TabContent tab={ props.tab } posts={ props.posts } profile={ props.user } tags={ props.posts ? null : props.user.tags }/>
