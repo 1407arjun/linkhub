@@ -35,8 +35,8 @@ export default function Profile(props) {
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
                     <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white px-4">Profile</h2>
-                    <TabLayout tab={ props.tab }/>
-                    <TabContent posts={ props.posts } profile={ props.user } tags={ props.posts ? null : props.user.tags }/>
+                    <TabLayout tab={ props.tab } moderator={ props.user.roles.includes("moderator") }/>
+                    <TabContent tab={ props.tab } posts={ props.posts } profile={ props.user } tags={ props.posts ? null : props.user.tags }/>
                 </div>
                 <SideBar/>
             </div>
@@ -46,7 +46,8 @@ export default function Profile(props) {
 }
 
 export async function getServerSideProps(context) {
-    const session = await getSession(context)
+    //const session = await getSession(context)
+    const session = { user: { email: "arjun140702@gmail.com" }}
     const { tab } = context.query
     if (session) {
         const mClient = await client
@@ -78,10 +79,20 @@ export async function getServerSideProps(context) {
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }
-                } else
+                } else if (profile.roles.includes("moderator") && tab === "moderation") {
+                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({tags: {"$in": profile.tags}, flags: {"$gte": {"$subtract": ["$upvotes", "$downvotes"]}}}).sort({flags: -1, date: -1}).toArray()))
+                    return {
+                        props: { user: profile, posts: posts, tab: tab }
+                    }    
+                } else if (tab === "tags") {
                     return {
                         props: { user: profile, tab: tab }
                     }
+                } else {
+                    return {
+                        notFound: true
+                    }
+                }
             }
         }     
     } else {
