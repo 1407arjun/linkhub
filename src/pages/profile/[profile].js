@@ -55,8 +55,8 @@ export default function Post(props) {
                                     <h2 className="font-bold text-2xl md:text-3xl text-left dark:text-white">{ data.name }</h2>
                                     { props.user.roles.includes("moderator") && <p className="self-center px-1.5 py-0.5 text-xs text-red-500 dark:text-red-400 sm:text-sm rounded-full border border-red-500 dark:border-red-400 font-semibold">Moderator</p> }
                                 </div> }
+                                <p className="w-full text-left text-base md:text-lg xl:text-xl text-gray-500 dark:text-gray-300">{ "@" + data.username }</p>
                             </div>
-                            <p className="w-full text-left text-base md:text-lg xl:text-xl text-gray-500 dark:text-gray-300">{ "@" + data.username }</p>
                         </div>
                         <div className={(data.tags.length > 0 ? "flex " : "hidden ") + "flex-row flex-wrap gap-2 justify-start items-start w-full px-3 my-4"}>
                             { data.tags.map((tag, index) => { return <TagBar key={ tag } name={ tag }/> }) }
