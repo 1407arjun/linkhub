@@ -34,9 +34,12 @@ export default function Profile(props) {
                         { !navStatus && <button onClick={ () => {setNavStatus(!navStatus)} } className="inline md:hidden w-10"><img src="/assets/home/menu.svg" className="w-full dark:invert" alt="Nav"/></button> }
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
-                    <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white px-4">Profile</h2>
-                    <TabLayout tab={ props.tab }/>
-                    <TabContent posts={ props.posts } profile={ props.user } tags={ props.posts ? null : props.user.tags }/>
+                    <div className="w-full flex flex-row gap-2 justify-start items-start px-4 my-2">
+                        <h2 className="w-full font-bold text-2xl md:text-3xl text-left dark:text-white">Profile</h2>
+                        { props.user.roles.includes("moderator") && <p className="self-center px-1.5 py-0.5 text-xs text-red-500 dark:text-red-400 sm:text-sm rounded-full border border-red-500 dark:border-red-400 font-semibold">Moderator</p> }  
+                    </div>
+                    <TabLayout tab={ props.tab } moderator={ props.user.roles.includes("moderator") }/>
+                    <TabContent tab={ props.tab } posts={ props.posts } profile={ props.user } tags={ props.posts ? null : props.user.tags }/>
                 </div>
                 <SideBar/>
             </div>
@@ -78,10 +81,20 @@ export async function getServerSideProps(context) {
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }
-                } else
+                } else if (profile.roles.includes("moderator") && tab === "moderation") {
+                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({tags: {"$in": profile.tags}, flags: {"$gte": {"$subtract": ["$upvotes", "$downvotes"]}}}).sort({flags: -1, date: -1}).toArray()))
+                    return {
+                        props: { user: profile, posts: posts, tab: tab }
+                    }    
+                } else if (tab === "tags") {
                     return {
                         props: { user: profile, tab: tab }
                     }
+                } else {
+                    return {
+                        notFound: true
+                    }
+                }
             }
         }     
     } else {
