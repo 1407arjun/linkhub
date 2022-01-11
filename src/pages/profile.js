@@ -82,7 +82,7 @@ export async function getServerSideProps(context) {
                         props: { user: profile, posts: posts, tab: tab }
                     }
                 } else if (profile.roles.includes("moderator") && tab === "moderation") {
-                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({tags: {"$in": profile.tags}, flags: {"$gte": {"$subtract": ["$upvotes", "$downvotes"]}}}).sort({flags: -1, date: -1}).toArray()))
+                    const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{"$match": {tags: {"$in": profile.tags}, flags: {"$gte": {"$subtract": ["$upvotes", "$downvotes"]}}}}, {"$sort": {flags: -1, date: -1}}]).toArray()))
                     return {
                         props: { user: profile, posts: posts, tab: tab }
                     }    
