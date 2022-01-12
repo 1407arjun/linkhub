@@ -7,11 +7,16 @@ import PostMini from '../components/posts/post-mini'
 import { useState, useEffect } from 'react'
 import { getSession } from 'next-auth/react'
 import client from '../server/loaders/database'
-import { ObjectId } from 'mongodb'
+import nprogress from 'nprogress'
+import axios from 'axios'
 
 export default function Home(props) {
     const [navStatus, setNavStatus] = useState(false)
     const [windowSize, setWindowSize] = useState()
+    const [posts, setPosts] = useState([])
+    const [olderPosts, setOlderPosts] = useState([])
+    const [saved, setSaved] = useState([])
+    const [tags, setTags] = useState([])
     
     useEffect(() => {
         setWindowSize(window.innerWidth)
@@ -22,6 +27,55 @@ export default function Home(props) {
         else
             setNavStatus(false)   
     }, [windowSize])
+
+    async function initPosts(username, tags) {
+        nprogress.start()
+        try {
+            const res = await axios.post("/api/init/home/posts", { username: username, tags: tags })
+            nprogress.done()
+            if (!res.data.error) {
+                setPosts(res.data.data.posts)
+                setOlderPosts(res.data.data.olderPosts)
+            }    
+        } catch (e) {
+            console.log(e)
+            nprogress.done()
+        }
+    }
+
+    async function initSaved(saved) {
+        nprogress.start()
+        try {
+            const res = await axios.post("/api/init/home/saved", { saved: saved })
+            nprogress.done()
+            if (!res.data.error) {
+                setSaved(res.data.data.saved)
+            }    
+        } catch (e) {
+            console.log(e)
+            nprogress.done()
+        }
+    }
+
+    async function initTags(tags) {
+        nprogress.start()
+        try {
+            const res = await axios.post("/api/init/home/tags", { tags: tags })
+            nprogress.done()
+            if (!res.data.error) {
+                setTags(res.data.data.tags)
+            }    
+        } catch (e) {
+            console.log(e)
+            nprogress.done()
+        }
+    }
+
+    useEffect(() => {
+        initPosts(props.user.username, props.user.tags)
+        initSaved(props.user.saved)
+        initTags(props.user.tags)
+    }, [props.user])
 
     return (
         <div className="dark:bg-black">
@@ -34,8 +88,8 @@ export default function Home(props) {
                         <SearchBar placeholder="What would you like to learn today?" smhidesearch={ false } />
                     </div>
                     <div className="h-screen overflow-y-auto w-full">
-                        { props.posts.length > 0 && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
-                            { props.posts.map((post, index) => {
+                        { posts.length > 0 && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4">
+                            { posts.map((post, index) => {
                                 return (
                                     <PostMini key={ post._id.toString() } id={ post._id.toString() } name={ post.author.name }
                                         username={ post.author.username }
@@ -56,9 +110,9 @@ export default function Home(props) {
                                 )
                             }) }
                         </div> } 
-                        { props.olderPosts.length > 0 && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-4">
+                        { olderPosts.length > 0 && <div className="flex flex-col justify-center items-start w-full px-2 sm:px-4 gap-2 sm:gap-4 mt-4">
                             <h3 className="w-full text-left text-lg md:text-xl xl:text-2xl font-bold dark:text-white">Older posts</h3>
-                            { props.olderPosts.map((post, index) => {
+                            { olderPosts.map((post, index) => {
                                 return (
                                     <PostMini key={ post._id.toString() } id={ post._id.toString() } name={ post.author.name }
                                         username={ post.author.username }
@@ -82,7 +136,7 @@ export default function Home(props) {
                         <p className="text-sm md:text-base italic dark:text-white text-center mt-4">-- You have reached the end --</p>
                     </div>
                 </div>
-                <SideBar saved={ props.saved } tags={ props.tags }/>
+                <SideBar saved={ saved } tags={ tags }/>
             </div>
             <Footer username={ props.user.username } signedin={ true }/>
         </div>
@@ -90,7 +144,7 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-    const session = await getSession(context)
+    /*const session = await getSession(context)
     if (session) {
         const mClient = await client
         const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: session.user.email})))
@@ -103,30 +157,7 @@ export async function getServerSideProps(context) {
                 props: {}
             }
         else {
-            let date = new Date()
-            date.setDate(date.getDate() - 3)
-            const posts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts")
-                                .aggregate([{"$match": {"author.username": {"$ne": profile.username}, 
-                                        tags: {"$in": profile.tags}, date: {"$gte": date}}},
-                                    {"$project": {title : 1, body : 1, date: 1, upvotes: 1, downvotes: 1, flags: 1, author: 1, tags: 1, ratio: {"$cond": {"if": {downvotes: 0}, "then": "$upvotes", "else": {"$divide": ["$upvotes", "$downvotes"]}}}}},
-                                    {"$sort": {ratio: -1, date: -1}}
-                                    ]).toArray()))
-
-            const olderPosts = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts")
-                                .aggregate([{"$match": {"author.username": {"$ne": profile.username}, 
-                                        tags: {"$in": profile.tags}, date: {"$lt": date}}},
-                                    {"$project": {title : 1, body : 1, date: 1, upvotes: 1, downvotes: 1, flags: 1, author: 1, tags: 1, ratio: {"$cond": {"if": {downvotes: 0}, "then": "$upvotes", "else": {"$divide": ["$upvotes", "$downvotes"]}}}}},
-                                    {"$sort": {ratio: -1, date: -1}}
-                                    ]).limit(25).toArray()))
-
-            //const oidArray = profile.saved.map(id => { return new ObjectId(id) })
-            const oidArray = [new ObjectId(profile.saved[profile.saved.length - 1]), new ObjectId(profile.saved[profile.saved.length - 2]), new ObjectId(profile.saved[profile.saved.length - 3])]
-            const saved = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").find({_id: {"$in": oidArray}}).limit(3).toArray()))
-            saved.reverse()
-            const tags = JSON.parse(JSON.stringify(await mClient.db("Client").collection("posts").aggregate([{$match: {tags: {$nin: profile.tags}}}, {$unwind: "$tags"},  {$sortByCount: "$tags"}]).limit(5).toArray()))
-            return {
-                props: { user: profile, posts: posts, olderPosts: olderPosts, saved: saved, tags: tags }
-            }
+            return { props: { user: profile } }   
         }
     } else {
         return {
@@ -135,5 +166,17 @@ export async function getServerSideProps(context) {
             },
             props: {}
         }
-    }
+    }*/
+
+    const mClient = await client
+    const profile = JSON.parse(JSON.stringify(await mClient.db("Client").collection("profiles").findOne({email: "arjun140702@gmail.com"})))
+    if (!profile)
+        return {
+            redirect: {
+            destination: "/complete/username"
+            },
+            props: {}
+        }
+    else
+        return { props: { user: profile } }   
 }
