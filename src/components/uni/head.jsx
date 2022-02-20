@@ -23,7 +23,7 @@ export default function Head(props) {
         <meta property="og:title" content={ props.title }/>
         <meta property="og:description"
             content={ props.desc }/>
-        <meta property="og:image" content={ props.image ? props.image : "https://linkhub-live.vercel.app/assets/banner.jpg" }/>
+        <meta property="og:image" content={ props.image ? props.image : "https://linkhub.imarjun.me/assets/banner.jpg" }/>
 
         <link rel='icon' href={ theme === "dark" ? '/assets/icon.svg' : '/assets/icon-black.svg'}/>
       </NextHead>
