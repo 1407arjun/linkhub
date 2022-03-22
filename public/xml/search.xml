@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-    <ShortName>Search LinkHub</ShortName>
-    <Description>Explore LinkHub using search</Description>
-    <InputEncoding>UTF-8</InputEncoding>
-    <Image width="16" height="16" type="image/x-icon">https://linkhub.imarjun.me/assets/favicon.ico</Image>
-    <Url type="text/html" method="get" template="https://linkhub.imarjun.me/explore?query={searchTerms}"/>
-</OpenSearchDescription>
