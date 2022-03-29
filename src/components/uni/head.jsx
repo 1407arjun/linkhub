@@ -25,6 +25,17 @@ export default function Head(props) {
             content={ props.desc }/>
         <meta property="og:image" content={ props.image ? props.image : "https://linkhub.imarjun.me/assets/banner.jpg" }/>
 
+        <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="@1407Arjun" />
+            <meta property="twitter:domain" content="linkhub.imarjun.me" />
+            <meta property="twitter:url" content="https://linkhub.imarjun.me/" />
+            <meta name="twitter:title" content={ props.title } />
+            <meta name="twitter:description" content={ props.desc } />
+            <meta
+                name="twitter:image"
+                content="https://linkhub.imarjun.me/assets/banner.jpg"
+            />
+
         <link rel='icon' href={ theme === "dark" ? '/assets/icon.svg' : '/assets/icon-black.svg'}/>
       </NextHead>
     )
