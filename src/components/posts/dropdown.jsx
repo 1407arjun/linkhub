@@ -76,7 +76,7 @@ export default function Dropdown(props) {
                 { saved && <img src="/assets/posts/bookmark-done.svg" className="w-4 xl:w-6" alt="Saved"/> }
                 { !saved && <img src="/assets/posts/bookmark.svg" className="w-4 xl:w-6 dark:invert" alt="Save"/> }
             </button> }
-            <button onClick={ () => {navigator.clipboard.writeText("https://linkhub.imarjun.me/post/" + props.id); alert("Copied the link to the post - " + props.title)} } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2">
+            <button onClick={ () => {navigator.clipboard.writeText("https://linkhub.arjunsivaraman.co/post/" + props.id); alert("Copied the link to the post - " + props.title)} } className="flex-none self-center justify-self-end bg-white dark:bg-black rounded-full hover:bg-gray-100 focus:bg-gray-200 dark:hover:bg-gray-700 dark:focus:bg-gray-800 p-2">
                 <img src="/assets/posts/share.svg" className="w-4 xl:w-6 dark:invert" alt="Open post"/>
             </button>
             <p className="inline-block text-gray-500 dark:text-gray-300 text-base xl:text-lg p-2">{ diff }</p>

@@ -11,12 +11,12 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta property="og:url" content="https://linkhub.imarjun.me/"/>
+          <meta property="og:url" content="https://linkhub.arjunsivaraman.co/"/>
           <meta property="og:type" content="website"/>
           <meta property="og:title" content="LinkHub - An open source resources network"/>
           <meta property="og:description"
             content={ tagline }/>
-          <meta property="og:image" content="https://linkhub.imarjun.me/assets/banner.jpg"/>
+          <meta property="og:image" content="https://linkhub.arjunsivaraman.co/assets/banner.jpg"/>
           <meta property="og:site_name" content="LinkHub" />
 
           <meta name="mobile-web-app-capable" content="yes"/>
