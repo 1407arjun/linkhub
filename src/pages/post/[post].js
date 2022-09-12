@@ -35,7 +35,7 @@ export default function Post(props) {
 
     return (
         <div className="dark:bg-black">
-            <Head title={  "Post by " + data.author.name.split(" ")[0] + " \u00b7 LinkHub" } desc={ data.title + " - a post on LinkHub" } image="https://linkhub.arjunsivaraman.co/assets/seo/link-45.png"/>
+            <Head title={  "Post by " + data.author.name.split(" ")[0] + " \u00b7 LinkHub" } desc={ data.title + " - a post on LinkHub" } image="https://linkhub.imarjun.me/assets/seo/link-45.png"/>
             <div className="flex flex-row justify-center items-start min-h-screen">
                 { status === "authenticated" && navStatus && <NavBar navstatus={ navStatus } update={ setNavStatus } current="Explore"/> }
                 <div className={ "flex flex-col gap-6 justify-start items-center" + (status === "authenticated" ? (( navStatus ? " w-5/6 border-l border-gray-300 dark:border-gray-600 " : " w-full ") + "md:w-5/6 lg:w-11/12 xl:w-5/6 p-4") : " w-full md:w-5/6 lg:w-11/12 xl:w-5/6 p-4 border-l border-r border-gray-300 dark:border-gray-600 min-h-screen") }>

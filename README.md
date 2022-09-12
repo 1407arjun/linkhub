@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://linkhub.arjunsivaraman.co">
+  <a href="https://linkhub.imarjun.me">
     <img src="https://user-images.githubusercontent.com/76874556/149613161-a7a6cd6c-4ddd-4ebd-8e6a-838cb65a82c6.jpg" alt="LinkHub">
   </a>
   
