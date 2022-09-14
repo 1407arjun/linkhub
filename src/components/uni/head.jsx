@@ -14,7 +14,6 @@ export default function Head(props) {
 
     return (
       <NextHead>
-        <meta name="google-site-verification" content="8II1ZS008rD9Vb8kkQlv8ipbKgfhLrjKDf-zj07RvsI" />
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>{ props.title }</title>
