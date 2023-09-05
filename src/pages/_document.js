@@ -14,7 +14,7 @@ class MyDocument extends Document {
                 <Head>
                     <meta
                         property="og:url"
-                        content="https://linkhub.arjuns.software/"
+                        content="https://linkhub.arjuns.co/"
                     />
                     <meta property="og:type" content="website" />
                     <meta
@@ -24,7 +24,7 @@ class MyDocument extends Document {
                     <meta property="og:description" content={tagline} />
                     <meta
                         property="og:image"
-                        content="https://linkhub.arjuns.software/assets/banner.jpg"
+                        content="https://linkhub.arjuns.co/assets/banner.jpg"
                     />
                     <meta property="og:site_name" content="LinkHub" />
 

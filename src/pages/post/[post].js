@@ -42,7 +42,7 @@ export default function Post(props) {
                     " \u00b7 LinkHub"
                 }
                 desc={data.title + " - a post on LinkHub"}
-                image="https://linkhub.arjuns.software/assets/seo/link-45.png"
+                image="https://linkhub.arjuns.co/assets/seo/link-45.png"
             />
             <div className="flex flex-row justify-center items-start min-h-screen">
                 {status === "authenticated" && navStatus && (

@@ -68,7 +68,7 @@ export default function Post(props) {
             <Head
                 title={data.name + " on LinkHub"}
                 desc={"View posts of the " + data.name + " tag on LinkHub"}
-                image="https://linkhub.arjuns.software/assets/seo/tag.png"
+                image="https://linkhub.arjuns.co/assets/seo/tag.png"
             />
             <div className="flex flex-row justify-center items-start min-h-screen">
                 {status === "authenticated" && navStatus && (

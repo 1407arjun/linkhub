@@ -106,7 +106,7 @@ export default function Dropdown(props) {
             <button
                 onClick={() => {
                     navigator.clipboard.writeText(
-                        "https://linkhub.arjuns.software/post/" + props.id
+                        "https://linkhub.arjuns.co/post/" + props.id
                     )
                     alert("Copied the link to the post - " + props.title)
                 }}
